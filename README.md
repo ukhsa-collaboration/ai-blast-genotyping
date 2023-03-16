@@ -53,13 +53,15 @@ AI UK Genotyping command line tool
 
 ****Process all FASTA files (based on extension) in a folder****
 
+```
 python ai_genotyping_tool_v01.py -e fasta -f ../gisaid -b ai_geno_groups_ref -o ../gisaid/genotyping_testing
 
-
+```
 ****Process all samples in single FASTA file****
+```
 
 python ai_genotyping_tool_v01.py -i ../gisaid/test_seq_20230307.fasta -b ai_geno_groups_ref -o ../gisaid/genotyping_testing
-
+```
 ## Assumptions:
 
 Assumes that the FASTA header ends with the segment: "|HA" or "_HA"
