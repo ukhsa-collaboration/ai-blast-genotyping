@@ -2,7 +2,7 @@
 
 command line tool for running the BLAST genotyping method 
 
-# Requirements
+# Requirements & Dependencies
 To run this tool you will need to have BLAST locally installed. 
 Recommend installing with conda: 
 
@@ -10,13 +10,17 @@ Recommend installing with conda:
 conda install -c bioconda blast
 ``
 
-
-You will also need to have a local copy of the BLAST database that has been created based on the reference strains for the UK AI genotypes. 
+## Files required
+1. **BLAST database** - You will also need to have a local copy of the BLAST database that has been created based on the reference strains for the UK AI genotypes. 
 This can be copied from the HPC:
 
 [sftp://hpc1mgmt.unix.phe.gov.uk/phengs/hpc_projects/nicc80_ai/geno_blastdb](url)
 
 You will need the files all files labelled "ai_geno_ref.*"
+
+2. **Genotypes reference table** - "genotype_groups_examples.csv" copy also available in the same HPC folder. 
+
+The reference table should be placed in the main repo folder to be accessed by the genotyping script
 
 If you do not have access to the folder then please discuss access with the project lead. 
 
