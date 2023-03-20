@@ -1,6 +1,5 @@
 
 
-
 '''
 ### AI Genotyping command line tool
 
@@ -130,12 +129,16 @@ reftabdict = {'PB2_Group1': 'A/chicken/England/053052/2021', 'PB2_Group2': 'A/ch
    'NA_Group2': 'A/herring_gull/England/324803/2022', 'M_Group1': 'A/chicken/England/053052/2021', 
    'NS_Group1': 'A/chicken/England/053052/2021', 'NS_Group2': 'A/chicken/England/085598/2022', 'NS_Group3': 'A/pheasant/England/251536/2022'}
 
-genogroups = pd.read_csv("~/Documents/avian_influenza/apha/genotype_groups_examples.csv",dtype=str)
-genogroups['Segment'] = genogroups['Segment'].replace(np.nan, "NA")
-
-groups = genogroups['Group'].tolist()
-genotypes = genogroups['Genotypes'].tolist()
-genodict = dict(zip(genogroups.Labels, genogroups.Genotypes))
+if os.path.exists("genotype_groups_examples.csv"):
+    genogroups = pd.read_csv("genotype_groups_examples.csv",dtype=str)
+    genogroups['Segment'] = genogroups['Segment'].replace(np.nan, "NA")
+    groups = genogroups['Group'].tolist()
+    genotypes = genogroups['Genotypes'].tolist()
+    genodict = dict(zip(genogroups.Labels, genogroups.Genotypes))
+else:
+    logging.error(f'Reference genotypes table exists:"genotype_groups_examples.csv". Please check if the file is in the correct location')
+    return 1
+    
 blast_cols = ['qseqid','sseqid','pident','length','mismatch','gapopen','qstart','qend','sstart','send','evalue','bitscore']
 threshold = 90
 
