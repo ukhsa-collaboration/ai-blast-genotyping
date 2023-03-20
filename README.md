@@ -16,7 +16,7 @@ This can be copied from the HPC:
 
 [sftp://hpc1mgmt.unix.phe.gov.uk/phengs/hpc_projects/nicc80_ai/geno_blastdb](url)
 
-You will need the files all files labelled "ai_geno_ref.*"
+You will need the files all files labelled "ai_geno_groups_ref.*"
 
 2. **Genotypes reference table** - "genotype_groups_examples.csv" copy also available in the same HPC folder. 
 
