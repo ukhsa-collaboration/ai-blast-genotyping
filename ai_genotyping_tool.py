@@ -1,5 +1,4 @@
 
-
 '''
 ### AI Genotyping command line tool
 
@@ -136,8 +135,8 @@ if os.path.exists("genotype_groups_examples.csv"):
     genotypes = genogroups['Genotypes'].tolist()
     genodict = dict(zip(genogroups.Labels, genogroups.Genotypes))
 else:
-    logging.error(f'Reference genotypes table exists:"genotype_groups_examples.csv". Please check if the file is in the correct location')
-    return 1
+    logging.error(f'Reference genotypes table does not exists:"genotype_groups_examples.csv". Please check if the file is in the correct location')
+   # return 1
     
 blast_cols = ['qseqid','sseqid','pident','length','mismatch','gapopen','qstart','qend','sstart','send','evalue','bitscore']
 threshold = 90
