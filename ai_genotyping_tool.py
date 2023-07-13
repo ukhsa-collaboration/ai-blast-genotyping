@@ -11,7 +11,9 @@
 
 '''
 
-import os, glob,sys
+import os
+import glob
+import sys
 import pandas as pd
 import numpy as np
 import logging
@@ -117,7 +119,7 @@ def testing_functions(testing_functions_parameters):
                     "Output folder does not exist. Attempting to create folder: %s" % (testing_functions_parameters[2]))
                 os.mkdir(testing_functions_parameters[2])
 
-
+path = os.path.dirname(sys.argv[0])
 # Reference data & input parameters - move to Lib folder
 reftabdict = {'PB2_Group1': 'A/chicken/England/053052/2021', 'PB2_Group2': 'A/chicken/Wales/053969/2021', 
 'PB2_Group3': 'A/chicken/Scotland/054477/2021', 'PB1_Group1': 'A/chicken/England/053052/2021', 'PB1_Group2': 'A/chicken/England/152082/2022',
@@ -129,15 +131,15 @@ reftabdict = {'PB2_Group1': 'A/chicken/England/053052/2021', 'PB2_Group2': 'A/ch
    'NA_Group2': 'A/herring_gull/England/324803/2022', 'M_Group1': 'A/chicken/England/053052/2021', 
    'NS_Group1': 'A/chicken/England/053052/2021', 'NS_Group2': 'A/chicken/England/085598/2022', 'NS_Group3': 'A/pheasant/England/251536/2022'}
 
-if os.path.exists("genotype_groups_examples.csv"):
-    genogroups = pd.read_csv("genotype_groups_examples.csv",dtype=str)
+if os.path.exists(os.path.join(path,"genotype_groups_examples.csv")):
+    genogroups = pd.read_csv(os.path.join(path,"genotype_groups_examples.csv"),dtype=str)
     genogroups['Segment'] = genogroups['Segment'].replace(np.nan, "NA")
     groups = genogroups['Group'].tolist()
     genotypes = genogroups['Genotypes'].tolist()
     genodict = dict(zip(genogroups.Labels, genogroups.Genotypes))
 else:
     logging.error(f'Reference genotypes table exists:"genotype_groups_examples.csv". Please check if the file is in the correct location')
-    return 1
+    #return 1
     
 blast_cols = ['qseqid','sseqid','pident','length','mismatch','gapopen','qstart','qend','sstart','send','evalue','bitscore']
 threshold = 90
@@ -149,14 +151,14 @@ def tidy_fasta_files(sample):
     os.system("perl -pi -e 's/ /_/g' "+sample)
     os.system("perl -pi -e 's/,/_/g' "+sample)
     os.system("perl -pi -e 's/--//g' "+sample)
-    os.system("perl -pi -e 's/-\n-//g' "+sample)
+    os.system("perl -pi -e 'spath/-\n-//g' "+sample)
     
 # function to run the blast searches to temp file
 
 def run_blast(db,folder,sample):
     tidy_fasta_files(sample)
     logging.info("Performing the BLAST searches per FASTA file")
-    subprocess.call("blastn -db "+db+" -query "+os.path.join(folder,sample)+" -out "+os.path.join(args.output_dir,sample)+".blast.out -outfmt 6 -max_target_seqs 1",shell=True)
+    subprocess.call(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(args.output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1",shell=True)
 
 def match_genotype_dict(blast_pass):
     segdict = dict(zip(genogroups["Segment"]+"_"+genogroups.Example_sequence, genogroups.Labels))
@@ -166,7 +168,12 @@ def match_genotype_dict(blast_pass):
     return blast_pass
 
 def tidy_sample_name(table,sample_name):
-    test = table[sample_name].str.split(pat = "|",expand = True)
+    if "|" in sample_name:
+        test = table[sample_name].str.split(pat = "|",expand = True)
+    elif "." in sample_name:
+        test = table[sample_name].str.split(pat = ".",expand = True)
+    elif "_" in sample_name:
+            test = table[sample_name].str.split(pat = "_",expand = True)
     if test.shape[1]==3:
         table[sample_name] = test[test.columns[0]]+"|"+test[test.columns[1]]
     if test.shape[1]==2:
@@ -177,8 +184,8 @@ def tidy_sample_name(table,sample_name):
 
 def tidy_blast_table(folder,sample):
     logging.info("Reading in BLAST output:")
-    logging.info(os.path.join(args.output_dir,sample+".blast.out"))
-    blasttab = pd.read_csv(os.path.join(args.output_dir,sample+".blast.out"),sep="\t",header = None)
+    logging.info(os.path.join(args.output_dir,f'{sample}.blast.out'))
+    blasttab = pd.read_csv(os.path.join(args.output_dir,f'{sample}.blast.out'),sep="\t",header = None)
     blasttab.columns = blast_cols
     blast_pass = blasttab[blasttab["pident"] >= threshold]
     blast_fail = blasttab[blasttab["pident"] < threshold]
@@ -187,14 +194,21 @@ def tidy_blast_table(folder,sample):
     logging.info("BLAST pass table dimensions:")
     logging.info(blast_pass.shape)
     if "|" in blast_pass['qseqid'][0]:
-        test = blast_pass['qseqid'].str.split(pat = "|",expand = True)
-        blast_pass['segment'] = test[test.columns[-1]]
-    else: 
-        test = blast_pass['qseqid'].str.split(pat = "_",expand = True)
-        blast_pass['segment'] = test[test.columns[-1]]
+            delim = "|"
+    elif "." in blast_pass['qseqid'][0]:
+        delim = "."
+    elif "." in blast_pass['qseqid'][0]:
+            delim = "."
+    else:
+        logging.error(f'Sample header delimiter unknown! Please check, "." or "|" expected!')
+
+  
+    test = blast_pass['qseqid'].str.split(pat = delim,expand = True)
+    blast_pass['segment'] = test[test.columns[-1]]
+
     blast_pass['ref_match'] = blast_pass['segment']+"_"+blast_pass['sseqid'].map(lambda x: x.split('|')[0]).str.replace("_","")
     blast_pass = match_genotype_dict(blast_pass)
-    blast_pass.to_csv(os.path.join(folder,sample+".blast.out2"))
+    blast_pass.to_csv(os.path.join(folder,f'{sample}.blast.out2'))
     results_df = pd.DataFrame(blast_pass['qseqid'].to_list(), columns=['sample',])
     results_df['genotype_match'] = blast_pass['genotype_match']
     results_df['segment'] = blast_pass['segment']
