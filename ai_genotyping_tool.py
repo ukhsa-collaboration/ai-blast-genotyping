@@ -234,7 +234,7 @@ def run_full_blasts(folder,mode,extension):
             logging.info("Running BLAST")
             run_blast(args.blastdb,folder,f)
             logging.info("Reviewing BLAST results")
-            sresults = tidy_blast_table(folder,f)
+            sresults = tidy_blast_table(args.output_dir,f)
             logging.info("Combining results across FASTA files...")
             results_tabs.append(sresults)
             newdf = pd.concat(results_tabs)
@@ -245,11 +245,12 @@ def run_full_blasts(folder,mode,extension):
     
     elif mode =="single":
         logging.info("Running BLAST on single FASTA file")
+        #folder = input_file in this situation
         head_tail = os.path.split(folder)
         logging.info(head_tail)
-        run_blast(args.blastdb,head_tail[0],os.path.join(head_tail[0],head_tail[1]))
+        run_blast(args.blastdb,head_tail[0],folder)
         logging.info("Reviewing BLAST results")
-        sresults = tidy_blast_table(head_tail[0],head_tail[1])
+        sresults = tidy_blast_table(args.output_dir,head_tail[1])
         sresults.to_csv(os.path.join(args.output_dir,str(x_int)+"_summary.csv")) 
         logging.info("Output file written to:")
         logging.info(os.path.join(args.output_dir,str(x_int)+"_summary.csv"))
