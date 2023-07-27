@@ -14,6 +14,8 @@ conda install -c bioconda blast
 1. **BLAST database** - You will also need to have a local copy of the BLAST database that has been created based on the reference strains for the UK AI genotypes. 
 This can be copied from the HPC:
 
+### THE INPUT FILES HAVE BEEN UPDATED SO PLEASE COPY ACROSS THE LATEST VERSION FROM THE HPC
+
 [sftp://hpc1mgmt.unix.phe.gov.uk/phengs/hpc_projects/nicc80_ai/geno_blastdb](url)
 
 You will need the files all files labelled "ai_geno_groups_ref.*"
@@ -69,6 +71,12 @@ python ai_genotyping_tool_v01.py -i ../gisaid/test_seq_20230307.fasta -b ai_geno
 ## Assumptions:
 
 Assumes that the FASTA header ends with the segment: "|HA" or "_HA"
+
+## Test data from the UK reference sequences
+
+A test data set for the UK reference genomes is available on the HPC folder in the location below
+sftp://hpc1mgmt.unix.phe.gov.uk/phengs/hpc_projects/nicc80_ai/geno_blastdb/test_data
+
 
 ## Features to add still
 
