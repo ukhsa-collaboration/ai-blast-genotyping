@@ -92,6 +92,9 @@ def check_arguments(args):
             logging.error(f'File does not appear to exists: {args.input_folder}. Please check')
             return 1
 
+    if not os.path.isdir(args.output_dir):
+        os.mkdir(args.output_dir)
+                
     if not os.path.exists(args.blastdb+".nin"):
         logging.error(f'BLAST database does not appear to exists: {args.blastdb}. Please check')
         return 1
@@ -123,11 +126,11 @@ path = os.path.dirname(sys.argv[0])
 reftabdict = {'PB2_Group1': 'A/chicken/England/053052/2021', 'PB2_Group2': 'A/chicken/Wales/053969/2021', 
 'PB2_Group3': 'A/chicken/Scotland/054477/2021', 'PB1_Group1': 'A/chicken/England/053052/2021', 'PB1_Group2': 'A/chicken/England/152082/2022',
  'PA_Group1': 'A/chicken/England/053052/2021', 'PA_Group2': 'A/chicken/Scotland/054477/2021', 
- 'PA_Group3': 'A/herring_gull/England/324803/2022', 'PA_Group4': 'A/Humboldt_penguin/England/161651/2022', 
- 'HA_Group1': 'A/chicken/England/053052/2021', 'HA_Group2': 'A/Greylag_goose/England/054503/2021',
+ 'PA_Group3': 'A/herringgull/England/324803/2022', 'PA_Group4': 'A/Humboldtpenguin/England/161651/2022', 
+ 'HA_Group1': 'A/chicken/England/053052/2021', 'HA_Group2': 'A/Greylaggoose/England/054503/2021',
   'NP_Group1': 'A/chicken/England/053052/2021', 'NP_Group2': 'A/turkey/England/016515/2022', 'NP_Group3': 'A/chicken/England/069816/2021',
    'NP_Group4': 'A/chicken/England/085598/2022', 'NP_Group5': 'A/chicken/England/118935/2022', 'NA_Group1': 'A/chicken/England/053052/2021', 
-   'NA_Group2': 'A/herring_gull/England/324803/2022', 'M_Group1': 'A/chicken/England/053052/2021', 
+   'NA_Group2': 'A/herringgull/England/324803/2022', 'M_Group1': 'A/chicken/England/053052/2021', 
    'NS_Group1': 'A/chicken/England/053052/2021', 'NS_Group2': 'A/chicken/England/085598/2022', 'NS_Group3': 'A/pheasant/England/251536/2022'}
 
 if os.path.exists(os.path.join(path,"genotype_groups_examples.csv")):
@@ -158,6 +161,7 @@ def run_blast(db,folder,sample):
     tidy_fasta_files(sample)
     logging.info("Performing the BLAST searches per FASTA file")
     subprocess.call(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(args.output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1",shell=True)
+    print(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(args.output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1")
 
 def match_genotype_dict(blast_pass):
     segdict = dict(zip(genogroups["Segment"]+"_"+genogroups.Example_sequence, genogroups.Labels))
@@ -167,16 +171,19 @@ def match_genotype_dict(blast_pass):
     return blast_pass
 
 def tidy_sample_name(table,sample_name):
+    delim="None"
     if "|" in sample_name:
-        test = table[sample_name].str.split(pat = "|",expand = True)
+        delim = "|"
     elif "." in sample_name:
-        test = table[sample_name].str.split(pat = ".",expand = True)
+        delim = "."
     elif "_" in sample_name:
-            test = table[sample_name].str.split(pat = "_",expand = True)
-    if test.shape[1]==3:
-        table[sample_name] = test[test.columns[0]]+"|"+test[test.columns[1]]
-    if test.shape[1]==2:
-        table[sample_name] = test[test.columns[0]]
+        delim = "."
+    if delim!=None:
+        test = table[sample_name].str.split(pat = delim,expand = True)
+        if test.shape[1]==3:
+            table[sample_name] = test[test.columns[0]]+"|"+test[test.columns[1]]
+        if test.shape[1]==2:
+            table[sample_name] = test[test.columns[0]]
     else:
         logging.info("Unsure of sample name format so not performing tidying step")
     return table
@@ -196,21 +203,23 @@ def tidy_blast_table(folder,sample):
             delim = "|"
     elif "." in blast_pass['qseqid'][0]:
         delim = "."
-    elif "." in blast_pass['qseqid'][0]:
-            delim = "."
+    elif "_" in blast_pass['qseqid'][0]:
+            delim = "_"
     else:
         logging.error(f'Sample header delimiter unknown! Please check, "." or "|" expected!')
 
   
     test = blast_pass['qseqid'].str.split(pat = delim,expand = True)
+    print(test)
     blast_pass['segment'] = test[test.columns[-1]]
-
+    blast_pass['isolate_epi_id'] = test[test.columns[0]]
     blast_pass['ref_match'] = blast_pass['segment']+"_"+blast_pass['sseqid'].map(lambda x: x.split('|')[0]).str.replace("_","")
     blast_pass = match_genotype_dict(blast_pass)
     blast_pass.to_csv(os.path.join(folder,f'{sample}.blast.out2'))
-    results_df = pd.DataFrame(blast_pass['qseqid'].to_list(), columns=['sample',])
+    results_df = pd.DataFrame(blast_pass['isolate_epi_id'].to_list(), columns=['sample'])
     results_df['genotype_match'] = blast_pass['genotype_match']
     results_df['segment'] = blast_pass['segment']
+    results_df['isolate_epi_id'] = blast_pass['isolate_epi_id']
     if blast_fail.shape[0]>=1:
         fail = blast_fail['qseqid'].to_list()
         for f in fail:
@@ -258,8 +267,9 @@ def run_full_blasts(folder,mode,extension):
     
 def create_persample_summary(summarytab):
     pivot = pd.pivot_table(summarytab, values='genotype_match', 
-                                index='sample', 
+                                index='isolate_epi_id', 
                                 columns='segment', fill_value = "N/A", aggfunc='first')
+    print(pivot)
     consensus = []
     freq=[]
     for index, row in pivot.iterrows():
@@ -282,7 +292,9 @@ def create_persample_summary(summarytab):
             freq.append("|".join(topgeno))
             consensus.append(genfreq)
     pivot["consensus"] = consensus
+    print(pivot["consensus"])
     pivot["Top_Hit"] = freq
+    print(pivot["Top_Hit"])
     pivot.to_csv(os.path.join(args.output_dir,str(x_int)+"_ukgenotyping_summary.csv"))
     return pivot
 # Need a function to summarise the tables / files processed
