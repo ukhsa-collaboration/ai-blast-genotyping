@@ -157,11 +157,11 @@ def tidy_fasta_files(sample):
     
 # function to run the blast searches to temp file
 
-def run_blast(db,folder,sample):
-    tidy_fasta_files(sample)
+def run_blast(db,folder,sample,output_dir):
+    tidy_fasta_files(os.path.join(folder,sample))
     logging.info("Performing the BLAST searches per FASTA file")
-    subprocess.call(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(args.output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1",shell=True)
-    print(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(args.output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1")
+    subprocess.call(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1",shell=True)
+    print(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1")
 
 def match_genotype_dict(blast_pass):
     segdict = dict(zip(genogroups["Segment"]+"_"+genogroups.Example_sequence, genogroups.Labels))
@@ -191,7 +191,9 @@ def tidy_sample_name(table,sample_name):
 def tidy_blast_table(folder,sample):
     logging.info("Reading in BLAST output:")
     logging.info(os.path.join(args.output_dir,f'{sample}.blast.out'))
+    #print(os.path.join(args.output_dir,f'{sample}.blast.out'))
     blasttab = pd.read_csv(os.path.join(args.output_dir,f'{sample}.blast.out'),sep="\t",header = None)
+   # print(blasttab.shape)
     blasttab.columns = blast_cols
     blast_pass = blasttab[blasttab["pident"] >= threshold]
     blast_fail = blasttab[blasttab["pident"] < threshold]
@@ -210,7 +212,7 @@ def tidy_blast_table(folder,sample):
 
   
     test = blast_pass['qseqid'].str.split(pat = delim,expand = True)
-    print(test)
+   # print(test)
     blast_pass['segment'] = test[test.columns[-1]]
     blast_pass['isolate_epi_id'] = test[test.columns[0]]
     blast_pass['ref_match'] = blast_pass['segment']+"_"+blast_pass['sseqid'].map(lambda x: x.split('|')[0]).str.replace("_","")
@@ -231,7 +233,7 @@ def tidy_blast_table(folder,sample):
     return(results_df)
 
 
-def run_full_blasts(folder,mode,extension):
+def run_full_blasts(folder,mode,extension,output_dir):
     results_tabs = []
     logging.info('Input folder provided:')
     logging.info(os.path.join(folder,"*"+extension))
@@ -241,7 +243,7 @@ def run_full_blasts(folder,mode,extension):
     if mode == "all_in_folder":   
         for f in fastas:
             logging.info("Running BLAST")
-            run_blast(args.blastdb,folder,f)
+            run_blast(args.blastdb,folder,f,output_dir)
             logging.info("Reviewing BLAST results")
             sresults = tidy_blast_table(args.output_dir,f)
             logging.info("Combining results across FASTA files...")
@@ -257,12 +259,13 @@ def run_full_blasts(folder,mode,extension):
         #folder = input_file in this situation
         head_tail = os.path.split(folder)
         logging.info(head_tail)
-        run_blast(args.blastdb,head_tail[0],folder)
+        print(args.blastdb,head_tail[0],folder)
+        run_blast(args.blastdb,head_tail[0],head_tail[1],output_dir)
         logging.info("Reviewing BLAST results")
-        sresults = tidy_blast_table(args.output_dir,head_tail[1])
-        sresults.to_csv(os.path.join(args.output_dir,str(x_int)+"_summary.csv")) 
+        sresults = tidy_blast_table(output_dir,head_tail[1])
+        sresults.to_csv(os.path.join(output_dir,str(x_int)+"_summary.csv")) 
         logging.info("Output file written to:")
-        logging.info(os.path.join(args.output_dir,str(x_int)+"_summary.csv"))
+        logging.info(os.path.join(output_dir,str(x_int)+"_summary.csv"))
         return sresults
     
 def create_persample_summary(summarytab):
@@ -324,13 +327,13 @@ def main(args):
     if args.input_folder is not None:
         logging.info("Processing folder full of Genbank input files")
         input_folder = os.path.abspath(args.input_folder)
-        summarytab = run_full_blasts(input_folder,"all_in_folder",args.extension)
+        summarytab = run_full_blasts(input_folder,"all_in_folder",args.extension,output_dir)
         pivot_out = create_persample_summary(summarytab)
         overall_summary(pivot_out)
     if args.input_file is not None:
         logging.info("Processing single Genbank input files")
         input_file= os.path.abspath(args.input_file)
-        summarytab = run_full_blasts(input_file,"single",args.extension)
+        summarytab = run_full_blasts(input_file,"single",args.extension,output_dir)
         pivot_out = create_persample_summary(summarytab)
         overall_summary(pivot_out)
 
