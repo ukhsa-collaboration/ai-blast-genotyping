@@ -17,13 +17,14 @@ import pandas as pd
 import numpy as np
 import logging
 import argparse
-from datetime import datetime
+from datetime import datetime, date
 import shutil
 import subprocess
 from collections import Counter
 
-now = datetime.now()
-x_int = int(now.strftime("%Y%m%d%H%M%S"))
+
+now = date.today()
+
 
 __version__ = 0.1
 __author__ = 'Kate Howell'
@@ -33,7 +34,7 @@ def logging_file_setup(output_folder, testing):
     print("Setting up logging information for debugging.")
     # Need to clean up log files, currently generates multiple log files.
     datetime_stamp = now.strftime("%Y%m%d-%H%M%S")
-    logging_file_output = os.path.join(output_folder, str(str(now.strftime("%Y%m%d")) + str('_logging_file.log')))
+    logging_file_output = os.path.join(output_folder, str(str(now.strftime("%Y%m%d")) + str('_geno_logging_file.log')))
     print("Logging output in the file: {}".format(logging_file_output))
 
     if testing == 'yes':
@@ -64,16 +65,17 @@ def read_commandline():
                         help='Output folder. Default: CWD.')
     parser.add_argument('--testing', '-t', required=False, default=False, choices=['yes', 'no'],
                         help='Debugging mode. Specify by either "yes" or "no"')  # Change this to a list of options
+    parser.add_argument('--tagname', '-n', required=True, help='Analysis name for output files')
     parser.add_argument('--extension', '-e', required=False, default='.fasta', help='FASTA file extension if not default')
     input_group = parser.add_mutually_exclusive_group() # input group requires one or the other
     input_group.add_argument('--input_file', '-i', required=False, help='Input FASTA file')
     input_group.add_argument('--input_folder', '-f', required=False, help='Input FASTA file')
     parser.add_argument('--blastdb', '-b', required=True, help='Reference BLAST database')
     args = parser.parse_args()
-    print(args)
     # Need to handle output dir before setting up logging files.
     if not os.path.isdir(args.output_dir):  # Set up output folder
         print(f"Creating output folder:\n {args.output_dir}")
+        logging.info(f"Creating output folder:\n {args.output_dir}")
         os.mkdir(args.output_dir)
 
     return args
@@ -107,10 +109,12 @@ def testing_functions(testing_functions_parameters):
         if testing_functions_parameters[0] == True:
             if os.path.exists(testing_functions_parameters[2]):
                 print('Deleting output_folder {}'.format(testing_functions_parameters[2]))
+                logging.info('Deleting output_folder {}'.format(testing_functions_parameters[2]))
                 try:  ## Try to remove tree; if failed show an error using try...except on screen
                     shutil.rmtree(testing_functions_parameters[2])
                 except OSError as e:
                     print("Error: %s - %s." % (e.filename, e.strerror))
+                    logging.info("Error: %s - %s." % (e.filename, e.strerror))
                 os.mkdir(testing_functions_parameters[2])
             else:
                 os.mkdir(testing_functions_parameters[2])
@@ -119,19 +123,21 @@ def testing_functions(testing_functions_parameters):
             if not os.path.exists(testing_functions_parameters[2]):
                 print(
                     "Output folder does not exist. Attempting to create folder: %s" % (testing_functions_parameters[2]))
+                logging.info(
+                    "Output folder does not exist. Attempting to create folder: %s" % (testing_functions_parameters[2]))
                 os.mkdir(testing_functions_parameters[2])
 
 path = os.path.dirname(sys.argv[0])
 # Reference data & input parameters - move to Lib folder
-reftabdict = {'PB2_Group1': 'A/chicken/England/053052/2021', 'PB2_Group2': 'A/chicken/Wales/053969/2021', 
-'PB2_Group3': 'A/chicken/Scotland/054477/2021', 'PB1_Group1': 'A/chicken/England/053052/2021', 'PB1_Group2': 'A/chicken/England/152082/2022',
- 'PA_Group1': 'A/chicken/England/053052/2021', 'PA_Group2': 'A/chicken/Scotland/054477/2021', 
- 'PA_Group3': 'A/herringgull/England/324803/2022', 'PA_Group4': 'A/Humboldtpenguin/England/161651/2022', 
- 'HA_Group1': 'A/chicken/England/053052/2021', 'HA_Group2': 'A/Greylaggoose/England/054503/2021',
-  'NP_Group1': 'A/chicken/England/053052/2021', 'NP_Group2': 'A/turkey/England/016515/2022', 'NP_Group3': 'A/chicken/England/069816/2021',
-   'NP_Group4': 'A/chicken/England/085598/2022', 'NP_Group5': 'A/chicken/England/118935/2022', 'NA_Group1': 'A/chicken/England/053052/2021', 
-   'NA_Group2': 'A/herringgull/England/324803/2022', 'M_Group1': 'A/chicken/England/053052/2021', 
-   'NS_Group1': 'A/chicken/England/053052/2021', 'NS_Group2': 'A/chicken/England/085598/2022', 'NS_Group3': 'A/pheasant/England/251536/2022'}
+#reftabdict = {'PB2_Group1': 'A/chicken/England/053052/2021', 'PB2_Group2': 'A/chicken/Wales/053969/2021', 
+#'PB2_Group3': 'A/chicken/Scotland/054477/2021', 'PB1_Group1': 'A/chicken/England/053052/2021', 'PB1_Group2': 'A/chicken/England/152082/2022',
+# 'PA_Group1': 'A/chicken/England/053052/2021', 'PA_Group2': 'A/chicken/Scotland/054477/2021', 
+# 'PA_Group3': 'A/herringgull/England/324803/2022', 'PA_Group4': 'A/Humboldtpenguin/England/161651/2022', 
+# 'HA_Group1': 'A/chicken/England/053052/2021', 'HA_Group2': 'A/Greylaggoose/England/054503/2021',
+#  'NP_Group1': 'A/chicken/England/053052/2021', 'NP_Group2': 'A/turkey/England/016515/2022', 'NP_Group3': 'A/chicken/England/069816/2021',
+#   'NP_Group4': 'A/chicken/England/085598/2022', 'NP_Group5': 'A/chicken/England/118935/2022', 'NA_Group1': 'A/chicken/England/053052/2021', 
+ #  'NA_Group2': 'A/herringgull/England/324803/2022', 'M_Group1': 'A/chicken/England/053052/2021', 
+ #  'NS_Group1': 'A/chicken/England/053052/2021', 'NS_Group2': 'A/chicken/England/085598/2022', 'NS_Group3': 'A/pheasant/England/251536/2022'}
 
 if os.path.exists(os.path.join(path,"genotype_groups_examples.csv")):
     genogroups = pd.read_csv(os.path.join(path,"genotype_groups_examples.csv"),dtype=str)
@@ -161,7 +167,7 @@ def run_blast(db,folder,sample,output_dir):
     tidy_fasta_files(os.path.join(folder,sample))
     logging.info("Performing the BLAST searches per FASTA file")
     subprocess.call(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1",shell=True)
-    print(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1")
+    #print(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1")
 
 def match_genotype_dict(blast_pass):
     segdict = dict(zip(genogroups["Segment"]+"_"+genogroups.Example_sequence, genogroups.Labels))
@@ -186,6 +192,7 @@ def tidy_sample_name(table,sample_name):
             table[sample_name] = test[test.columns[0]]
     else:
         logging.info("Unsure of sample name format so not performing tidying step")
+        print("Unsure of sample name format so not performing tidying step")
     return table
 
 def tidy_blast_table(folder,sample):
@@ -198,7 +205,8 @@ def tidy_blast_table(folder,sample):
     blast_pass = blasttab[blasttab["pident"] >= threshold]
     blast_fail = blasttab[blasttab["pident"] < threshold]
     if blast_fail.shape[0]>= 1:
-        logging.info(blast_fail.shape[0]," sequences do not meet a minimum percentage sequence identity to the ref seq!!")
+        logging.info(f'{blast_fail.shape[0]}sequences do not meet a minimum percentage sequence identity to the ref seq!!')
+        print(f'{blast_fail.shape[0]}sequences do not meet a minimum percentage sequence identity to the ref seq!!')
     logging.info("BLAST pass table dimensions:")
     logging.info(blast_pass.shape)
     if "|" in blast_pass['qseqid'][0]:
@@ -209,28 +217,34 @@ def tidy_blast_table(folder,sample):
             delim = "_"
     else:
         logging.error(f'Sample header delimiter unknown! Please check, "." or "|" expected!')
+        print(f'Sample header delimiter unknown! Please check, "." or "|" expected!')
 
   
     test = blast_pass['qseqid'].str.split(pat = delim,expand = True)
-   # print(test)
-    blast_pass['segment'] = test[test.columns[-1]]
-    blast_pass['isolate_epi_id'] = test[test.columns[0]]
-    blast_pass['ref_match'] = blast_pass['segment']+"_"+blast_pass['sseqid'].map(lambda x: x.split('|')[0]).str.replace("_","")
+    blast_pass.insert(len(blast_pass.columns),'segment',test[test.columns[-1]])
+    blast_pass.insert(len(blast_pass.columns),'isolate_epi_id',test[test.columns[0]])
+    blast_pass.insert(len(blast_pass.columns),'ref_match',blast_pass['segment']+"_"+blast_pass['sseqid'].map(lambda x: x.split('|')[0]).str.replace("_",""))
     blast_pass = match_genotype_dict(blast_pass)
     blast_pass.to_csv(os.path.join(folder,f'{sample}.blast.out2'))
     results_df = pd.DataFrame(blast_pass['isolate_epi_id'].to_list(), columns=['sample'])
-    results_df['genotype_match'] = blast_pass['genotype_match']
-    results_df['segment'] = blast_pass['segment']
-    results_df['isolate_epi_id'] = blast_pass['isolate_epi_id']
+    results_df.insert(len(results_df.columns),'genotype_match',blast_pass['genotype_match'])
+    results_df.insert(len(results_df.columns),'segment',blast_pass['segment'])
+    results_df.insert(len(results_df.columns),'isolate_epi_id',blast_pass['isolate_epi_id'])
+    newresults_df = [results_df]
     if blast_fail.shape[0]>=1:
-        fail = blast_fail['qseqid'].to_list()
-        for f in fail:
-            missing =[[f,"NA","NA"]]
-            results_df = results_df.append(pd.DataFrame(missing, columns=results_df.columns),ignore_index=True)
-    results_df.sort_values(by=['sample'],inplace=True)
-    results_df = tidy_sample_name(results_df,'sample')
+        test = blast_fail['qseqid'].str.split(pat = delim,expand = True)
+        blast_fail.insert(len(blast_fail.columns),'segment',test[test.columns[-1]])
+        blast_fail.insert(len(blast_fail.columns),'isolate_epi_id',test[test.columns[0]])
+        missing = pd.DataFrame(blast_fail['isolate_epi_id'].to_list(), columns=['sample'])
+        missing.insert(len(missing.columns),'genotype_match',"No match")
+        missing.insert(len(missing.columns),'segment',blast_fail['segment'])
+        missing.insert(len(missing.columns),'isolate_epi_id',blast_fail['isolate_epi_id'])
+        newresults_df.append(missing)
+    newresultstab = pd.concat(newresults_df)
+    newresultstab.sort_values(by=['sample'],inplace=True)
+    newresultstab = tidy_sample_name(newresultstab,'sample')
 
-    return(results_df)
+    return(newresultstab)
 
 
 def run_full_blasts(folder,mode,extension,output_dir):
@@ -243,29 +257,37 @@ def run_full_blasts(folder,mode,extension,output_dir):
     if mode == "all_in_folder":   
         for f in fastas:
             logging.info("Running BLAST")
+            print("Running BLAST on input folder")
             run_blast(args.blastdb,folder,f,output_dir)
             logging.info("Reviewing BLAST results")
+            print("Reviewing BLAST results")
             sresults = tidy_blast_table(args.output_dir,f)
             logging.info("Combining results across FASTA files...")
+            print("Combining results across FASTA files...")
             results_tabs.append(sresults)
             newdf = pd.concat(results_tabs)
-            newdf.to_csv(os.path.join(args.output_dir,str(x_int)+"_summary.csv"))
+            newdf.to_csv(os.path.join(args.output_dir,str(now)+"_summary.csv"))
             logging.info("Output file written to:")
-            logging.info(os.path.join(args.output_dir,str(x_int)+"_summary.csv"))
+            logging.info(os.path.join(args.output_dir,str(now)+"_summary.csv"))
+            print("Output file written to:")
+            print(os.path.join(args.output_dir,str(now)+"_summary.csv"))
         return(newdf)
     
     elif mode =="single":
         logging.info("Running BLAST on single FASTA file")
-        #folder = input_file in this situation
+        print("Running BLAST on single FASTA file")
         head_tail = os.path.split(folder)
         logging.info(head_tail)
         print(args.blastdb,head_tail[0],folder)
         run_blast(args.blastdb,head_tail[0],head_tail[1],output_dir)
         logging.info("Reviewing BLAST results")
+        print("Reviewing BLAST results")
         sresults = tidy_blast_table(output_dir,head_tail[1])
-        sresults.to_csv(os.path.join(output_dir,str(x_int)+"_summary.csv")) 
+        sresults.to_csv(os.path.join(output_dir,f'{now}_{args.tagname}_BLAST_summary.csv')) 
         logging.info("Output file written to:")
-        logging.info(os.path.join(output_dir,str(x_int)+"_summary.csv"))
+        logging.info(os.path.join(output_dir,f'{now}_{args.tagname}_BLAST_summary.csv'))
+        print("Output file written to:")
+        print(os.path.join(output_dir,f'{now}_{args.tagname}_BLAST_summary.csv'))
         return sresults
     
 def create_persample_summary(summarytab):
@@ -275,7 +297,9 @@ def create_persample_summary(summarytab):
     print(pivot)
     consensus = []
     freq=[]
+    results = []
     for index, row in pivot.iterrows():
+            result = ""
             newlist = []
             topgeno = []
             for s in pivot.columns:
@@ -292,22 +316,35 @@ def create_persample_summary(summarytab):
             for n,c in enumerate(counts):
                 if c==maxgeno:
                     topgeno.append(keys[n])
+                    if int(maxgeno)>=7:
+                        result = keys[n]
+                    else:
+                        result = "Please review individual segments results"
             freq.append("|".join(topgeno))
             consensus.append(genfreq)
+            results.append(result)
     pivot["consensus"] = consensus
     print(pivot["consensus"])
     pivot["Top_Hit"] = freq
     print(pivot["Top_Hit"])
-    pivot.to_csv(os.path.join(args.output_dir,str(x_int)+"_ukgenotyping_summary.csv"))
+    pivot['Final_result'] = results
+    pivot.to_csv(os.path.join(args.output_dir,f'{now}_{args.tagname}_genotyping_summary.csv'))
+    logging.info("Summary output file written to:")
+    logging.info(os.path.join(args.output_dir,f'{now}_{args.tagname}_genotyping_summary.csv'))
+    print("Summary output file written to:")
+    print(os.path.join(args.output_dir,f'{now}_{args.tagname}_genotyping_summary.csv'))
     return pivot
 # Need a function to summarise the tables / files processed
 
 def overall_summary(pivot):
     # Number of samples included
     # Summary of genotypes called
-    print(f"Samples processed: ",pivot.shape[0])
+    print(f"Samples processed: {pivot.shape[0]}")
     print("Genotypes called: ")
-    print(Counter(pivot['Top_Hit']))
+    print(Counter(pivot['Final_result']))
+    logging.info(f"Samples processed: {pivot.shape[0]}")
+    logging.info("Genotypes called: ")
+    logging.info(Counter(pivot['Final_result']))
 # Need a function to use historic genotype rules when multiple genotype calls are returned
 ### e.g. AIV07-B1|AIV07-B2 = AIV07-B2
 
@@ -325,13 +362,15 @@ def main(args):
     logging_file_setup(output_dir, args.testing)
 
     if args.input_folder is not None:
-        logging.info("Processing folder full of Genbank input files")
+        logging.info("Processing folder full of input files")
+        print("Processing folder full of input files")
         input_folder = os.path.abspath(args.input_folder)
         summarytab = run_full_blasts(input_folder,"all_in_folder",args.extension,output_dir)
         pivot_out = create_persample_summary(summarytab)
         overall_summary(pivot_out)
     if args.input_file is not None:
-        logging.info("Processing single Genbank input files")
+        print("Processing single FASTA files")
+        logging.info("Processing single FASTA files")
         input_file= os.path.abspath(args.input_file)
         summarytab = run_full_blasts(input_file,"single",args.extension,output_dir)
         pivot_out = create_persample_summary(summarytab)
