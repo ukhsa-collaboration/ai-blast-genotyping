@@ -129,6 +129,7 @@ def testing_functions(testing_functions_parameters):
 
 path = os.path.dirname(sys.argv[0])
 # Reference data & input parameters - move to Lib folder
+<<<<<<< HEAD
 #reftabdict = {'PB2_Group1': 'A/chicken/England/053052/2021', 'PB2_Group2': 'A/chicken/Wales/053969/2021', 
 #'PB2_Group3': 'A/chicken/Scotland/054477/2021', 'PB1_Group1': 'A/chicken/England/053052/2021', 'PB1_Group2': 'A/chicken/England/152082/2022',
 # 'PA_Group1': 'A/chicken/England/053052/2021', 'PA_Group2': 'A/chicken/Scotland/054477/2021', 
@@ -138,6 +139,17 @@ path = os.path.dirname(sys.argv[0])
 #   'NP_Group4': 'A/chicken/England/085598/2022', 'NP_Group5': 'A/chicken/England/118935/2022', 'NA_Group1': 'A/chicken/England/053052/2021', 
  #  'NA_Group2': 'A/herringgull/England/324803/2022', 'M_Group1': 'A/chicken/England/053052/2021', 
  #  'NS_Group1': 'A/chicken/England/053052/2021', 'NS_Group2': 'A/chicken/England/085598/2022', 'NS_Group3': 'A/pheasant/England/251536/2022'}
+=======
+reftabdict = {'PB2_Group1': 'A/chicken/England/053052/2021', 'PB2_Group2': 'A/chicken/Wales/053969/2021', 
+'PB2_Group3': 'A/chicken/Scotland/054477/2021', 'PB1_Group1': 'A/chicken/England/053052/2021', 'PB1_Group2': 'A/chicken/England/152082/2022',
+ 'PA_Group1': 'A/chicken/England/053052/2021', 'PA_Group2': 'A/chicken/Scotland/054477/2021', 
+ 'PA_Group3': 'A/herringgull/England/324803/2022', 'PA_Group4': 'A/Humboldtpenguin/England/161651/2022', 
+ 'HA_Group1': 'A/chicken/England/053052/2021', 'HA_Group2': 'A/Greylaggoose/England/054503/2021',
+  'NP_Group1': 'A/chicken/England/053052/2021', 'NP_Group2': 'A/turkey/England/016515/2022', 'NP_Group3': 'A/chicken/England/069816/2021',
+   'NP_Group4': 'A/chicken/England/085598/2022', 'NP_Group5': 'A/chicken/England/118935/2022', 'NA_Group1': 'A/chicken/England/053052/2021', 
+   'NA_Group2': 'A/herringgull/England/324803/2022', 'M_Group1': 'A/chicken/England/053052/2021', 
+   'NS_Group1': 'A/chicken/England/053052/2021', 'NS_Group2': 'A/chicken/England/085598/2022', 'NS_Group3': 'A/pheasant/England/251536/2022'}
+>>>>>>> a14f6ce42d80b877eb1ea60e46ac0bf4086c0409
 
 if os.path.exists(os.path.join(path,"genotype_groups_examples.csv")):
     genogroups = pd.read_csv(os.path.join(path,"genotype_groups_examples.csv"),dtype=str)
@@ -167,7 +179,11 @@ def run_blast(db,folder,sample,output_dir):
     tidy_fasta_files(os.path.join(folder,sample))
     logging.info("Performing the BLAST searches per FASTA file")
     subprocess.call(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1",shell=True)
+<<<<<<< HEAD
     #print(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1")
+=======
+    print(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1")
+>>>>>>> a14f6ce42d80b877eb1ea60e46ac0bf4086c0409
 
 def match_genotype_dict(blast_pass):
     segdict = dict(zip(genogroups["Segment"]+"_"+genogroups.Example_sequence, genogroups.Labels))
@@ -198,7 +214,9 @@ def tidy_sample_name(table,sample_name):
 def tidy_blast_table(folder,sample):
     logging.info("Reading in BLAST output:")
     logging.info(os.path.join(args.output_dir,f'{sample}.blast.out'))
+    #print(os.path.join(args.output_dir,f'{sample}.blast.out'))
     blasttab = pd.read_csv(os.path.join(args.output_dir,f'{sample}.blast.out'),sep="\t",header = None)
+   # print(blasttab.shape)
     blasttab.columns = blast_cols
     blast_pass = blasttab[blasttab["pident"] >= threshold]
     blast_fail = blasttab[blasttab["pident"] < threshold]
@@ -219,6 +237,7 @@ def tidy_blast_table(folder,sample):
 
   
     test = blast_pass['qseqid'].str.split(pat = delim,expand = True)
+<<<<<<< HEAD
     blast_pass.insert(len(blast_pass.columns),'segment',test[test.columns[-1]])
     blast_pass.insert(len(blast_pass.columns),'isolate_epi_id',test[test.columns[0]])
     blast_pass.insert(len(blast_pass.columns),'ref_match',blast_pass['segment']+"_"+blast_pass['sseqid'].map(lambda x: x.split('|')[0]).str.replace("_",""))
@@ -243,6 +262,27 @@ def tidy_blast_table(folder,sample):
     newresultstab = tidy_sample_name(newresultstab,'sample')
 
     return(newresultstab)
+=======
+   # print(test)
+    blast_pass['segment'] = test[test.columns[-1]]
+    blast_pass['isolate_epi_id'] = test[test.columns[0]]
+    blast_pass['ref_match'] = blast_pass['segment']+"_"+blast_pass['sseqid'].map(lambda x: x.split('|')[0]).str.replace("_","")
+    blast_pass = match_genotype_dict(blast_pass)
+    blast_pass.to_csv(os.path.join(folder,f'{sample}.blast.out2'))
+    results_df = pd.DataFrame(blast_pass['isolate_epi_id'].to_list(), columns=['sample'])
+    results_df['genotype_match'] = blast_pass['genotype_match']
+    results_df['segment'] = blast_pass['segment']
+    results_df['isolate_epi_id'] = blast_pass['isolate_epi_id']
+    if blast_fail.shape[0]>=1:
+        fail = blast_fail['qseqid'].to_list()
+        for f in fail:
+            missing =[[f,"NA","NA"]]
+            results_df = results_df.append(pd.DataFrame(missing, columns=results_df.columns),ignore_index=True)
+    results_df.sort_values(by=['sample'],inplace=True)
+    results_df = tidy_sample_name(results_df,'sample')
+
+    return(results_df)
+>>>>>>> a14f6ce42d80b877eb1ea60e46ac0bf4086c0409
 
 
 def run_full_blasts(folder,mode,extension,output_dir):
@@ -255,10 +295,15 @@ def run_full_blasts(folder,mode,extension,output_dir):
     if mode == "all_in_folder":   
         for f in fastas:
             logging.info("Running BLAST")
+<<<<<<< HEAD
             print("Running BLAST on input folder")
             run_blast(args.blastdb,folder,f,output_dir)
             logging.info("Reviewing BLAST results")
             print("Reviewing BLAST results")
+=======
+            run_blast(args.blastdb,folder,f,output_dir)
+            logging.info("Reviewing BLAST results")
+>>>>>>> a14f6ce42d80b877eb1ea60e46ac0bf4086c0409
             sresults = tidy_blast_table(args.output_dir,f)
             logging.info("Combining results across FASTA files...")
             print("Combining results across FASTA files...")
@@ -273,12 +318,17 @@ def run_full_blasts(folder,mode,extension,output_dir):
     
     elif mode =="single":
         logging.info("Running BLAST on single FASTA file")
+<<<<<<< HEAD
         print("Running BLAST on single FASTA file")
+=======
+        #folder = input_file in this situation
+>>>>>>> a14f6ce42d80b877eb1ea60e46ac0bf4086c0409
         head_tail = os.path.split(folder)
         logging.info(head_tail)
         print(args.blastdb,head_tail[0],folder)
         run_blast(args.blastdb,head_tail[0],head_tail[1],output_dir)
         logging.info("Reviewing BLAST results")
+<<<<<<< HEAD
         print("Reviewing BLAST results")
         sresults = tidy_blast_table(output_dir,head_tail[1])
         sresults.to_csv(os.path.join(output_dir,f'{now}_{args.tagname}_BLAST_summary.csv')) 
@@ -286,12 +336,19 @@ def run_full_blasts(folder,mode,extension,output_dir):
         logging.info(os.path.join(output_dir,f'{now}_{args.tagname}_BLAST_summary.csv'))
         print("Output file written to:")
         print(os.path.join(output_dir,f'{now}_{args.tagname}_BLAST_summary.csv'))
+=======
+        sresults = tidy_blast_table(output_dir,head_tail[1])
+        sresults.to_csv(os.path.join(output_dir,str(x_int)+"_summary.csv")) 
+        logging.info("Output file written to:")
+        logging.info(os.path.join(output_dir,str(x_int)+"_summary.csv"))
+>>>>>>> a14f6ce42d80b877eb1ea60e46ac0bf4086c0409
         return sresults
     
 def create_persample_summary(summarytab):
     pivot = pd.pivot_table(summarytab, values='genotype_match', 
                                 index='isolate_epi_id', 
                                 columns='segment', fill_value = "N/A", aggfunc='first')
+    print(pivot)
     consensus = []
     freq=[]
     results = []
@@ -321,14 +378,19 @@ def create_persample_summary(summarytab):
             consensus.append(genfreq)
             results.append(result)
     pivot["consensus"] = consensus
+    print(pivot["consensus"])
     pivot["Top_Hit"] = freq
     print(pivot["Top_Hit"])
+<<<<<<< HEAD
     pivot['Final_result'] = results
     pivot.to_csv(os.path.join(args.output_dir,f'{now}_{args.tagname}_genotyping_summary.csv'))
     logging.info("Summary output file written to:")
     logging.info(os.path.join(args.output_dir,f'{now}_{args.tagname}_genotyping_summary.csv'))
     print("Summary output file written to:")
     print(os.path.join(args.output_dir,f'{now}_{args.tagname}_genotyping_summary.csv'))
+=======
+    pivot.to_csv(os.path.join(args.output_dir,str(x_int)+"_ukgenotyping_summary.csv"))
+>>>>>>> a14f6ce42d80b877eb1ea60e46ac0bf4086c0409
     return pivot
 # Need a function to summarise the tables / files processed
 
