@@ -72,7 +72,7 @@ def check_arguments(args):
 path = os.path.dirname(sys.argv[0])
 
 def subset_metadata(g, newtab,filetag):
-     subblasttab = newtab[newtab['Top_Hit']==g]
+     subblasttab = newtab[newtab['Final_result']==g]
      subblasttab.to_csv(os.path.join(args.output_dir,str(f'{filetag}_{now}_dbextract_metadata_{g}.csv')))
      
 
@@ -97,8 +97,8 @@ def main(args):
     newtab = pd.merge(metatab,blasttab, left_on='isolate_epi_id', right_on='isolate_epi_id',how='left')
     newtab.to_csv(os.path.join(args.output_dir,str(f'{filetag}_{now}_dbextract_metadata_blast.csv')))
     print("Genotyping results summary:")
-    print(Counter(blasttab['Top_Hit']))
-    genotypes = list(set(blasttab['Top_Hit']))
+    print(Counter(blasttab['Final_result']))
+    genotypes = list(set(blasttab['Final_result']))
     for g in genotypes:
          subset_metadata(g, newtab,filetag)
 
