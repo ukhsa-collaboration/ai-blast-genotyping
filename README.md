@@ -3,12 +3,9 @@
 command line tool for running the BLAST genotyping method 
 
 # Requirements & Dependencies
-To run this tool you will need to have BLAST locally installed. 
-Recommend installing with conda: 
+To run this tool you will need to numpy, pandas and BLAST installed. The versions are present in the requirements.txt file. 
+Installation can be performed with either pip or conda. 
 
-``
-conda install -c bioconda blast
-``
 
 ## Files required
 1. **BLAST database** - You will also need to have a local copy of the BLAST database that has been created based on the reference strains for the UK AI genotypes. 
@@ -57,16 +54,10 @@ AI UK Genotyping command line tool
 
 ## Example usage
 
-****Process all FASTA files (based on extension) in a folder****
-
-```
-python ai_genotyping_tool_v01.py -e fasta -f ../gisaid -b ai_geno_groups_ref -o ../gisaid/genotyping_testing
-
-```
-****Process all samples in single FASTA file****
+****Process all FASTA files (based on extension) in a folder or all samples in single FASTA file****
 ```
 
-python ai_genotyping_tool_v01.py -i ../gisaid/test_seq_20230307.fasta -b ai_geno_groups_ref -o ../gisaid/genotyping_testing
+python /path/ai-blast-genotyping/ai_genotyping_tool.py -o OUTPUT_DIR -t {yes,no} -e FASTA_EXTENSION [--input_file INPUT_FILE OR --input_folder INPUT_FOLDER] -b BLASTDB –n FILETAG 
 ```
 ## Assumptions:
 
@@ -78,10 +69,6 @@ A test data set for the UK reference genomes is available on the HPC folder in t
 sftp://hpc1mgmt.unix.phe.gov.uk/phengs/hpc_projects/nicc80_ai/geno_blastdb/test_data
 
 
-## Features to add still
-
-1. Testing data
-2. Historic table for joint genotyping calls
 
 
 # Details of how the BLAST database was set up & initial testing
