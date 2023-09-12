@@ -21,7 +21,7 @@ from datetime import datetime, date
 import shutil
 import subprocess
 from collections import Counter
-
+from Bio import SeqIO
 
 now = date.today()
 
@@ -31,6 +31,11 @@ __author__ = 'Kate Howell'
 
 
 def logging_file_setup(output_folder, testing):
+    """
+    Set up log
+
+    :return: N/A
+    """
     print("Setting up logging information for debugging.")
     # Need to clean up log files, currently generates multiple log files.
     datetime_stamp = now.strftime("%Y%m%d-%H%M%S")
@@ -77,7 +82,6 @@ def read_commandline():
         print(f"Creating output folder:\n {args.output_dir}")
         logging.info(f"Creating output folder:\n {args.output_dir}")
         os.mkdir(args.output_dir)
-
     return args
 
 
@@ -104,6 +108,7 @@ def check_arguments(args):
 
 
 def testing_functions(testing_functions_parameters):
+
     # Generate output folder
     if testing_functions_parameters[1] == str('output_folder'):
         if testing_functions_parameters[0] == True:
@@ -128,31 +133,24 @@ def testing_functions(testing_functions_parameters):
                 os.mkdir(testing_functions_parameters[2])
 
 path = os.path.dirname(sys.argv[0])
-# Reference data & input parameters - move to Lib folder
-#reftabdict = {'PB2_Group1': 'A/chicken/England/053052/2021', 'PB2_Group2': 'A/chicken/Wales/053969/2021', 
-#'PB2_Group3': 'A/chicken/Scotland/054477/2021', 'PB1_Group1': 'A/chicken/England/053052/2021', 'PB1_Group2': 'A/chicken/England/152082/2022',
-# 'PA_Group1': 'A/chicken/England/053052/2021', 'PA_Group2': 'A/chicken/Scotland/054477/2021', 
-# 'PA_Group3': 'A/herringgull/England/324803/2022', 'PA_Group4': 'A/Humboldtpenguin/England/161651/2022', 
-# 'HA_Group1': 'A/chicken/England/053052/2021', 'HA_Group2': 'A/Greylaggoose/England/054503/2021',
-#  'NP_Group1': 'A/chicken/England/053052/2021', 'NP_Group2': 'A/turkey/England/016515/2022', 'NP_Group3': 'A/chicken/England/069816/2021',
-#   'NP_Group4': 'A/chicken/England/085598/2022', 'NP_Group5': 'A/chicken/England/118935/2022', 'NA_Group1': 'A/chicken/England/053052/2021', 
- #  'NA_Group2': 'A/herringgull/England/324803/2022', 'M_Group1': 'A/chicken/England/053052/2021', 
- #  'NS_Group1': 'A/chicken/England/053052/2021', 'NS_Group2': 'A/chicken/England/085598/2022', 'NS_Group3': 'A/pheasant/England/251536/2022'}
+blast_cols = ['qseqid','sseqid','pident','length','mismatch','gapopen','qstart','qend','sstart','send','evalue','bitscore']
+threshold = 97
 
 if os.path.exists(os.path.join(path,"genotype_groups_examples.csv")):
-    genogroups = pd.read_csv(os.path.join(path,"genotype_groups_examples.csv"),dtype=str)
-    genogroups['Segment'] = genogroups['Segment'].replace(np.nan, "NA")
-    groups = genogroups['Group'].tolist()
-    genotypes = genogroups['Genotypes'].tolist()
-    genodict = dict(zip(genogroups.Labels, genogroups.Genotypes))
+        genogroups = pd.read_csv(os.path.join(path,"genotype_groups_examples.csv"),dtype=str)
+        genogroups['Segment'] = genogroups['Segment'].replace(np.nan, "NA")
+        groups = genogroups['Group'].tolist()
+        genotypes = genogroups['Genotypes'].tolist()
+        genodict = dict(zip(genogroups.Labels, genogroups.Genotypes))
 else:
-    logging.error(f'Reference genotypes table does not exists:"genotype_groups_examples.csv". Please check if the file is in the correct location')
-   # return 1
-    
-blast_cols = ['qseqid','sseqid','pident','length','mismatch','gapopen','qstart','qend','sstart','send','evalue','bitscore']
-threshold = 90
+        logging.error(f'Reference genotypes table does not exists:"genotype_groups_examples.csv". Please check if the file is in the correct location')
 
 def tidy_fasta_files(sample):
+    """
+    Run regex on FASTA files to ensure BLAST searches can run 
+
+    :return: None
+    """
     logging.info("Tidying FASTA headers for the following non-standard characters.... () ,-\n")
     os.system("perl -pi -e 's/\(/_/g' "+sample)
     os.system("perl -pi -e 's/\)/_/g' "+sample)
@@ -161,7 +159,29 @@ def tidy_fasta_files(sample):
     os.system("perl -pi -e 's/--//g' "+sample)
     os.system("perl -pi -e 'spath/-\n-//g' "+sample)
     
-# function to run the blast searches to temp file
+
+def duplicate_fasta_check(fasta):
+    """
+    Read in FASTA file, check if sequence in dictionary, report any duplicates 
+
+    :return: duplicates_list
+    """
+    seqdict = {}
+    duplist = []
+    fasta_sequences = SeqIO.parse(open(fasta), 'fasta')
+    for seq in fasta_sequences:
+        #check if sequence already in dictionary
+        if seq.id in seqdict:
+            print(f"Duplicate sequence found for {seq.id}")
+            logging.info(f"Duplicate sequence found for {seq.id}")
+            duplist.append(seq.id)
+        else:
+            seqdict[seq.id] = str(seq.seq)
+            
+    print(f"{len(duplist)} duplicates found in FASTA files. Any duplicates should be reviewed prior to interpreting results!")
+    logging.info(print(f"{len(duplist)} duplicates found in FASTA files. Any duplicates should be reviewed prior to interpreting results!"))
+    return duplist
+
 
 def run_blast(db,folder,sample,output_dir):
     tidy_fasta_files(os.path.join(folder,sample))
@@ -198,6 +218,7 @@ def tidy_sample_name(table,sample_name):
 def tidy_blast_table(folder,sample):
     logging.info("Reading in BLAST output:")
     logging.info(os.path.join(args.output_dir,f'{sample}.blast.out'))
+    print(os.path.join(args.output_dir,f'{sample}.blast.out'))
     #print(os.path.join(args.output_dir,f'{sample}.blast.out'))
     blasttab = pd.read_csv(os.path.join(args.output_dir,f'{sample}.blast.out'),sep="\t",header = None)
    # print(blasttab.shape)
@@ -209,18 +230,29 @@ def tidy_blast_table(folder,sample):
         print(f'{blast_fail.shape[0]}sequences do not meet a minimum percentage sequence identity to the ref seq!!')
     logging.info("BLAST pass table dimensions:")
     logging.info(blast_pass.shape)
-    if "|" in blast_pass['qseqid'][0]:
+    if blast_pass.shape[0] == 0: 
+        print("No sequences found to meet the minimum threshold. Tool now exiting, please check that you are using the same subtype of sequences as in the database!")
+        sys.exit(logging.error("No sequences found to meet the minimum threshold. Tool now exiting, please check that you are using the same subtype of sequences as in the database!"))
+    print("Checking sequence identifier for delimiters.... ")
+    logging.info("Checking sequence identifier for delimiters.... ")
+    if "|" in list(blast_pass['qseqid'])[0]:
             delim = "|"
-    elif "." in blast_pass['qseqid'][0]:
+        
+    elif "." in list(blast_pass['qseqid'])[0]:
         delim = "."
-    elif "_" in blast_pass['qseqid'][0]:
+    elif "_" in list(blast_pass['qseqid'])[0]:
             delim = "_"
     else:
         logging.error(f'Sample header delimiter unknown! Please check, "." or "|" expected!')
         print(f'Sample header delimiter unknown! Please check, "." or "|" expected!')
-
-  
-    test = blast_pass['qseqid'].str.split(pat = delim,expand = True)
+    print(f'Delimiter found: {delim}')
+    logging.info(f'Delimiter found: {delim}')
+    logging.info("Preparing BLAST table for summary")
+    print("Preparing BLAST table for summary")
+    try:
+        test = blast_pass['qseqid'].str.split(pat = delim,expand = True)
+    except:
+        print(f"Issue with delimiter! {delim}")
     blast_pass.insert(len(blast_pass.columns),'segment',test[test.columns[-1]])
     blast_pass.insert(len(blast_pass.columns),'isolate_epi_id',test[test.columns[0]])
     blast_pass.insert(len(blast_pass.columns),'ref_match',blast_pass['segment']+"_"+blast_pass['sseqid'].map(lambda x: x.split('|')[0]).str.replace("_",""))
@@ -258,6 +290,10 @@ def run_full_blasts(folder,mode,extension,output_dir):
         for f in fastas:
             logging.info("Running BLAST")
             print("Running BLAST on input folder")
+            duplist = duplicate_fasta_check(f)
+            if len(duplist)>=1:
+                print(f"Duplicates identified: {duplist}")
+                logging.info(f"Duplicates identified: {duplist}")
             run_blast(args.blastdb,folder,f,output_dir)
             logging.info("Reviewing BLAST results")
             print("Reviewing BLAST results")
@@ -266,11 +302,11 @@ def run_full_blasts(folder,mode,extension,output_dir):
             print("Combining results across FASTA files...")
             results_tabs.append(sresults)
             newdf = pd.concat(results_tabs)
-            newdf.to_csv(os.path.join(args.output_dir,str(now)+"_summary.csv"))
-            logging.info("Output file written to:")
-            logging.info(os.path.join(args.output_dir,str(now)+"_summary.csv"))
-            print("Output file written to:")
-            print(os.path.join(args.output_dir,str(now)+"_summary.csv"))
+       #     newdf.to_csv(os.path.join(args.output_dir,str(now)+"_summary.csv"))
+        #    logging.info("Output file written to:")
+         #   logging.info(os.path.join(args.output_dir,str(now)+"_summary.csv"))
+          #  print("Output file written to:")
+           # print(os.path.join(args.output_dir,str(now)+"_summary.csv"))
         return(newdf)
     
     elif mode =="single":
@@ -279,6 +315,10 @@ def run_full_blasts(folder,mode,extension,output_dir):
         head_tail = os.path.split(folder)
         logging.info(head_tail)
         print(args.blastdb,head_tail[0],folder)
+        duplist = duplicate_fasta_check(folder)
+        if len(duplist)>=1:
+                print(f"Duplicates identified: {duplist}")
+                logging.info(f"Duplicates identified: {duplist}")
         run_blast(args.blastdb,head_tail[0],head_tail[1],output_dir)
         logging.info("Reviewing BLAST results")
         print("Reviewing BLAST results")
@@ -348,6 +388,7 @@ def overall_summary(pivot):
 # Need a function to use historic genotype rules when multiple genotype calls are returned
 ### e.g. AIV07-B1|AIV07-B2 = AIV07-B2
 
+
 # Run script
 
 def main(args):
@@ -360,7 +401,8 @@ def main(args):
 
     # Set up logging
     logging_file_setup(output_dir, args.testing)
-
+    # Read in required files
+   # return 1
     if args.input_folder is not None:
         logging.info("Processing folder full of input files")
         print("Processing folder full of input files")
