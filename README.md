@@ -6,6 +6,18 @@ command line tool for running the BLAST genotyping method
 To run this tool you will need to numpy, pandas and BLAST installed. The versions are present in the requirements.txt file. 
 Installation can be performed with either pip or conda. 
 
+# Running on the HPC
+
+To run this script on the HPC you will need to load pre-existing modules 
+
+```
+# standard setup to get off the head node
+module load sge
+module load qrsh 
+# specific requirements
+module load sge blast+/2.2.27
+```
+
 
 ## Files required
 1. **BLAST database** - You will also need to have a local copy of the BLAST database that has been created based on the reference strains for the UK AI genotypes. 
