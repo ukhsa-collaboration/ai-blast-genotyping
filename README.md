@@ -8,7 +8,8 @@ Installation can be performed with either pip or conda.
 
 # Running on the HPC
 
-To run this script on the HPC you will need to load pre-existing modules 
+To run this script on the HPC you will need to load pre-existing modules, and have copied over and un-zip the gitlab code for both the AI BLAST genotyping gitlab repo. 
+You do not have to install further python modules or use the requirements.txt due to the limitations of updating python code on the HPC. 
 
 ```
 # standard setup to get off the head node
