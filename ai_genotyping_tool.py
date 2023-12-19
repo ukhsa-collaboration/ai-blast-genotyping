@@ -76,8 +76,10 @@ def read_commandline():
     input_group.add_argument('--input_file', '-i', required=False, help='Input FASTA file')
     input_group.add_argument('--input_folder', '-f', required=False, help='Input FASTA file')
     parser.add_argument('--blastdb', '-b', required=True, help='Reference BLAST database')
+    parser.add_argument('--strict', '-s', required=True, help='Strict version, all 8 segments for genotype',default='no')
+    
     args = parser.parse_args()
-    # Need to handle output dir before setting up logging files.
+    # Need to handle output dir before setting up logging files.hat's the timeline for the analysis
     if not os.path.isdir(args.output_dir):  # Set up output folder
         print(f"Creating output folder:\n {args.output_dir}")
         logging.info(f"Creating output folder:\n {args.output_dir}")
@@ -258,7 +260,7 @@ def tidy_blast_table(folder,sample):
     blast_pass.insert(len(blast_pass.columns),'ref_match',blast_pass['segment']+"_"+blast_pass['sseqid'].map(lambda x: x.split('|')[0]).str.replace("_",""))
     blast_pass = match_genotype_dict(blast_pass)
     blast_pass.to_csv(os.path.join(folder,f'{sample}.blast.out2'))
-    results_df = pd.DataFrame(blast_pass['isolate_epi_id'].to_list(), columns=['sample'])
+    results_df = pd.DataFrame(blast_pass['isolate_epi_id'], columns=['sample'])
     results_df.insert(len(results_df.columns),'genotype_match',blast_pass['genotype_match'])
     results_df.insert(len(results_df.columns),'segment',blast_pass['segment'])
     results_df.insert(len(results_df.columns),'isolate_epi_id',blast_pass['isolate_epi_id'])
@@ -330,7 +332,7 @@ def run_full_blasts(folder,mode,extension,output_dir):
         print(os.path.join(output_dir,f'{now}_{args.tagname}_BLAST_summary.csv'))
         return sresults
     
-def create_persample_summary(summarytab):
+def create_persample_summary(summarytab,segthreshold):
     pivot = pd.pivot_table(summarytab, values='genotype_match', 
                                 index='isolate_epi_id', 
                                 columns='segment', fill_value = "N/A", aggfunc='first')
@@ -356,10 +358,10 @@ def create_persample_summary(summarytab):
             for n,c in enumerate(counts):
                 if c==maxgeno:
                     topgeno.append(keys[n])
-                    if int(maxgeno)>=7:
+                    if int(maxgeno)>=segthreshold:
                         result = keys[n]
                     else:
-                        result = "Please review individual segments results"
+                        result = "No known genotype: Please review individual segments results"
             freq.append("|".join(topgeno))
             consensus.append(genfreq)
             results.append(result)
@@ -395,7 +397,10 @@ def main(args):
     start_time = datetime.now()  # Start time for calculating performance improvements
     # Create paths for qsub submission
     output_dir = os.path.abspath(args.output_dir)
-
+    if args.strict == "yes":
+        segthreshold = 8
+    else:
+        segthreshold = 7
     # Generate output folder
     testing_functions([args.testing, str('output_folder'), output_dir])
 
@@ -408,14 +413,14 @@ def main(args):
         print("Processing folder full of input files")
         input_folder = os.path.abspath(args.input_folder)
         summarytab = run_full_blasts(input_folder,"all_in_folder",args.extension,output_dir)
-        pivot_out = create_persample_summary(summarytab)
+        pivot_out = create_persample_summary(summarytab,segthreshold)
         overall_summary(pivot_out)
     if args.input_file is not None:
         print("Processing single FASTA files")
         logging.info("Processing single FASTA files")
         input_file= os.path.abspath(args.input_file)
         summarytab = run_full_blasts(input_file,"single",args.extension,output_dir)
-        pivot_out = create_persample_summary(summarytab)
+        pivot_out = create_persample_summary(summarytab,segthreshold)
         overall_summary(pivot_out)
 
     end_time = datetime.now()  # end time for calculating performance improvements
