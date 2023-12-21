@@ -400,10 +400,9 @@ def run_full_blasts(folder,mode,extension,output_dir):
         print(args.blastdb,head_tail[0],folder)
         duplist = duplicate_fasta_check(folder)
         segdict,segmentlist = missing_fasta_check(folder,segdict)
-        segmissing, fasta_count = create_segment_tab(segdict,segmentlist)
+        segmissing, fasta_count = create_segment_tab(segdict,segments)
         segdicttab = pd.DataFrame.from_dict(segmissing, orient='index')
         segdicttab = segdicttab.reset_index()
-        print(segdicttab.columns)
         segdicttab.to_csv(os.path.join(output_dir,f'{now}_{args.tagname}_segment_table.csv'))
         logging.info(f"Segment table written to : {os.path.join(output_dir,f'{now}_{args.tagname}_segment_table.csv')}")
         segdicttab.columns = ['sample','PB2','PB1','PA','HA','NP','NA','MP','NS']
