@@ -423,7 +423,7 @@ def run_full_blasts(folder,mode,extension,output_dir):
 def create_persample_summary(summarytab,segthreshold):
     pivot = pd.pivot_table(summarytab, values='genotype_match', 
                                 index='isolate_epi_id', 
-                                columns='segment', fill_value = "N/A", aggfunc='first')
+                                columns='segment', fill_value = "No sequence", aggfunc='first')
     print(pivot)
     path = os.path.dirname(sys.argv[0])
     prioritytab = pd.read_csv(os.path.join(path,"genotype_prioritisation.csv"))
@@ -452,13 +452,13 @@ def create_persample_summary(summarytab,segthreshold):
                     if int(maxgeno)>=segthreshold:
                         tophit = "|".join(topgeno)
                         if "|" in tophit:
-                            tophit1,tophit2 =tophit.split("|")
-                            hit1tab = prioritytab[prioritytab['Genotype']==tophit1]
-                            hit2tab = prioritytab[prioritytab['Genotype']==tophit2]
-                            if hit1tab['Frequency'].iloc[0] < hit2tab['Frequency'].iloc[0]:
-                                result = tophit2
-                            else:
-                                result = tophit1
+                            freqs = []
+                            for t in topgeno:
+                                hittab = prioritytab[prioritytab['Genotype'] == t]
+                                freqs.append(hittab['Frequency'].iloc[0])
+                            maxhit = max(freqs)
+                            result = topgeno[freqs.index(maxhit)]
+
                         else:
                             result = keys[n]
                     else:
@@ -471,6 +471,7 @@ def create_persample_summary(summarytab,segthreshold):
     pivot["Top_Hit"] = freq
     print(pivot["Top_Hit"])
     pivot['Final_result'] = results
+    pivot['Final_result'] = pivot['Final_result'].str.replace("No sequence","Insufficient sequence data")
     pivot.to_csv(os.path.join(args.output_dir,f'{now}_{args.tagname}_genotyping_summary.csv'))
     logging.info("Summary output file written to:")
     logging.info(os.path.join(args.output_dir,f'{now}_{args.tagname}_genotyping_summary.csv'))
