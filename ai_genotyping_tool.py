@@ -77,7 +77,7 @@ def read_commandline():
     input_group.add_argument('--input_folder', '-f', required=False, help='Input FASTA file')
     parser.add_argument('--blastdb', '-b', required=True, help='Reference BLAST database')
     parser.add_argument('--strict', '-s', required=True, help='Strict version, all 8 segments for genotype',default='no')
-    
+    parser.add_argument('--identity', '-d', required=True, help='Percentage identity threshold. Default = 97',default=97)
     args = parser.parse_args()
     # Need to handle output dir before setting up logging files.hat's the timeline for the analysis
     if not os.path.isdir(args.output_dir):  # Set up output folder
@@ -106,6 +106,8 @@ def check_arguments(args):
     if not os.path.exists(args.blastdb+".nin"):
         logging.error(f'BLAST database does not appear to exists: {args.blastdb}. Please check')
         return 1
+
+    
     return 0
 
 
@@ -136,7 +138,7 @@ def testing_functions(testing_functions_parameters):
 
 path = os.path.dirname(sys.argv[0])
 blast_cols = ['qseqid','sseqid','pident','length','mismatch','gapopen','qstart','qend','sstart','send','evalue','bitscore']
-threshold = 97
+
 
 if os.path.exists(os.path.join(path,"genotype_groups_examples.csv")):
         genogroups = pd.read_csv(os.path.join(path,"genotype_groups_examples.csv"),dtype=str)
@@ -183,6 +185,8 @@ def duplicate_fasta_check(fasta):
     print(f"{len(duplist)} duplicates found in FASTA files. Any duplicates should be reviewed prior to interpreting results!")
     logging.info(print(f"{len(duplist)} duplicates found in FASTA files. Any duplicates should be reviewed prior to interpreting results!"))
     return duplist
+
+
 
 def missing_fasta_check(fasta,segdict):
     """
@@ -259,6 +263,7 @@ def tidy_blast_table(folder,sample,segmissing,fasta_count):
         logging.info(f"{fasta_count - blasttab.shape[0]} FASTAs do not meet minimum BLAST thresholds")
    # print(blasttab.shape)
     blasttab.columns = blast_cols
+    threshold = int(args.identity)
     blast_pass = blasttab[blasttab["pident"] >= threshold]
     blast_fail = blasttab[blasttab["pident"] < threshold]
     if blast_fail.shape[0]>= 1:
@@ -506,6 +511,7 @@ def main(args):
     # Generate output folder
     testing_functions([args.testing, str('output_folder'), output_dir])
     logging.info(args)
+
     # Set up logging
     logging_file_setup(output_dir, args.testing)
     # Read in required files
