@@ -218,18 +218,18 @@ def missing_fasta_check(fasta,segdict):
     return segdict, segmentlist
 
 segments = ['PB2','PB1','PA','HA','NP','NA','MP','NS']
-def create_segment_tab(segdict,segmentlist):
+def create_segment_tab(segdict):
     segdf = {}
     samples = segdict.keys()
     fasta_count = 0 
     for s in samples:
         segfound = segdict.get(s)
-        notfound = set(segmentlist) - set(segfound)
+        notfound = set(segments) - set(segfound)
         if len(notfound)>=1:
             print(f'Missing segments identified for {s}: {notfound}')
             logging.info(f'Missing segments identified for {s}: {notfound}')
         row = []
-        for seg in segmentlist:
+        for seg in segments:
             if seg in segfound:
                 row.append(seg)
                 fasta_count += 1
@@ -316,13 +316,15 @@ def tidy_blast_table(folder,sample,segmissing,fasta_count):
         newresults_df.append(missing)
     newresultstab = pd.concat(newresults_df)
     samples = list(set(newresultstab['isolate_epi_id']))
-
+    print(segmissing)
     for s in samples:
+        print(s)
         subresults = newresultstab[newresultstab['isolate_epi_id']==s]
         if subresults.shape[0] == 1:
             pass
         elif subresults.shape[0] == 0:
             submissing = segmissing[segmissing['sample'] == s]
+            
             segfile = list(set(newresultstab['segment']))[0]
             if submissing[segfile] == "missing":
                 newresultstab.loc[len(newresultstab)]  = ['No sequence',segfile,s]
@@ -330,9 +332,14 @@ def tidy_blast_table(folder,sample,segmissing,fasta_count):
                 newresultstab.loc[len(newresultstab)]  = ['BLAST FAIL',segfile,s]
         elif subresults.shape[0]<8:
             submissing = segmissing[segmissing['sample'] == s]
+            print(submissing)
             segfound = list(set(subresults['segment']))
-            segcheck = list(set(segments)-set(segfound))
+           # print(segfound)
+            segcheck = list(set(segments) - set(segfound))
+          #  print(segcheck)
             for seg in segcheck:
+              #  print(seg)
+              #  print(submissing)
                 print(submissing[seg].iloc[0])
                 if submissing[seg].iloc[0] == "missing":
                     newresultstab.loc[len(newresultstab)]  = ['No sequence',seg,s]
@@ -358,7 +365,7 @@ def run_full_blasts(folder,mode,extension,output_dir):
 
             logging.info("Running BLAST")
             print("Running BLAST on input folder")
-            segdict,segmentlist = missing_fasta_check(f,segdict)
+            segdict, segmentlist = missing_fasta_check(f, segdict)
             duplist = duplicate_fasta_check(f)
             if len(duplist)>=1:
                 print(f"Duplicates identified: {duplist}")
@@ -366,16 +373,18 @@ def run_full_blasts(folder,mode,extension,output_dir):
             run_blast(args.blastdb,folder,f,output_dir)
             logging.info("Reviewing BLAST results")
             print("Reviewing BLAST results")
-            segmissing, fasta_count = create_segment_tab(segdict,segmentlist)
+            segmissing, fasta_count = create_segment_tab(segdict)
+
             segdicttab = pd.DataFrame.from_dict(segmissing, orient='index')
             segdicttab = segdicttab.reset_index()
+            print(segdicttab)
             segtabs.append(segdicttab)
             segcols = ['sample']
-            for s in segmentlist:
+            for s in segments:
                 segcols.append(s)
             segdicttab.columns = segcols
            # segdicttab['sample'] = segdicttab.index
-
+            
             sresults = tidy_blast_table(args.output_dir,f,segdicttab,fasta_count)
             logging.info("Combining results across FASTA files...")
             print("Combining results across FASTA files...")
@@ -405,7 +414,7 @@ def run_full_blasts(folder,mode,extension,output_dir):
         print(args.blastdb,head_tail[0],folder)
         duplist = duplicate_fasta_check(folder)
         segdict,segmentlist = missing_fasta_check(folder,segdict)
-        segmissing, fasta_count = create_segment_tab(segdict,segments)
+        segmissing, fasta_count = create_segment_tab(segdict)
         segdicttab = pd.DataFrame.from_dict(segmissing, orient='index')
         segdicttab = segdicttab.reset_index()
         segdicttab.to_csv(os.path.join(output_dir,f'{now}_{args.tagname}_segment_table.csv'))
@@ -460,6 +469,7 @@ def create_persample_summary(summarytab,segthreshold):
                             freqs = []
                             for t in topgeno:
                                 hittab = prioritytab[prioritytab['Genotype'] == t]
+                                print(hittab)
                                 freqs.append(hittab['Frequency'].iloc[0])
                             maxhit = max(freqs)
                             result = topgeno[freqs.index(maxhit)]
