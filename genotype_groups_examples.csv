@@ -1,143 +1,45 @@
 Segment,Group,Genotypes,Labels,Example_sequence
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/chicken/England/053052/2021
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/Greylaggoose/England/054503/2021
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/chicken/Wales/053969/2021
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/chicken/Scotland/054477/2021
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/turkey/England/016515/2022
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/chicken/England/069816/2021
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/chicken/England/085598/2022
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/chicken/England/118935/2022
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/herringgull/England/324803/2022
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/pheasant/England/251536/2022
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/chicken/England/152082/2022
-MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223,MP_Group1,A/Humboldtpenguin/England/161651/2022
-PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223,PB1_Group1,A/chicken/England/053052/2021
-PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223,PB1_Group1,A/Greylaggoose/England/054503/2021
-PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223,PB1_Group1,A/chicken/Wales/053969/2021
-PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223,PB1_Group1,A/chicken/Scotland/054477/2021
-PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223,PB1_Group1,A/turkey/England/016515/2022
-PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223,PB1_Group1,A/chicken/England/069816/2021
-PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223,PB1_Group1,A/chicken/England/085598/2022
-PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223,PB1_Group1,A/chicken/England/118935/2022
-PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223,PB1_Group1,A/herringgull/England/324803/2022
-PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223,PB1_Group1,A/pheasant/England/251536/2022
-PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223,PB1_Group1,A/Humboldtpenguin/England/161651/2022
-NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223,NA_Group1,A/chicken/England/053052/2021
-NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223,NA_Group1,A/Greylaggoose/England/054503/2021
-NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223,NA_Group1,A/chicken/Wales/053969/2021
-NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223,NA_Group1,A/chicken/Scotland/054477/2021
-NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223,NA_Group1,A/turkey/England/016515/2022
-NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223,NA_Group1,A/chicken/England/069816/2021
-NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223,NA_Group1,A/chicken/England/085598/2022
-NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223,NA_Group1,A/chicken/England/118935/2022
-NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223,NA_Group1,A/pheasant/England/251536/2022
-NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223,NA_Group1,A/chicken/England/152082/2022
-NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223,NA_Group1,A/Humboldtpenguin/England/161651/2022
-NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223,NS_Group1,A/chicken/England/053052/2021
-NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223,NS_Group1,A/Greylaggoose/England/054503/2021
-NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223,NS_Group1,A/chicken/Wales/053969/2021
-NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223,NS_Group1,A/chicken/Scotland/054477/2021
-NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223,NS_Group1,A/turkey/England/016515/2022
-NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223,NS_Group1,A/chicken/England/069816/2021
-NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223,NS_Group1,A/chicken/England/118935/2022
-NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223,NS_Group1,A/pheasant/England/251536/2022
-NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223,NS_Group1,A/chicken/England/152082/2022
-NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223,NS_Group1,A/Humboldtpenguin/England/161651/2022
-NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223,NP_Group1,A/chicken/England/053052/2021
-NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223,NP_Group1,A/Greylaggoose/England/054503/2021
-NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223,NP_Group1,A/chicken/Wales/053969/2021
-NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223,NP_Group1,A/chicken/Scotland/054477/2021
-NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223,NP_Group1,A/pheasant/England/251536/2022
-NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223,NP_Group1,A/chicken/England/152082/2022
-NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223,NP_Group1,A/Humboldtpenguin/England/161651/2022
-PA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV20|AIV55,PA_Group1,A/chicken/England/053052/2021
-PA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV20|AIV55,PA_Group1,A/Greylaggoose/England/054503/2021
-PA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV20|AIV55,PA_Group1,A/chicken/Wales/053969/2021
-PA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV20|AIV55,PA_Group1,A/turkey/England/016515/2022
-PA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV20|AIV55,PA_Group1,A/chicken/England/069816/2021
-PB2,Group 1,AIV07-B1|AIV07-B2|AIV20|AIV55,PB2_Group1,A/chicken/England/053052/2021
-PB2,Group 1,AIV07-B1|AIV07-B2|AIV20|AIV55,PB2_Group1,A/Greylaggoose/England/054503/2021
-PB2,Group 1,AIV07-B1|AIV07-B2|AIV20|AIV55,PB2_Group1,A/turkey/England/016515/2022
-PB2,Group 1,AIV07-B1|AIV07-B2|AIV20|AIV55,PB2_Group1,A/chicken/England/069816/2021
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-003707-003
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-011119-002
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-004008-002
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-008890-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-005844-010
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-003434-002
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-010445-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-008225-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-008239-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-010668-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-013105-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-003733-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-010663-005
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-007805-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-005590-002
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-001855-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-031266-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-037822-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-006530-002
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-037701-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-008760-007
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-013078-002
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-035225-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-009287-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-000081-004
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-014746-009
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-009329-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-010139-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-028879-001
+HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-009980-001
+HA,ea2,A2,HA_ea2,22-022528-003
+HA,ea2,A2,HA_ea2,22-036180-006
+HA,ea2,A2,HA_ea2,23-001397-004
+HA,ea2,A2,HA_ea2,22-008064-001
+HA,ea2,A2,HA_ea2,23-004612-024
+HA,ea3,A3,HA_ea3,22-013001-001
+HA,ea4,A4,HA_ea4,23-003641-006
+HA,ea5,A5,HA_ea5,23-001397-012
+HA,ea6,A6,HA_ea6,23-004612-001
 HA,Group 1,AIV07-B1|AIV08,HA_Group1,A/chicken/England/053052/2021
 HA,Group 1,AIV07-B1|AIV08,HA_Group1,A/chicken/Wales/053969/2021
-HA,Group 2,AIV07-B2|AIV09|AIV73|WB153|AIV204|AIV20|AIV55|AIV48|WB135|AIV204|AIV223,HA_Group2,A/Greylaggoose/England/054503/2021
-HA,Group 2,AIV07-B2|AIV09|AIV73|WB153|AIV204|AIV20|AIV55|AIV48|WB135|AIV204|AIV223,HA_Group2,A/chicken/Scotland/054477/2021
-HA,Group 2,AIV07-B2|AIV09|AIV73|WB153|AIV204|AIV20|AIV55|AIV48|WB135|AIV204|AIV223,HA_Group2,A/turkey/England/016515/2022
-HA,Group 2,AIV07-B2|AIV09|AIV73|WB153|AIV204|AIV20|AIV55|AIV48|WB135|AIV204|AIV223,HA_Group2,A/chicken/England/069816/2021
-HA,Group 2,AIV07-B2|AIV09|AIV73|WB153|AIV204|AIV20|AIV55|AIV48|WB135|AIV204|AIV223,HA_Group2,A/chicken/England/085598/2022
-HA,Group 2,AIV07-B2|AIV09|AIV73|WB153|AIV204|AIV20|AIV55|AIV48|WB135|AIV204|AIV223,HA_Group2,A/chicken/England/118935/2022
-HA,Group 2,AIV07-B2|AIV09|AIV73|WB153|AIV204|AIV20|AIV55|AIV48|WB135|AIV204|AIV223,HA_Group2,A/herringgull/England/324803/2022
-HA,Group 2,AIV07-B2|AIV09|AIV73|WB153|AIV204|AIV20|AIV55|AIV48|WB135|AIV204|AIV223,HA_Group2,A/pheasant/England/251536/2022
-HA,Group 2,AIV07-B2|AIV09|AIV73|WB153|AIV204|AIV20|AIV55|AIV48|WB135|AIV204|AIV223,HA_Group2,A/Humboldtpenguin/England/161651/2022
-HA,Group 2,AIV07-B2|AIV09|AIV73|WB153|AIV204|AIV20|AIV55|AIV48|WB135|AIV223,HA_Group2,A/chicken/England/152082/2022
-PB2,Group 2,AIV08|AIV223,PB2_Group2,A/chicken/Wales/053969/2021
-PB2,Group 2,AIV08|AIV223,PB2_Group2,A/Humboldtpenguin/England/161651/2022
-PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204,PB2_Group3,A/chicken/Scotland/054477/2021
-PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204,PB2_Group3,A/chicken/England/085598/2022
-PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204,PB2_Group3,A/chicken/England/118935/2022
-PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204,PB2_Group3,A/herringgull/England/324803/2022
-PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204,PB2_Group3,A/pheasant/England/251536/2022
-PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204,PB2_Group3,A/chicken/England/152082/2022
-PA,Group 2,AIV09|AIV73|WB153|AIV204,PA_Group2,A/chicken/Scotland/054477/2021
-PA,Group 2,AIV09|AIV73|WB153|AIV204,PA_Group2,A/chicken/England/118935/2022
-PA,Group 2,AIV09|AIV73|WB153|AIV204,PA_Group2,A/pheasant/England/251536/2022
-PA,Group 2,AIV09|AIV73|WB153|AIV204,PA_Group2,A/chicken/England/152082/2022
-NP,Group 2,AIV20,NP_Group2,A/turkey/England/016515/2022
-PB1,Group 2,AIV204,PB1_Group2,A/chicken/England/152082/2022
-PA,Group 4,AIV223,PA_Group4,A/Humboldtpenguin/England/161651/2022
-NP,Group 4,AIV48|WB135,NP_Group4,A/chicken/England/085598/2022
-NP,Group 4,AIV48|WB135,NP_Group4,A/herringgull/England/324803/2022
-NS,Group 2,AIV48|WB135,NS_Group2,A/chicken/England/085598/2022
-NS,Group 2,AIV48|WB135,NS_Group2,A/herringgull/England/324803/2022
-NP,Group 3,AIV55,NP_Group3,A/chicken/England/069816/2021
-NP,Group5,AIV73,NP_Group5,A/chicken/England/118935/2022
-NA,Group 2,WB135,NA_Group2,A/herringgull/England/324803/2022
-PA,Group 3,WB135|AIV48,PA_Group3,A/herringgull/England/324803/2022
-PA,Group 3,WB135|AIV48,PA_Group3,A/chicken/England/085598/2022
-NS,Group 3,WB153,NS_Group3,A/pheasant/England/251536/2022
-PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/duck/Saratov/29-02V/2021
-PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/gull/France/22P015977/2022
-PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
-PB2,Group 2,AF,PB2_EU_Group2,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
-PB2,Group 3,C,PB2_EU_Group3,A/EurasianWigeon/Netherlands/1/2020
-PB2,Group 4,CB,PB2_EU_Group4,A/Mallard/Netherlands/19/2022
-PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/Mallard/Netherlands/18/2022
-PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/swan/Italy/22VIR10875-2/2022
-PB2,Group 5,CI,PB2_EU_Group5,A/GreatCormorant/Netherlands/1/2022
-PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
-PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/pheasant/England/251536/2022
-PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/Black-headedgull/Netherlands/4/2023
-PB2,Group 6,I,PB2_EU_Group6,A/whooperswan/Romania/1031121VIR849-2/2021
-PB2,Group 7,CJ,PB2_EU_Group7,A/EurasianWigeon/Netherlands/6/2022
-PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/duck/Saratov/29-02V/2021
-PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/gull/France/22P015977/2022
-PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
-PB1,Group 2,AF|CJ,PB1_EU_Group2,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
-PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/EurasianWigeon/Netherlands/1/2020
-PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/Mallard/Netherlands/19/2022
-PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/Mallard/Netherlands/18/2022
-PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/swan/Italy/22VIR10875-2/2022
-PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/GreatCormorant/Netherlands/1/2022
-PB1,Group 3,CM,PB1_EU_Group3,A/Corvusmonedula/Belgium/119180006/2022
-PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/pheasant/England/251536/2022
-PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/Black-headedgull/Netherlands/4/2023
-PB1,Group 4,I,PB1_EU_Group4,A/whooperswan/Romania/1031121VIR849-2/2021
-PB1,Group 2,AF|CJ,PB1_EU_Group2,A/EurasianWigeon/Netherlands/6/2022
-PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/duck/Saratov/29-02V/2021
-PA,Group 2,BB|CT,PA_EU_Group2,A/gull/France/22P015977/2022
-PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
-PA,Group 3,AF|C,PA_EU_Group3,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
-PA,Group 3,AF|C,PA_EU_Group3,A/EurasianWigeon/Netherlands/1/2020
-PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/Mallard/Netherlands/19/2022
-PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/Mallard/Netherlands/18/2022
-PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/swan/Italy/22VIR10875-2/2022
-PA,Group 4,CI,PA_EU_Group4,A/GreatCormorant/Netherlands/1/2022
-PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
-PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/pheasant/England/251536/2022
-PA,Group 2,BB|CT,PA_EU_Group2,A/Black-headedgull/Netherlands/4/2023
-PA,Group 5,I,PA_EU_Group5,A/whooperswan/Romania/1031121VIR849-2/2021
-PA,Group 6,CJ,PA_EU_Group6,A/EurasianWigeon/Netherlands/6/2022
 HA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I|CJ,HA_EU_Group1,A/duck/Saratov/29-02V/2021
 HA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I|CJ,HA_EU_Group1,A/gull/France/22P015977/2022
 HA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I|CJ,HA_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
@@ -152,165 +54,21 @@ HA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I|CJ,HA_EU_Group1,A/pheasant/Engla
 HA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I|CJ,HA_EU_Group1,A/Black-headedgull/Netherlands/4/2023
 HA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I|CJ,HA_EU_Group1,A/whooperswan/Romania/1031121VIR849-2/2021
 HA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I|CJ,HA_EU_Group1,A/EurasianWigeon/Netherlands/6/2022
-NP,Group 1,AB|CB|CI|CM|CR,NP_EU_Group1,A/duck/Saratov/29-02V/2021
-NP,Group 2,BB|CT,NP_EU_Group2,A/gull/France/22P015977/2022
-NP,Group 3,CH|I|CJ,NP_EU_Group3,A/EurasianWigeon/Netherlands/3/2022
-NP,Group 4,AF,NP_EU_Group4,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
-NP,Group 5,C,NP_EU_Group5,A/EurasianWigeon/Netherlands/1/2020
-NP,Group 1,AB|CB|CI|CM|CR,NP_EU_Group1,A/Mallard/Netherlands/19/2022
-NP,Group 6,CA|CD,NP_EU_Group6,A/Mallard/Netherlands/18/2022
-NP,Group 7,CA|CD,NP_EU_Group7,A/swan/Italy/22VIR10875-2/2022
-NP,Group 1,AB|CB|CI|CM|CR,NP_EU_Group1,A/GreatCormorant/Netherlands/1/2022
-NP,Group 1,AB|CB|CI|CM|CR,NP_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
-NP,Group 1,AB|CB|CI|CM|CR,NP_EU_Group1,A/pheasant/England/251536/2022
-NP,Group 2,BB|CT,NP_EU_Group2,A/Black-headedgull/Netherlands/4/2023
-NP,Group 3,CH|I|CJ,NP_EU_Group3,A/whooperswan/Romania/1031121VIR849-2/2021
-NP,Group 3,CH|I|CJ,NP_EU_Group3,A/EurasianWigeon/Netherlands/6/2022
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/duck/Saratov/29-02V/2021
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/gull/France/22P015977/2022
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/EurasianWigeon/Netherlands/1/2020
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/Mallard/Netherlands/19/2022
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/Mallard/Netherlands/18/2022
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/swan/Italy/22VIR10875-2/2022
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/GreatCormorant/Netherlands/1/2022
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/pheasant/England/251536/2022
-NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/Black-headedgull/Netherlands/4/2023
-NA,Group 2,I,NA_EU_Group2,A/whooperswan/Romania/1031121VIR849-2/2021
-NA,Group 3,CJ,NA_EU_Group3,A/EurasianWigeon/Netherlands/6/2022
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/duck/Saratov/29-02V/2021
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/gull/France/22P015977/2022
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/EurasianWigeon/Netherlands/1/2020
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/Mallard/Netherlands/19/2022
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/Mallard/Netherlands/18/2022
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/swan/Italy/22VIR10875-2/2022
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/GreatCormorant/Netherlands/1/2022
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/pheasant/England/251536/2022
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/Black-headedgull/Netherlands/4/2023
-MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/whooperswan/Romania/1031121VIR849-2/2021
-MP,Group 2,CJ,MP_EU_Group2,A/EurasianWigeon/Netherlands/6/2022
-NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/duck/Saratov/29-02V/2021
-NS,Group 2,BB,NS_EU_Group2,A/gull/France/22P015977/2022
-NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
-NS,Group 3,AF|CD,NS_EU_Group3,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
-NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/EurasianWigeon/Netherlands/1/2020
-NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/Mallard/Netherlands/19/2022
-NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/Mallard/Netherlands/18/2022
-NS,Group 3,AF|CD,NS_EU_Group3,A/swan/Italy/22VIR10875-2/2022
-NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/GreatCormorant/Netherlands/1/2022
-NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
-NS,Group 4,CR|I,NS_EU_Group4,A/pheasant/England/251536/2022
-NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/Black-headedgull/Netherlands/4/2023
-NS,Group 4,CR|I,NS_EU_Group4,A/whooperswan/Romania/1031121VIR849-2/2021
-NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/EurasianWigeon/Netherlands/6/2022
-PB2,am2.3.2,minor11,PB2_am2.3.2,22-010663-005
-PB2,am3.3,minor18,PB2_am3.3,22-031266-001
-NP,am5,Minor34,NP_am5,23-013078-002
-PB1,am1.1,B1.2|B1.1,PB1_am1.1,22-008890-001
-PB1,am1.1,B1.2|B1.1,PB1_am1.1,22-009287-001
-MP,ea6,A6,MP_ea6,23-004612-001
-PA,ea5,A5,PA_ea5,23-001397-012
-NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-004008-002
-NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,23-005844-010
-NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,23-003434-002
-NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-008225-001
-NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-013105-001
-NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,23-001855-001
-NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-031266-001
-NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,23-000081-004
-NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-014746-009
-NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-009329-001
-PB2,ea5,A5,PB2_ea5,23-001397-012
-MP,ea3,A3,MP_ea3,22-013001-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-003707-003
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-011119-002
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-004008-002
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-005844-010
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-022528-003
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-036180-006
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-003434-002
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-010445-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-008225-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-008239-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-010668-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-013105-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-010663-005
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-001397-004
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-007805-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-005590-002
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-001855-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-031266-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-037822-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-006530-002
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-037701-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-013078-002
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-035225-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-009287-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-008064-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-000081-004
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-014746-009
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-009329-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-004612-024
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-010139-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-028879-001
-PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-009980-001
-NP,ea6,A6,NP_ea6,23-004612-001
-HA,ea2,A2,HA_ea2,22-022528-003
-HA,ea2,A2,HA_ea2,22-036180-006
-HA,ea2,A2,HA_ea2,23-001397-004
-HA,ea2,A2,HA_ea2,22-008064-001
-HA,ea2,A2,HA_ea2,23-004612-024
-PB2,am1.2,B2.2|minor13|B2.1|minor19,PB2_am1.2,22-008225-001
-PB2,am1.2,B2.2|minor13|B2.1|minor19,PB2_am1.2,22-010668-001
-PB2,am1.2,B2.2|minor13|B2.1|minor19,PB2_am1.2,22-007805-001
-PB2,am1.2,B2.2|minor13|B2.1|minor19,PB2_am1.2,22-037701-001
-PB2,am3.2,B3.5,PB2_am3.2,23-003434-002
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-003707-003
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-011119-002
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-004008-002
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-010445-001
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-008225-001
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-008239-001
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-010668-001
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-013105-001
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-010663-005
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-007805-001
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-005590-002
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-006530-002
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-035225-001
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-009329-001
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-010139-001
-PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-009980-001
-PB1,am1.2,minor15|B3.4|B3.5|Minor34|minor19,PB1_am1.2,23-003434-002
-PB1,am1.2,minor15|B3.4|B3.5|Minor34|minor19,PB1_am1.2,22-037701-001
-PB1,am1.2,minor15|B3.4|B3.5|Minor34|minor19,PB1_am1.2,23-013078-002
-PB1,am1.2,minor15|B3.4|B3.5|Minor34|minor19,PB1_am1.2,23-000081-004
-PB1,am1.2,minor15|B3.4|B3.5|Minor34|minor19,PB1_am1.2,22-014746-009
-NP,am1.1,minor19|B2.2|B2.1|minor04,NP_am1.1,22-011119-002
-NP,am1.1,minor19|B2.2|B2.1|minor04,NP_am1.1,22-010668-001
-NP,am1.1,minor19|B2.2|B2.1|minor04,NP_am1.1,22-007805-001
-NP,am1.1,minor19|B2.2|B2.1|minor04,NP_am1.1,22-037701-001
-PB1,am1.4,B3.3,PB1_am1.4,23-005844-010
-NP,am1.4.2,B5.1,NP_am1.4.2,22-008239-001
-NP,ea5,A5,NP_ea5,23-001397-012
-NA,ea6N5,A6,NA_ea6N5,23-004612-001
-NA,ea2,A2,NA_ea2,22-022528-003
-NA,ea2,A2,NA_ea2,22-036180-006
-NA,ea2,A2,NA_ea2,23-001397-004
-NA,ea2,A2,NA_ea2,22-008064-001
-NA,ea2,A2,NA_ea2,23-004612-024
-NP,ea1,A1|minor17|A2,NP_ea1,22-003707-003
-NP,ea1,A1|minor17|A2,NP_ea1,22-022528-003
-NP,ea1,A1|minor17|A2,NP_ea1,22-036180-006
-NP,ea1,A1|minor17|A2,NP_ea1,23-001397-004
-NP,ea1,A1|minor17|A2,NP_ea1,22-035225-001
-NP,ea1,A1|minor17|A2,NP_ea1,22-008064-001
-NP,ea1,A1|minor17|A2,NP_ea1,23-004612-024
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/Greylaggoose/England/054503/2021
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/chicken/Scotland/054477/2021
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/turkey/England/016515/2022
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/chicken/England/069816/2021
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/chicken/England/085598/2022
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/chicken/England/118935/2022
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/herringgull/England/324803/2022
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/pheasant/England/251536/2022
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/Humboldtpenguin/England/161651/2022
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/chicken/England/152082/2022
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/Pheasant/England/113701/2023
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/Chicken/Scotland/114160/2023
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/Greylaggoose/England/132468/2023
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/CanadaGoose/England/142157/2023
+HA,Group 2,AIV07-B2|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,HA_Group2,A/Chicken/England/005435/2024
 MP,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|A2|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,MP_ea1,22-003707-003
 MP,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|A2|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,MP_ea1,22-011119-002
 MP,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|A2|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,MP_ea1,22-004008-002
@@ -346,49 +104,42 @@ MP,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1
 MP,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|A2|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,MP_ea1,22-010139-001
 MP,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|A2|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,MP_ea1,22-028879-001
 MP,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|A2|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,MP_ea1,22-009980-001
-NP,am2,minor14,NP_am2,22-008760-007
-PB2,ea4,A4,PB2_ea4,23-003641-006
-NS,ea4,A4,NS_ea4,23-003641-006
-PA,am1.2,B1.3,PA_am1.2,23-003733-001
-PB1,am1.3,B1.3,PB1_am1.3,23-003733-001
-NS,ea5,A5,NS_ea5,23-001397-012
-NP,am1.2,B1.2|B1.1|minor01|B1.3,NP_am1.2,22-008890-001
-NP,am1.2,B1.2|B1.1|minor01|B1.3,NP_am1.2,23-003733-001
-NP,am1.2,B1.2|B1.1|minor01|B1.3,NP_am1.2,22-005590-002
-NP,am1.2,B1.2|B1.1|minor01|B1.3,NP_am1.2,22-009287-001
-PB1,am5,Minor32,PB1_am5,22-037822-001
-PB1,ea4,A4,PB1_ea4,23-003641-006
-PB2,ea3,A3,PB2_ea3,22-013001-001
-HA,ea6,A6,HA_ea6,23-004612-001
-NP,ea3,A3,NP_ea3,22-013001-001
-NP,ea4,A4,NP_ea4,23-003641-006
-PB2,am1.3,B1.3,PB2_am1.3,23-003733-001
-NS,am1.2,B2.2,NS_am1.2,22-010668-001
-PA,am2,minor14,PA_am2,22-008760-007
-NS,am1.4,minor18,NS_am1.4,22-031266-001
-PB2,am4,B3.4,PB2_am4,23-000081-004
-PB1,am2,minor14|minor18,PB1_am2,22-031266-001
-PB1,am2,minor14|minor18,PB1_am2,22-008760-007
-NA,ea5,A5,NA_ea5,23-001397-012
-PB2,am1.1,minor10|B1.2|B1.1|minor01,PB2_am1.1,22-008890-001
-PB2,am1.1,minor10|B1.2|B1.1|minor01,PB2_am1.1,22-005590-002
-PB2,am1.1,minor10|B1.2|B1.1|minor01,PB2_am1.1,22-009287-001
-PB2,am1.1,minor10|B1.2|B1.1|minor01,PB2_am1.1,22-010139-001
-PB1,ea2,A2,PB1_ea2,22-022528-003
-PB1,ea2,A2,PB1_ea2,22-036180-006
-PB1,ea2,A2,PB1_ea2,23-001397-004
-PB1,ea2,A2,PB1_ea2,22-008064-001
-PB1,ea2,A2,PB1_ea2,23-004612-024
-PB2,am2.1,Minor32|minor07|B3.1|minor15,PB2_am2.1,22-013105-001
-PB2,am2.1,Minor32|minor07|B3.1|minor15,PB2_am2.1,22-037822-001
-PB2,am2.1,Minor32|minor07|B3.1|minor15,PB2_am2.1,22-014746-009
-PB2,am2.1,Minor32|minor07|B3.1|minor15,PB2_am2.1,22-009329-001
-PB2,ea6,A6,PB2_ea6,23-004612-001
-HA,ea3,A3,HA_ea3,22-013001-001
-PB2,am2.2,minor08|minor16|B3.3|B4.1,PB2_am2.2,23-005844-010
-PB2,am2.2,minor08|minor16|B3.3|B4.1,PB2_am2.2,22-010445-001
-PB2,am2.2,minor08|minor16|B3.3|B4.1,PB2_am2.2,22-006530-002
-PB2,am2.2,minor08|minor16|B3.3|B4.1,PB2_am2.2,22-028879-001
+MP,ea3,A3,MP_ea3,22-013001-001
+MP,ea4,A4,MP_ea4,23-003641-006
+MP,ea5,A5,MP_ea5,23-001397-012
+MP,ea6,A6,MP_ea6,23-004612-001
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/chicken/England/053052/2021
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/Greylaggoose/England/054503/2021
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/chicken/Wales/053969/2021
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/chicken/Scotland/054477/2021
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/turkey/England/016515/2022
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/chicken/England/069816/2021
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/chicken/England/085598/2022
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/chicken/England/118935/2022
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/herringgull/England/324803/2022
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/pheasant/England/251536/2022
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/chicken/England/152082/2022
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/Humboldtpenguin/England/161651/2022
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/Pheasant/England/113701/2023
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/Chicken/Scotland/114160/2023
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/Greylaggoose/England/132468/2023
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/CanadaGoose/England/142157/2023
+MP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,MP_Group1,A/Chicken/England/005435/2024
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/duck/Saratov/29-02V/2021
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/gull/France/22P015977/2022
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/EurasianWigeon/Netherlands/1/2020
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/Mallard/Netherlands/19/2022
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/Mallard/Netherlands/18/2022
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/swan/Italy/22VIR10875-2/2022
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/GreatCormorant/Netherlands/1/2022
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/pheasant/England/251536/2022
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/Black-headedgull/Netherlands/4/2023
+MP,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT|I,MP_EU_Group1,A/whooperswan/Romania/1031121VIR849-2/2021
+MP,Group 2,CJ,MP_EU_Group2,A/EurasianWigeon/Netherlands/6/2022
+NA,am1N4,minor16,NA_am1N4,22-028879-001
 NA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,NA_ea1,22-003707-003
 NA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,NA_ea1,22-011119-002
 NA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,NA_ea1,22-004008-002
@@ -418,19 +169,116 @@ NA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|B2.1|minor07
 NA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,NA_ea1,22-009329-001
 NA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,NA_ea1,22-010139-001
 NA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,NA_ea1,22-009980-001
-NA,ea4,A4,NA_ea4,23-003641-006
+NA,ea2,A2,NA_ea2,22-022528-003
+NA,ea2,A2,NA_ea2,22-036180-006
+NA,ea2,A2,NA_ea2,23-001397-004
+NA,ea2,A2,NA_ea2,22-008064-001
+NA,ea2,A2,NA_ea2,23-004612-024
 NA,ea3,A3,NA_ea3,22-013001-001
-PB2,am3.1,minor17,PB2_am3.1,22-035225-001
-HA,ea4,A4,HA_ea4,23-003641-006
+NA,ea4,A4,NA_ea4,23-003641-006
+NA,ea5,A5,NA_ea5,23-001397-012
+NA,ea6N5,A6,NA_ea6N5,23-004612-001
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/chicken/England/053052/2021
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/Greylaggoose/England/054503/2021
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/chicken/Wales/053969/2021
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/chicken/Scotland/054477/2021
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/turkey/England/016515/2022
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/chicken/England/069816/2021
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/chicken/England/085598/2022
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/chicken/England/118935/2022
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/pheasant/England/251536/2022
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/chicken/England/152082/2022
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/Humboldtpenguin/England/161651/2022
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/duck/Saratov/29-02V/2021
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/gull/France/22P015977/2022
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/EurasianWigeon/Netherlands/1/2020
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/Mallard/Netherlands/19/2022
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/Mallard/Netherlands/18/2022
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/swan/Italy/22VIR10875-2/2022
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/GreatCormorant/Netherlands/1/2022
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/pheasant/England/251536/2022
+NA,Group 1,AB|BB|CH|AF|C|CB|CA|CD|CI|CM|CR|CT,NA_EU_Group1,A/Black-headedgull/Netherlands/4/2023
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/Pheasant/England/113701/2023
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/Chicken/Scotland/114160/2023
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/Greylaggoose/England/132468/2023
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/CanadaGoose/England/142157/2023
+NA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB153|AIV204|AIV223|WB359|AIV50|WB372|WB381|AIV01,NA_Group1,A/Chicken/England/005435/2024
+NA,Group 2,WB135,NA_Group2,A/herringgull/England/324803/2022
+NA,Group 2,I,NA_EU_Group2,A/whooperswan/Romania/1031121VIR849-2/2021
+NA,Group 3,CJ,NA_EU_Group3,A/EurasianWigeon/Netherlands/6/2022
+NP,am1.1,minor19|B2.2|B2.1|minor04,NP_am1.1,22-011119-002
+NP,am1.1,minor19|B2.2|B2.1|minor04,NP_am1.1,22-010668-001
+NP,am1.1,minor19|B2.2|B2.1|minor04,NP_am1.1,22-007805-001
+NP,am1.1,minor19|B2.2|B2.1|minor04,NP_am1.1,22-037701-001
+NP,am1.2,B1.2|B1.1|minor01|B1.3,NP_am1.2,22-008890-001
+NP,am1.2,B1.2|B1.1|minor01|B1.3,NP_am1.2,23-003733-001
+NP,am1.2,B1.2|B1.1|minor01|B1.3,NP_am1.2,22-005590-002
+NP,am1.2,B1.2|B1.1|minor01|B1.3,NP_am1.2,22-009287-001
+NP,am1.3,B4.1,NP_am1.3,22-010445-001
+NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-004008-002
+NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,23-005844-010
+NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,23-003434-002
+NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-008225-001
+NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-013105-001
+NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,23-001855-001
+NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-031266-001
+NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,23-000081-004
+NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-014746-009
+NP,am1.4.1,B3.6|minor13|minor15|minor18|B3.4|B3.1|B3.3|B3.5|minor09|minor07,NP_am1.4.1,22-009329-001
+NP,am1.4.2,B5.1,NP_am1.4.2,22-008239-001
+NP,am1.5,minor11,NP_am1.5,22-010663-005
+NP,am1.6,minor10|minor08|minor12,NP_am1.6,22-006530-002
+NP,am1.6,minor10|minor08|minor12,NP_am1.6,22-010139-001
+NP,am1.6,minor10|minor08|minor12,NP_am1.6,22-009980-001
+NP,am2,minor14,NP_am2,22-008760-007
+NP,am3,minor16,NP_am3,22-028879-001
 NP,am4,Minor32,NP_am4,22-037822-001
-MP,ea4,A4,MP_ea4,23-003641-006
-PB2,am2.3.1,minor14,PB2_am2.3.1,22-008760-007
-PA,am1,B1.2,PA_am1,22-008890-001
-NS,am1.3,minor14,NS_am1.3,22-008760-007
-NS,ea6,A6,NS_ea6,23-004612-001
-PA,ea4,A4,PA_ea4,23-003641-006
-NA,am1N4,minor16,NA_am1N4,22-028879-001
-PB1,am4,B3.6,PB1_am4,23-001855-001
+NP,am5,Minor34,NP_am5,23-013078-002
+NP,ea1,A1|minor17|A2,NP_ea1,22-003707-003
+NP,ea1,A1|minor17|A2,NP_ea1,22-022528-003
+NP,ea1,A1|minor17|A2,NP_ea1,22-036180-006
+NP,ea1,A1|minor17|A2,NP_ea1,23-001397-004
+NP,ea1,A1|minor17|A2,NP_ea1,22-035225-001
+NP,ea1,A1|minor17|A2,NP_ea1,22-008064-001
+NP,ea1,A1|minor17|A2,NP_ea1,23-004612-024
+NP,ea3,A3,NP_ea3,22-013001-001
+NP,ea4,A4,NP_ea4,23-003641-006
+NP,ea5,A5,NP_ea5,23-001397-012
+NP,ea6,A6,NP_ea6,23-004612-001
+NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223|WB372|WB381|AIV01,NP_Group1,A/chicken/England/053052/2021
+NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223|WB372|WB381|AIV01,NP_Group1,A/Greylaggoose/England/054503/2021
+NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223|WB372|WB381|AIV01,NP_Group1,A/chicken/Wales/053969/2021
+NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223|WB372|WB381|AIV01,NP_Group1,A/chicken/Scotland/054477/2021
+NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223|WB372|WB381|AIV01,NP_Group1,A/pheasant/England/251536/2022
+NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223|WB372|WB381|AIV01,NP_Group1,A/chicken/England/152082/2022
+NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223|WB372|WB381|AIV01,NP_Group1,A/Humboldtpenguin/England/161651/2022
+NP,Group 1,AB|CB|CI|CM|CR,NP_EU_Group1,A/duck/Saratov/29-02V/2021
+NP,Group 1,AB|CB|CI|CM|CR,NP_EU_Group1,A/Mallard/Netherlands/19/2022
+NP,Group 1,AB|CB|CI|CM|CR,NP_EU_Group1,A/GreatCormorant/Netherlands/1/2022
+NP,Group 1,AB|CB|CI|CM|CR,NP_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
+NP,Group 1,AB|CB|CI|CM|CR,NP_EU_Group1,A/pheasant/England/251536/2022
+NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223|WB372|WB381|AIV01,NP_Group1,A/Greylaggoose/England/132468/2023
+NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223|WB372|WB381|AIV01,NP_Group1,A/CanadaGoose/England/142157/2023
+NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223|WB372|WB381|AIV01,NP_Group1,A/Chicken/England/005435/2024 
+NP,Group 2,AIV20,NP_Group2,A/turkey/England/016515/2022
+NP,Group 2,BB|CT,NP_EU_Group2,A/gull/France/22P015977/2022
+NP,Group 2,BB|CT,NP_EU_Group2,A/Black-headedgull/Netherlands/4/2023
+NP,Group 3,AIV55,NP_Group3,A/chicken/England/069816/2021
+NP,Group 3,CH|I|CJ,NP_EU_Group3,A/EurasianWigeon/Netherlands/3/2022
+NP,Group 3,CH|I|CJ,NP_EU_Group3,A/whooperswan/Romania/1031121VIR849-2/2021
+NP,Group 3,CH|I|CJ,NP_EU_Group3,A/EurasianWigeon/Netherlands/6/2022
+NP,Group 4,AIV48|WB135,NP_Group4,A/chicken/England/085598/2022
+NP,Group 4,AIV48|WB135,NP_Group4,A/herringgull/England/324803/2022
+NP,Group 4,AF,NP_EU_Group4,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
+NP,Group 5,C,NP_EU_Group5,A/EurasianWigeon/Netherlands/1/2020
+NP,Group 6,CA|CD,NP_EU_Group6,A/Mallard/Netherlands/18/2022
+NP,Group 6,WB359|AIV50,NP_Group6,A/Pheasant/England/113701/2023
+NP,Group 6,WB359|AIV50,NP_Group6,A/Chicken/Scotland/114160/2023
+NP,Group 7,CA|CD,NP_EU_Group7,A/swan/Italy/22VIR10875-2/2022
+NP,Group5,AIV73,NP_Group5,A/chicken/England/118935/2022
 NS,am1.1,B3.6|Minor32|B3.4|B3.3|B3.5|minor07|Minor34,NS_am1.1,23-005844-010
 NS,am1.1,B3.6|Minor32|B3.4|B3.3|B3.5|minor07|Minor34,NS_am1.1,23-003434-002
 NS,am1.1,B3.6|Minor32|B3.4|B3.3|B3.5|minor07|Minor34,NS_am1.1,22-013105-001
@@ -438,58 +286,9 @@ NS,am1.1,B3.6|Minor32|B3.4|B3.3|B3.5|minor07|Minor34,NS_am1.1,23-001855-001
 NS,am1.1,B3.6|Minor32|B3.4|B3.3|B3.5|minor07|Minor34,NS_am1.1,22-037822-001
 NS,am1.1,B3.6|Minor32|B3.4|B3.3|B3.5|minor07|Minor34,NS_am1.1,23-013078-002
 NS,am1.1,B3.6|Minor32|B3.4|B3.3|B3.5|minor07|Minor34,NS_am1.1,23-000081-004
-PB1,ea3,A3,PB1_ea3,22-013001-001
-PB2,am5,B3.6|Minor34,PB2_am5,23-001855-001
-PB2,am5,B3.6|Minor34,PB2_am5,23-013078-002
-HA,ea5,A5,HA_ea5,23-001397-012
-PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-003707-003
-PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-011119-002
-PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-004008-002
-PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-022528-003
-PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-036180-006
-PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-008239-001
-PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,23-001397-004
-PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-008064-001
-PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,23-004612-024
-PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-009980-001
-NP,am1.6,minor10|minor08|minor12,NP_am1.6,22-006530-002
-NP,am1.6,minor10|minor08|minor12,NP_am1.6,22-010139-001
-NP,am1.6,minor10|minor08|minor12,NP_am1.6,22-009980-001
-PB1,am3,minor16,PB1_am3,22-028879-001
-NS,ea3,A3,NS_ea3,22-013001-001
-PA,ea6,A6,PA_ea6,23-004612-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-003707-003
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-011119-002
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-004008-002
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-008890-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-005844-010
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-003434-002
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-010445-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-008225-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-008239-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-010668-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-013105-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-003733-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-010663-005
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-007805-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-005590-002
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-001855-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-031266-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-037822-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-006530-002
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-037701-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-008760-007
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-013078-002
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-035225-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-009287-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,23-000081-004
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-014746-009
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-009329-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-010139-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-028879-001
-HA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor14|minor13|B3.4|minor12|minor11|B3.3|B1.3|B1.1|B3.6|B2.2|B1.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,HA_ea1,22-009980-001
-NP,am1.3,B4.1,NP_am1.3,22-010445-001
-NP,am1.5,minor11,NP_am1.5,22-010663-005
+NS,am1.2,B2.2,NS_am1.2,22-010668-001
+NS,am1.3,minor14,NS_am1.3,22-008760-007
+NS,am1.4,minor18,NS_am1.4,22-031266-001
 NS,ea1,B5.1|minor01|minor15|minor19|A1|minor08|minor16|B2.1|minor13|minor12|A2|minor11|B1.3|B1.1|B1.2|minor10|B3.1|minor04|minor09|B4.1|minor17,NS_ea1,22-003707-003
 NS,ea1,B5.1|minor01|minor15|minor19|A1|minor08|minor16|B2.1|minor13|minor12|A2|minor11|B1.3|B1.1|B1.2|minor10|B3.1|minor04|minor09|B4.1|minor17,NS_ea1,22-011119-002
 NS,ea1,B5.1|minor01|minor15|minor19|A1|minor08|minor16|B2.1|minor13|minor12|A2|minor11|B1.3|B1.1|B1.2|minor10|B3.1|minor04|minor09|B4.1|minor17,NS_ea1,22-004008-002
@@ -515,8 +314,252 @@ NS,ea1,B5.1|minor01|minor15|minor19|A1|minor08|minor16|B2.1|minor13|minor12|A2|m
 NS,ea1,B5.1|minor01|minor15|minor19|A1|minor08|minor16|B2.1|minor13|minor12|A2|minor11|B1.3|B1.1|B1.2|minor10|B3.1|minor04|minor09|B4.1|minor17,NS_ea1,22-010139-001
 NS,ea1,B5.1|minor01|minor15|minor19|A1|minor08|minor16|B2.1|minor13|minor12|A2|minor11|B1.3|B1.1|B1.2|minor10|B3.1|minor04|minor09|B4.1|minor17,NS_ea1,22-028879-001
 NS,ea1,B5.1|minor01|minor15|minor19|A1|minor08|minor16|B2.1|minor13|minor12|A2|minor11|B1.3|B1.1|B1.2|minor10|B3.1|minor04|minor09|B4.1|minor17,NS_ea1,22-009980-001
+NS,ea3,A3,NS_ea3,22-013001-001
+NS,ea4,A4,NS_ea4,23-003641-006
+NS,ea5,A5,NS_ea5,23-001397-012
+NS,ea6,A6,NS_ea6,23-004612-001
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/chicken/England/053052/2021
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/Greylaggoose/England/054503/2021
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/chicken/Wales/053969/2021
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/chicken/Scotland/054477/2021
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/turkey/England/016515/2022
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/chicken/England/069816/2021
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/chicken/England/118935/2022
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/pheasant/England/251536/2022
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/chicken/England/152082/2022
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/Humboldtpenguin/England/161651/2022
+NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/duck/Saratov/29-02V/2021
+NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
+NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/EurasianWigeon/Netherlands/1/2020
+NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/Mallard/Netherlands/19/2022
+NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/Mallard/Netherlands/18/2022
+NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/GreatCormorant/Netherlands/1/2022
+NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
+NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/Black-headedgull/Netherlands/4/2023
+NS,Group 1,AB|CH|C|CB|CA|CI|CM|CT|CJ,NS_EU_Group1,A/EurasianWigeon/Netherlands/6/2022
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/Greylaggoose/England/132468/2023
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/CanadaGoose/England/142157/2023
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/Chicken/England/005435/2024 
+NS,Group 2,AIV48|WB135,NS_Group2,A/chicken/England/085598/2022
+NS,Group 2,AIV48|WB135,NS_Group2,A/herringgull/England/324803/2022
+NS,Group 2,BB,NS_EU_Group2,A/gull/France/22P015977/2022
+NS,Group 3,WB153,NS_Group3,A/pheasant/England/251536/2022
+NS,Group 3,AF|CD,NS_EU_Group3,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
+NS,Group 3,AF|CD,NS_EU_Group3,A/swan/Italy/22VIR10875-2/2022
+NS,Group 4,CR|I,NS_EU_Group4,A/pheasant/England/251536/2022
+NS,Group 4,CR|I,NS_EU_Group4,A/whooperswan/Romania/1031121VIR849-2/2021
+NS,Group 4,WB359|AIV50,NS_Group4,A/Pheasant/England/113701/2023
+NS,Group 4,WB359|AIV50,NS_Group4,A/Chicken/Scotland/114160/2023
+PA,am1,B1.2,PA_am1,22-008890-001
+PA,am1.2,B1.3,PA_am1.2,23-003733-001
+PA,am2,minor14,PA_am2,22-008760-007
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-003707-003
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-011119-002
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-004008-002
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-005844-010
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-022528-003
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-036180-006
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-003434-002
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-010445-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-008225-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-008239-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-010668-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-013105-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-010663-005
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-001397-004
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-007805-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-005590-002
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-001855-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-031266-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-037822-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-006530-002
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-037701-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-013078-002
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-035225-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-009287-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-008064-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-000081-004
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-014746-009
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-009329-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,23-004612-024
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-010139-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-028879-001
+PA,ea1,B5.1|minor01|minor15|minor19|Minor34|A1|minor08|B3.5|minor18|minor16|B2.1|minor07|minor13|B3.4|minor12|A2|minor11|B3.3|B1.1|B3.6|B2.2|minor10|Minor32|B3.1|minor04|minor09|B4.1|minor17,PA_ea1,22-009980-001
 PA,ea3,A3,PA_ea3,22-013001-001
-MP,ea5,A5,MP_ea5,23-001397-012
-PB1,ea6,A6,PB1_ea6,23-004612-001
+PA,ea4,A4,PA_ea4,23-003641-006
+PA,ea5,A5,PA_ea5,23-001397-012
+PA,ea6,A6,PA_ea6,23-004612-001
+PA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV20|AIV55,PA_Group1,A/chicken/England/053052/2021
+PA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV20|AIV55,PA_Group1,A/Greylaggoose/England/054503/2021
+PA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV20|AIV55,PA_Group1,A/chicken/Wales/053969/2021
+PA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV20|AIV55,PA_Group1,A/turkey/England/016515/2022
+PA,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV20|AIV55,PA_Group1,A/chicken/England/069816/2021
+PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/duck/Saratov/29-02V/2021
+PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
+PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/Mallard/Netherlands/19/2022
+PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/Mallard/Netherlands/18/2022
+PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/swan/Italy/22VIR10875-2/2022
+PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
+PA,Group 1,AB|CH|CB|CA|CD|CM|CR,PA_EU_Group1,A/pheasant/England/251536/2022
+PA,Group 2,AIV09|AIV73|WB153|AIV204|WB359|AIV50|WB372|AIV01,PA_Group2,A/Chicken/England/005435/2024
+PA,Group 2,AIV09|AIV73|WB153|AIV204|WB359|AIV50|WB372|AIV01,PA_Group2,A/chicken/Scotland/054477/2021
+PA,Group 2,AIV09|AIV73|WB153|AIV204|WB359|AIV50|WB372|AIV01,PA_Group2,A/chicken/England/118935/2022
+PA,Group 2,AIV09|AIV73|WB153|AIV204|WB359|AIV50|WB372|AIV01,PA_Group2,A/pheasant/England/251536/2022
+PA,Group 2,AIV09|AIV73|WB153|AIV204|WB359|AIV50|WB372|AIV01,PA_Group2,A/chicken/England/152082/2022
+PA,Group 2,BB|CT,PA_EU_Group2,A/gull/France/22P015977/2022
+PA,Group 2,BB|CT,PA_EU_Group2,A/Black-headedgull/Netherlands/4/2023
+PA,Group 2,AIV09|AIV73|WB153|AIV204|WB359|AIV50|WB372|AIV01,PA_Group1,A/Greylaggoose/England/132468/2023
+PA,Group 2,AIV09|AIV73|WB153|AIV204|WB359|AIV50|WB372|AIV01,PA_Group2,A/Chicken/Scotland/114160/2023
+PA,Group 2,AIV09|AIV73|WB153|AIV204|WB359|AIV50|WB372|AIV01,PA_Group2,A/Chicken/England/005435/2024
+PA,Group 3,WB135|AIV48,PA_Group3,A/herringgull/England/324803/2022
+PA,Group 3,WB135|AIV48,PA_Group3,A/chicken/England/085598/2022
+PA,Group 3,AF|C,PA_EU_Group3,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
+PA,Group 3,AF|C,PA_EU_Group3,A/EurasianWigeon/Netherlands/1/2020
+PA,Group 4,AIV223,PA_Group4,A/Humboldtpenguin/England/161651/2022
+PA,Group 4,CI,PA_EU_Group4,A/GreatCormorant/Netherlands/1/2022
+PA,Group 5,I,PA_EU_Group5,A/whooperswan/Romania/1031121VIR849-2/2021
+PA,Group 5,WB381,PA_Group5,A/CanadaGoose/England/142157/2023
+PA,Group 6,CJ,PA_EU_Group6,A/EurasianWigeon/Netherlands/6/2022
+PB1,am1.1,B1.2|B1.1,PB1_am1.1,22-008890-001
+PB1,am1.1,B1.2|B1.1,PB1_am1.1,22-009287-001
+PB1,am1.2,minor15|B3.4|B3.5|Minor34|minor19,PB1_am1.2,23-003434-002
+PB1,am1.2,minor15|B3.4|B3.5|Minor34|minor19,PB1_am1.2,22-037701-001
+PB1,am1.2,minor15|B3.4|B3.5|Minor34|minor19,PB1_am1.2,23-013078-002
+PB1,am1.2,minor15|B3.4|B3.5|Minor34|minor19,PB1_am1.2,23-000081-004
+PB1,am1.2,minor15|B3.4|B3.5|Minor34|minor19,PB1_am1.2,22-014746-009
+PB1,am1.3,B1.3,PB1_am1.3,23-003733-001
+PB1,am1.4,B3.3,PB1_am1.4,23-005844-010
+PB1,am2,minor14|minor18,PB1_am2,22-031266-001
+PB1,am2,minor14|minor18,PB1_am2,22-008760-007
+PB1,am3,minor16,PB1_am3,22-028879-001
+PB1,am4,B3.6,PB1_am4,23-001855-001
+PB1,am5,Minor32,PB1_am5,22-037822-001
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-003707-003
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-011119-002
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-004008-002
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-010445-001
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-008225-001
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-008239-001
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-010668-001
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-013105-001
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-010663-005
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-007805-001
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-005590-002
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-006530-002
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-035225-001
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-009329-001
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-010139-001
+PB1,ea1,A1|B2.2|minor13|B5.1|minor01|minor10|minor08|B3.1|B2.1|minor04|minor11|minor12|minor09|B4.1|minor07|minor17,PB1_ea1,22-009980-001
+PB1,ea2,A2,PB1_ea2,22-022528-003
+PB1,ea2,A2,PB1_ea2,22-036180-006
+PB1,ea2,A2,PB1_ea2,23-001397-004
+PB1,ea2,A2,PB1_ea2,22-008064-001
+PB1,ea2,A2,PB1_ea2,23-004612-024
+PB1,ea3,A3,PB1_ea3,22-013001-001
+PB1,ea4,A4,PB1_ea4,23-003641-006
 PB1,ea5,A5,PB1_ea5,23-001397-012
-NP,am3,minor16,NP_am3,22-028879-001
+PB1,ea6,A6,PB1_ea6,23-004612-001
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/chicken/England/053052/2021
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/Greylaggoose/England/054503/2021
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/chicken/Wales/053969/2021
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/chicken/Scotland/054477/2021
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/turkey/England/016515/2022
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/chicken/England/069816/2021
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/chicken/England/085598/2022
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/chicken/England/118935/2022
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/herringgull/England/324803/2022
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/pheasant/England/251536/2022
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/Humboldtpenguin/England/161651/2022
+PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/duck/Saratov/29-02V/2021
+PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/gull/France/22P015977/2022
+PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
+PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/EurasianWigeon/Netherlands/1/2020
+PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/Mallard/Netherlands/19/2022
+PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/Mallard/Netherlands/18/2022
+PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/swan/Italy/22VIR10875-2/2022
+PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/GreatCormorant/Netherlands/1/2022
+PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/pheasant/England/251536/2022
+PB1,Group 1,AB|BB|CH|C|CB|CA|CD|CI|CR|CT,PB1_EU_Group1,A/Black-headedgull/Netherlands/4/2023
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/Pheasant/England/113701/2023
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/CanadaGoose/England/142157/2023
+PB1,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV48|AIV73|WB135|WB153|AIV223|WB359|WB381|AIV01,PB1_Group1,A/Chicken/England/005435/2024
+PB1,Group 2,AIV204,PB1_Group2,A/chicken/England/152082/2022
+PB1,Group 2,AF|CJ,PB1_EU_Group2,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
+PB1,Group 2,AF|CJ,PB1_EU_Group2,A/EurasianWigeon/Netherlands/6/2022
+PB1,Group 3,CM,PB1_EU_Group3,A/Corvusmonedula/Belgium/119180006/2022
+PB1,Group 3,AIV50,PB1_Group3,A/Chicken/Scotland/114160/2023
+PB1,Group 4,I,PB1_EU_Group4,A/whooperswan/Romania/1031121VIR849-2/2021
+PB1,Group 4,WB372,PB1_Group4,A/Greylaggoose/England/132468/2023
+PB2,am1.1,minor10|B1.2|B1.1|minor01,PB2_am1.1,22-008890-001
+PB2,am1.1,minor10|B1.2|B1.1|minor01,PB2_am1.1,22-005590-002
+PB2,am1.1,minor10|B1.2|B1.1|minor01,PB2_am1.1,22-009287-001
+PB2,am1.1,minor10|B1.2|B1.1|minor01,PB2_am1.1,22-010139-001
+PB2,am1.2,B2.2|minor13|B2.1|minor19,PB2_am1.2,22-008225-001
+PB2,am1.2,B2.2|minor13|B2.1|minor19,PB2_am1.2,22-010668-001
+PB2,am1.2,B2.2|minor13|B2.1|minor19,PB2_am1.2,22-007805-001
+PB2,am1.2,B2.2|minor13|B2.1|minor19,PB2_am1.2,22-037701-001
+PB2,am1.3,B1.3,PB2_am1.3,23-003733-001
+PB2,am2.1,Minor32|minor07|B3.1|minor15,PB2_am2.1,22-013105-001
+PB2,am2.1,Minor32|minor07|B3.1|minor15,PB2_am2.1,22-037822-001
+PB2,am2.1,Minor32|minor07|B3.1|minor15,PB2_am2.1,22-014746-009
+PB2,am2.1,Minor32|minor07|B3.1|minor15,PB2_am2.1,22-009329-001
+PB2,am2.2,minor08|minor16|B3.3|B4.1,PB2_am2.2,23-005844-010
+PB2,am2.2,minor08|minor16|B3.3|B4.1,PB2_am2.2,22-010445-001
+PB2,am2.2,minor08|minor16|B3.3|B4.1,PB2_am2.2,22-006530-002
+PB2,am2.2,minor08|minor16|B3.3|B4.1,PB2_am2.2,22-028879-001
+PB2,am2.3.1,minor14,PB2_am2.3.1,22-008760-007
+PB2,am2.3.2,minor11,PB2_am2.3.2,22-010663-005
+PB2,am3.1,minor17,PB2_am3.1,22-035225-001
+PB2,am3.2,B3.5,PB2_am3.2,23-003434-002
+PB2,am3.3,minor18,PB2_am3.3,22-031266-001
+PB2,am4,B3.4,PB2_am4,23-000081-004
+PB2,am5,B3.6|Minor34,PB2_am5,23-001855-001
+PB2,am5,B3.6|Minor34,PB2_am5,23-013078-002
+PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-003707-003
+PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-011119-002
+PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-004008-002
+PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-022528-003
+PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-036180-006
+PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-008239-001
+PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,23-001397-004
+PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-008064-001
+PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,23-004612-024
+PB2,ea1,A1|B5.1|minor12|minor04|A2|minor09,PB2_ea1,22-009980-001
+PB2,ea3,A3,PB2_ea3,22-013001-001
+PB2,ea4,A4,PB2_ea4,23-003641-006
+PB2,ea5,A5,PB2_ea5,23-001397-012
+PB2,ea6,A6,PB2_ea6,23-004612-001
+PB2,Group 1,AIV07-B1|AIV07-B2|AIV20|AIV55,PB2_Group1,A/chicken/England/053052/2021
+PB2,Group 1,AIV07-B1|AIV07-B2|AIV20|AIV55,PB2_Group1,A/Greylaggoose/England/054503/2021
+PB2,Group 1,AIV07-B1|AIV07-B2|AIV20|AIV55,PB2_Group1,A/turkey/England/016515/2022
+PB2,Group 1,AIV07-B1|AIV07-B2|AIV20|AIV55,PB2_Group1,A/chicken/England/069816/2021
+PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/duck/Saratov/29-02V/2021
+PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/gull/France/22P015977/2022
+PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/EurasianWigeon/Netherlands/3/2022
+PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/Mallard/Netherlands/18/2022
+PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/swan/Italy/22VIR10875-2/2022
+PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/Corvusmonedula/Belgium/119180006/2022
+PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/pheasant/England/251536/2022
+PB2,Group 1,AB|BB|CH|CA|CD|CM|CR|CT,PB2_EU_Group1,A/Black-headedgull/Netherlands/4/2023
+PB2,Group 2,AIV08|AIV223,PB2_Group2,A/chicken/Wales/053969/2021
+PB2,Group 2,AIV08|AIV223,PB2_Group2,A/Humboldtpenguin/England/161651/2022
+PB2,Group 2,AF,PB2_EU_Group2,A/chicken/Italy/IZSLT-12244821VIR9218-1/2021
+PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204|WB372|AIV01,PB2_Group3,A/chicken/Scotland/054477/2021
+PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204|WB372|AIV01,PB2_Group3,A/chicken/England/085598/2022
+PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204|WB372|AIV01,PB2_Group3,A/chicken/England/118935/2022
+PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204|WB372|AIV01,PB2_Group3,A/herringgull/England/324803/2022
+PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204|WB372|AIV01,PB2_Group3,A/pheasant/England/251536/2022
+PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204|WB372|AIV01,PB2_Group3,A/chicken/England/152082/2022
+PB2,Group 3,C,PB2_EU_Group3,A/EurasianWigeon/Netherlands/1/2020
+PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204|WB372|AIV01,PB2_Group3,A/Greylaggoose/England/132468/2023
+PB2,Group 3,AIV09|AIV48|AIV73|WB135|WB153|AIV204|WB372|AIV01,PB2_Group3,A/Chicken/England/005435/2024
+PB2,Group 4,CB,PB2_EU_Group4,A/Mallard/Netherlands/19/2022
+PB2,Group 4,WB359|AIV50,PB2_Group4,A/Chicken/Scotland/114160/2023
+PB2,Group 4,WB359|AIV50,PB2_Group4,A/Pheasant/England/113701/2023
+PB2,Group 5,CI,PB2_EU_Group5,A/GreatCormorant/Netherlands/1/2022
+PB2,Group 5,WB381,PB2_Group5,A/CanadaGoose/England/142157/2023
+PB2,Group 6,I,PB2_EU_Group6,A/whooperswan/Romania/1031121VIR849-2/2021
+PB2,Group 7,CJ,PB2_EU_Group7,A/EurasianWigeon/Netherlands/6/2022
+PA,Group 2,AIV09|AIV73|WB153|AIV204|WB359|AIV50|WB372,PA_Group5,A/Pheasant/England/113701/2023
+NP,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|WB153|AIV204|AIV223|WB372|WB381|AIV01,NP_Group1,A/Chicken/England/005435/2024
+NS,Group 1,AIV07-B1|AIV07-B2|AIV08|AIV09|AIV20|AIV55|AIV73|AIV204|AIV223|WB372|WB381|AIV01,NS_Group1,A/Chicken/England/005435/2024
