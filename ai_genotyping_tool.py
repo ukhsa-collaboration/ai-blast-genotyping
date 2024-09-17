@@ -26,7 +26,7 @@ from Bio import SeqIO
 now = date.today()
 
 
-__version__ = 0.1
+__version__ = 2.0
 __author__ = 'Kate Howell'
 
 
@@ -38,20 +38,19 @@ def logging_file_setup(output_folder, testing):
     """
     print("Setting up logging information for debugging.")
     # Need to clean up log files, currently generates multiple log files.
-    datetime_stamp = now.strftime("%Y%m%d-%H%M%S")
     logging_file_output = os.path.join(output_folder, str(str(now.strftime("%Y%m%d")) + str('_geno_logging_file.log')))
     print("Logging output in the file: {}".format(logging_file_output))
 
     if testing == 'yes':
         logging.basicConfig(
-            filename=logging_file_output,  # filename=logging_file_output,
+            filename=logging_file_output, 
             filemode='w',
             format='%(asctime)s:%(levelname)s:%(message)s',
             level=logging.DEBUG)
         print("Logging Level: DEBUG")
     else:
         logging.basicConfig(
-            filename=logging_file_output,  # filename=logging_file_output,
+            filename=logging_file_output,  
             filemode='w',
             format='%(asctime)s:%(levelname)s:%(message)s',
             level=logging.INFO)
@@ -112,7 +111,11 @@ def check_arguments(args):
 
 
 def testing_functions(testing_functions_parameters):
+    """
 
+
+    :return: N/A
+    """
     # Generate output folder
     if testing_functions_parameters[1] == str('output_folder'):
         if testing_functions_parameters[0] == True:
@@ -139,13 +142,21 @@ def testing_functions(testing_functions_parameters):
 path = os.path.dirname(sys.argv[0])
 blast_cols = ['qseqid','sseqid','pident','length','mismatch','gapopen','qstart','qend','sstart','send','evalue','bitscore']
 
+segments = ['PB2','PB1','PA','HA','NP','NA','MP','NS']
 
-if os.path.exists(os.path.join(path,"genotype_groups_examples.csv")):
-        genogroups = pd.read_csv(os.path.join(path,"genotype_groups_examples.csv"),dtype=str)
+if os.path.exists(os.path.join(path,"blast_geno_threshold_table99.5.csv")):
+        genoblast = pd.read_csv(os.path.join(path,"blast_geno_threshold_table98.csv"),dtype=str)
+        genogroups=pd.melt(genoblast, id_vars=['sequence','genotype','subtype','constellation'], value_vars=segments)
+        print(genogroups.head)
+        genogroups=genogroups.rename(columns={"variable": "Segment", "value": "Group"})
         genogroups['Segment'] = genogroups['Segment'].replace(np.nan, "NA")
         groups = genogroups['Group'].tolist()
-        genotypes = genogroups['Genotypes'].tolist()
-        genodict = dict(zip(genogroups.Labels, genogroups.Genotypes))
+        genotypes = genogroups['genotype'].tolist()
+        genodict= genogroups.groupby('Group')['genotype'].apply(list).to_dict()
+        genodict2 ={}
+        for key in genodict:
+            genodict2[key]= "|".join(genodict[key])
+        genodict = genodict2
 else:
         logging.error(f'Reference genotypes table does not exists:"genotype_groups_examples.csv". Please check if the file is in the correct location')
 
@@ -196,7 +207,7 @@ def missing_fasta_check(fasta,segdict):
     """
     delim="None"
     fasta_sequences = SeqIO.parse(open(fasta), 'fasta')
-    segmentlist = []
+
     for seq in fasta_sequences:
         if "|" in seq.id:
             delim = "|"
@@ -214,11 +225,16 @@ def missing_fasta_check(fasta,segdict):
             pass
         newlist.append(identifier[-1])
         segdict[identifier[0]] = newlist
-    segmentlist = list(set(newlist))
-    return segdict, segmentlist
 
-segments = ['PB2','PB1','PA','HA','NP','NA','MP','NS']
+    return segdict
+
+
 def create_segment_tab(segdict):
+    """
+
+
+    :return: N/A
+    """
     segdf = {}
     samples = segdict.keys()
     fasta_count = 0 
@@ -239,29 +255,44 @@ def create_segment_tab(segdict):
         segdf[s] = row
     return segdf,fasta_count        
 
-def run_blast(db,folder,sample,output_dir):
+
+def run_blast(db, folder, sample, output_dir):
+    """
+
+
+    :return: N/A
+    """
     tidy_fasta_files(os.path.join(folder,sample))
     logging.info("Performing the BLAST searches per FASTA file")
     subprocess.call(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1",shell=True)
-    #print(f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1")
+
 
 def match_genotype_dict(blast_pass):
-    segdict = dict(zip(genogroups["Segment"]+"_"+genogroups.Example_sequence, genogroups.Labels))
+    """
+
+
+    :return: N/A
+    """
+    segdict = dict(zip(genogroups["Segment"]+"_"+genogroups.sequence.str.replace("_",""), genogroups.Group))
     #map the query sequence back to the genotyping table
+    #need to look up which group the reference is in
     blast_pass["group_match"] = blast_pass['ref_match'].apply(lambda x: segdict.get(x)).fillna('')
     blast_pass["genotype_match"] = blast_pass['group_match'].apply(lambda x: genodict.get(x)).fillna('')
     return blast_pass
 
-def tidy_blast_table(folder,sample,segmissing,fasta_count):
+
+def tidy_blast_table(folder, sample, segmissing, fasta_count):
+    """
+
+
+    :return: N/A
+    """
     logging.info("Reading in BLAST output:")
     logging.info(os.path.join(args.output_dir,f'{sample}.blast.out'))
-    print(os.path.join(args.output_dir,f'{sample}.blast.out'))
-    #print(os.path.join(args.output_dir,f'{sample}.blast.out'))
     blasttab = pd.read_csv(os.path.join(args.output_dir,f'{sample}.blast.out'),sep="\t",header = None)
     if blasttab.shape[0] < fasta_count:
         print(f"{fasta_count - blasttab.shape[0]} FASTAs do not meet minimum BLAST thresholds")
         logging.info(f"{fasta_count - blasttab.shape[0]} FASTAs do not meet minimum BLAST thresholds")
-   # print(blasttab.shape)
     blasttab.columns = blast_cols
     threshold = int(args.identity)
     blast_pass = blasttab[blasttab["pident"] >= threshold]
@@ -302,29 +333,25 @@ def tidy_blast_table(folder,sample,segmissing,fasta_count):
     results_df = pd.DataFrame()
     results_df.insert(len(results_df.columns),'genotype_match',blast_pass['genotype_match'])
     results_df.insert(len(results_df.columns),'segment',blast_pass['segment'])
-    results_df.insert(len(results_df.columns),'isolate_epi_id',blast_pass['isolate_epi_id'])
+    results_df.insert(len(results_df.columns), 'isolate_epi_id', blast_pass['isolate_epi_id'])
+    results_df.insert(len(results_df.columns), 'top_hit', blast_pass['ref_match'])
     newresults_df = [results_df]
     if blast_fail.shape[0]>=1:
         test = blast_fail['qseqid'].str.split(pat = delim,expand = True)
         blast_fail.insert(len(blast_fail.columns),'segment',test[test.columns[-1]])
         blast_fail.insert(len(blast_fail.columns),'isolate_epi_id',test[test.columns[0]])
         missing =blast_fail[['segment','isolate_epi_id']]
-     #   missing = pd.DataFrame(columns=['id'])
         missing.insert(len(missing.columns),'genotype_match',["No match via BLAST"] * missing.shape[0])
-      #  missing.insert(len(missing.columns),'segment',blast_fail['segment'])
-      #  missing.insert(len(missing.columns),'isolate_epi_id',blast_fail['isolate_epi_id'])
         newresults_df.append(missing)
     newresultstab = pd.concat(newresults_df)
     samples = list(set(newresultstab['isolate_epi_id']))
-    print(segmissing)
+
     for s in samples:
-        print(s)
         subresults = newresultstab[newresultstab['isolate_epi_id']==s]
         if subresults.shape[0] == 1:
             pass
         elif subresults.shape[0] == 0:
             submissing = segmissing[segmissing['sample'] == s]
-            
             segfile = list(set(newresultstab['segment']))[0]
             if submissing[segfile] == "missing":
                 newresultstab.loc[len(newresultstab)]  = ['No sequence',segfile,s]
@@ -332,25 +359,25 @@ def tidy_blast_table(folder,sample,segmissing,fasta_count):
                 newresultstab.loc[len(newresultstab)]  = ['BLAST FAIL',segfile,s]
         elif subresults.shape[0]<8:
             submissing = segmissing[segmissing['sample'] == s]
-            print(submissing)
+
             segfound = list(set(subresults['segment']))
-           # print(segfound)
             segcheck = list(set(segments) - set(segfound))
-          #  print(segcheck)
             for seg in segcheck:
-              #  print(seg)
-              #  print(submissing)
-                print(submissing[seg].iloc[0])
+
                 if submissing[seg].iloc[0] == "missing":
                     newresultstab.loc[len(newresultstab)]  = ['No sequence',seg,s]
                 else:
                     newresultstab.loc[len(newresultstab)]  = ['BLAST FAIL',seg,s]
-    #newresultstab.sort_values(by=['sample'],inplace=True)
 
     return(newresultstab)
 
 
-def run_full_blasts(folder,mode,extension,output_dir):
+def run_full_blasts(folder, mode, extension, output_dir):
+    """
+
+
+    :return: N/A
+    """
     results_tabs = []
     logging.info('Input folder provided:')
     logging.info(os.path.join(folder,"*"+extension))
@@ -365,7 +392,7 @@ def run_full_blasts(folder,mode,extension,output_dir):
 
             logging.info("Running BLAST")
             print("Running BLAST on input folder")
-            segdict, segmentlist = missing_fasta_check(f, segdict)
+            segdict = missing_fasta_check(f, segdict)
             duplist = duplicate_fasta_check(f)
             if len(duplist)>=1:
                 print(f"Duplicates identified: {duplist}")
@@ -377,13 +404,11 @@ def run_full_blasts(folder,mode,extension,output_dir):
 
             segdicttab = pd.DataFrame.from_dict(segmissing, orient='index')
             segdicttab = segdicttab.reset_index()
-            print(segdicttab)
             segtabs.append(segdicttab)
             segcols = ['sample']
             for s in segments:
                 segcols.append(s)
             segdicttab.columns = segcols
-           # segdicttab['sample'] = segdicttab.index
             
             sresults = tidy_blast_table(args.output_dir,f,segdicttab,fasta_count)
             logging.info("Combining results across FASTA files...")
@@ -395,14 +420,11 @@ def run_full_blasts(folder,mode,extension,output_dir):
         logging.info(f"Segment table written to : {os.path.join(output_dir,f'{now}_{args.tagname}_segment_table.csv')}")
         # add step to sort out missing segments table
 
-      #  segdicttab = pd.DataFrame.from_dict(segdict)
-       # print(segdicttab)
         newdf.to_csv(os.path.join(output_dir,f'{now}_{args.tagname}_BLAST_summary.csv')) 
         logging.info("Output file written to:")
-        logging.info(os.path.join(output_dir,f'{now}_{args.tagname}_BLAST_summary.csv'))
-          #  print("Output file written to:")
-           # print(os.path.join(args.output_dir,str(now)+"_summary.csv"))
-        return(newdf,segdicttab)
+        logging.info(os.path.join(output_dir, f'{now}_{args.tagname}_BLAST_summary.csv'))
+
+        return(newdf)
     
     elif mode =="single":
         logging.info("Running BLAST on single FASTA file")
@@ -411,9 +433,8 @@ def run_full_blasts(folder,mode,extension,output_dir):
         logging.info("Fasta file found:")
         logging.info(folder)
         logging.info(head_tail)
-        print(args.blastdb,head_tail[0],folder)
         duplist = duplicate_fasta_check(folder)
-        segdict,segmentlist = missing_fasta_check(folder,segdict)
+        segdict = missing_fasta_check(folder,segdict)
         segmissing, fasta_count = create_segment_tab(segdict)
         segdicttab = pd.DataFrame.from_dict(segmissing, orient='index')
         segdicttab = segdicttab.reset_index()
@@ -432,13 +453,18 @@ def run_full_blasts(folder,mode,extension,output_dir):
         logging.info(os.path.join(output_dir,f'{now}_{args.tagname}_BLAST_summary.csv'))
         print("Output file written to:")
         print(os.path.join(output_dir,f'{now}_{args.tagname}_BLAST_summary.csv'))
-        return sresults,segdicttab
+        return sresults
+
     
-def create_persample_summary(summarytab,segthreshold):
+def create_persample_summary(summarytab, segthreshold):
+    """
+
+
+    :return: N/A
+    """
     pivot = pd.pivot_table(summarytab, values='genotype_match', 
                                 index='isolate_epi_id', 
                                 columns='segment', fill_value = "No sequence", aggfunc='first')
-    print(pivot)
     path = os.path.dirname(sys.argv[0])
     prioritytab = pd.read_csv(os.path.join(path,"genotype_prioritisation.csv"))
     consensus = []
@@ -462,15 +488,20 @@ def create_persample_summary(summarytab,segthreshold):
             for n,c in enumerate(counts):
                 if c==maxgeno:
                     topgeno.append(keys[n])
-                    
                     if int(maxgeno)>=segthreshold:
                         tophit = "|".join(topgeno)
                         if "|" in tophit:
                             freqs = []
                             for t in topgeno:
                                 hittab = prioritytab[prioritytab['Genotype'] == t]
-                                print(hittab)
-                                freqs.append(hittab['Frequency'].iloc[0])
+                                if hittab.shape[0]>0:
+                                
+                                    freqs.append(hittab['Frequency'].iloc[0])
+                                else:
+                                    logging.info(f'Genotype not found in frequency table: {t}')
+                                    print(f'Genotype not found in frequency table: {t}')
+                                    freqs.append(0)
+
                             maxhit = max(freqs)
                             result = topgeno[freqs.index(maxhit)]
 
@@ -478,13 +509,12 @@ def create_persample_summary(summarytab,segthreshold):
                             result = keys[n]
                     else:
                         result = "No known genotype: Please review individual segments results"
+
             freq.append("|".join(topgeno))
             consensus.append(genfreq)
             results.append(result)
     pivot["consensus"] = consensus
-    print(pivot["consensus"])
     pivot["Top_Hit"] = freq
-    print(pivot["Top_Hit"])
     pivot['Final_result'] = results
     pivot['Final_result'] = pivot['Final_result'].str.replace("No sequence","Insufficient sequence data")
     pivot.to_csv(os.path.join(args.output_dir,f'{now}_{args.tagname}_genotyping_summary.csv'))
@@ -495,7 +525,13 @@ def create_persample_summary(summarytab,segthreshold):
     return pivot
 # Need a function to summarise the tables / files processed
 
+
 def overall_summary(pivot):
+    """
+
+
+    :return: N/A
+    """
     # Number of samples included
     # Summary of genotypes called
     print(f"Samples processed: {pivot.shape[0]}")
@@ -510,7 +546,13 @@ def overall_summary(pivot):
 
 # Run script
 
+
 def main(args):
+    """
+
+
+    :return: N/A
+    """
     start_time = datetime.now()  # Start time for calculating performance improvements
     # Create paths for qsub submission
     output_dir = os.path.abspath(args.output_dir)
@@ -525,20 +567,19 @@ def main(args):
     # Set up logging
     logging_file_setup(output_dir, args.testing)
     # Read in required files
-   # return 1
     if args.input_folder is not None:
         logging.info("Processing folder full of input files")
         print("Processing folder full of input files")
         input_folder = os.path.abspath(args.input_folder)
 
-        summarytab,segmissing = run_full_blasts(input_folder,"all_in_folder",args.extension,output_dir)
+        summarytab = run_full_blasts(input_folder,"all_in_folder",args.extension,output_dir)
         pivot_out = create_persample_summary(summarytab,segthreshold)
         overall_summary(pivot_out)
     if args.input_file is not None:
         print("Processing single FASTA files")
         logging.info("Processing single FASTA files")
         input_file= os.path.abspath(args.input_file)
-        summarytab,segmissing = run_full_blasts(input_file,"single",args.extension,output_dir)
+        summarytab = run_full_blasts(input_file,"single",args.extension,output_dir)
         pivot_out = create_persample_summary(summarytab,segthreshold)
         overall_summary(pivot_out)
 

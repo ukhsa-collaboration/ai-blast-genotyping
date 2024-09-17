@@ -1,0 +1,9 @@
+sample,H5-0.HA,H5-0.MP,H5-0.NA,H5-0.NP,H5-0.NS,H5-0.PA,H5-0.PB1,H5-0.PB2,consensus,Top_Hit
+01148207_H23199000204R_OM_H5-0.HA,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"Counter({'N/A': 7, '': 1})",N/A
+01148207_H23199000204R_OM_H5-0.MP,N/A,,N/A,N/A,N/A,N/A,N/A,N/A,"Counter({'N/A': 7, '': 1})",N/A
+01148207_H23199000204R_OM_H5-0.NA,N/A,N/A,,N/A,N/A,N/A,N/A,N/A,"Counter({'N/A': 7, '': 1})",N/A
+01148207_H23199000204R_OM_H5-0.NP,N/A,N/A,N/A,,N/A,N/A,N/A,N/A,"Counter({'N/A': 7, '': 1})",N/A
+01148207_H23199000204R_OM_H5-0.NS,N/A,N/A,N/A,N/A,,N/A,N/A,N/A,"Counter({'N/A': 7, '': 1})",N/A
+01148207_H23199000204R_OM_H5-0.PA,N/A,N/A,N/A,N/A,N/A,,N/A,N/A,"Counter({'N/A': 7, '': 1})",N/A
+01148207_H23199000204R_OM_H5-0.PB1,N/A,N/A,N/A,N/A,N/A,N/A,,N/A,"Counter({'N/A': 7, '': 1})",N/A
+01148207_H23199000204R_OM_H5-0.PB2,N/A,N/A,N/A,N/A,N/A,N/A,N/A,,"Counter({'N/A': 7, '': 1})",N/A
