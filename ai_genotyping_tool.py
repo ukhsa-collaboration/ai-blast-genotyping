@@ -216,7 +216,7 @@ blast_cols = [
 
 segments = ["PB2", "PB1", "PA", "HA", "NP", "NA", "MP", "NS"]
 
-if os.path.exists(os.path.join(path, "blast_geno_threshold_table99.5.csv")):
+if os.path.exists(os.path.join(path, "blast_geno_threshold_table98.csv")):
     genoblast = pd.read_csv(
         os.path.join(path, "blast_geno_threshold_table98.csv"), dtype=str
     )
@@ -499,9 +499,9 @@ def tidy_blast_table(folder, sample, segmissing, fasta_count):
             for seg in segcheck:
 
                 if submissing[seg].iloc[0] == "missing":
-                    newresultstab.loc[len(newresultstab)] = ["No sequence", seg, s]
+                    newresultstab.loc[len(newresultstab)] = ["No sequence", seg, s,"Null"]
                 else:
-                    newresultstab.loc[len(newresultstab)] = ["BLAST FAIL", seg, s]
+                    newresultstab.loc[len(newresultstab)] = ["BLAST FAIL", seg, s,"Null"]
 
     return newresultstab
 

@@ -57,12 +57,8 @@ def read_commandline():
         "--tagname", "-n", required=True, help="Analysis name for output files"
     )
     parser.add_argument(
-        "--testing",
-        "-t",
-        required=False,
-        default=False,
-        choices=["yes", "no"],
-        help='Debugging mode. Specify by either "yes" or "no"',
+        "--threshold", "-t", required=True, help="Threshold for BLAST filtering"
+
     )
     # Add threads
     args = parser.parse_args()
@@ -91,7 +87,7 @@ segments = ["PB2", "PB1", "PA", "HA", "NP", "NA", "MP", "NS"]
 
 repopath = os.path.dirname(sys.argv[0])
 
-def logging_file_setup(output_folder, testing):
+def logging_file_setup(output_folder):
     """
     Set up log
 
@@ -104,22 +100,14 @@ def logging_file_setup(output_folder, testing):
     )
     print("Logging output in the file: {}".format(logging_file_output))
 
-    if testing == "yes":
-        logging.basicConfig(
-            filename=logging_file_output,
-            filemode="w",
-            format="%(asctime)s:%(levelname)s:%(message)s",
-            level=logging.DEBUG,
-        )
-        print("Logging Level: DEBUG")
-    else:
-        logging.basicConfig(
+
+    logging.basicConfig(
             filename=logging_file_output,
             filemode="w",
             format="%(asctime)s:%(levelname)s:%(message)s",
             level=logging.INFO,
-        )
-        print("Logging Level: INFO")
+    )
+    print("Logging Level: INFO")
     logging.info("Logging Started.")
 
 
@@ -417,7 +405,7 @@ def main(args):
 
 
     # Set up logging
-    logging_file_setup(output_dir, args.testing)
+    logging_file_setup(output_dir)
     # Read in required files depending if CSV or FASTA provided
     outputfasta = os.path.join(args.output_dir,f'all_genotype_references_{now}.fasta')
    
@@ -449,7 +437,7 @@ def main(args):
         print("Unable to run the BLAST processing, exiting...")
         sys.exit()
     blast,queries = filter_blast_results(blasttab)
-    geno_groups(queries, blast,98,epitab['Genotype'])
+    geno_groups(queries, blast,int(args.threshold),epitab['Genotype'])
     
 
     end_time = datetime.now()  # end time for calculating performance improvements
@@ -461,7 +449,7 @@ if __name__ == "__main__":
     args = read_commandline()
 
     # Setting up testing and logging
-    logging_file_setup(args.output_dir, args.testing)
+    logging_file_setup(args.output_dir)
     check = check_arguments(args)
     if check == 1:
         sys.exit(
