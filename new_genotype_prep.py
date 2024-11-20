@@ -413,15 +413,15 @@ def main(args):
     
     if args.epiid is not None:
         epitab = pd.read_csv(args.epiid)
-        ids = "','".join(epitab['isolate_epi_id'])
+        ids = "','".join(epitab['sequence'])
         print(f"{len(epitab['sequence'])} new genotypes to be added to the database")
         db_extract = query_aiseqdb(args.username, ids)
-        for i in epitab['isolate_epi_id']:
+        for i in epitab['sequence']:
             subepitab = db_extract[db_extract['isolate_epi_id']==i]
             print(f'{i} has {subepitab.shape[0]} segments available')
             if subepitab.shape[0] < 8:
                 print(f'{i} does not have all 8 segments available. Constellation will be incomplete')
-        db_extract2 = pd.merge(db_extract,epitab,left_on='isolate_epi_id',right_on='isolate_epi_id',how="left")
+        db_extract2 = pd.merge(db_extract,epitab,left_on='isolate_epi_id',right_on='sequence',how="left")
         create_fasta_seqs(db_extract2)
         subepitab = epitab[['Genotype', 'sequence', 'subtype', 'schema']]
         genotab = update_geno_key(args.geno_key,subepitab)
