@@ -11,6 +11,7 @@ from datetime import date, datetime
 from collections import Counter
 import json
 import subprocess
+from subprocess import PIPE, CalledProcessError, check_call, Popen, STDOUT
 
 now = date.today()
 
@@ -143,20 +144,76 @@ def query_aiseqdb(username, epiids):
 
     return db_extract
 
+
+def per_segment_fasta(segments, fastafile, output_dir):
+    """
+    Create FASTA file of the genotype sequences per segment, run alignments & trees
+
+    :param segments: segment list
+
+    :param fastafile: all genotypes references FASTA file
+
+    :param output_dir: output directory
+
+    :return: N/A
+    """
+    for s in segments:
+        seq_file = open(os.path.join(output_dir,f"all_genotype_references_{now}_{s}.fasta"), "w")
+        fasta_sequences = SeqIO.parse(open(fastafile), 'fasta')
+        for seq in fasta_sequences:
+            if s in seq.id:
+                SeqIO.write(seq, seq_file, "fasta")
+        #try:
+            #print('mafft', os.path.join(output_dir, f"all_genotype_references_{now}_{s}.fasta"), '>',os.path.join(output_dir,f"all_genotype_references_{now}_{s}.aln"))
+        #    aln_seqs = subprocess.Popen(['mafft', os.path.join(output_dir, f"all_genotype_references_{now}_{s}.fasta"), '>',os.path.join(output_dir,f"all_genotype_references_{now}_{s}.aln")],stdout=PIPE, stderr=PIPE)
+         #   out, err = aln_seqs.communicate()
+         #   result = out.decode()
+         #   print("Error : ",err )
+         #   print("Result : ",result )
+         #   aln_seqs.wait()
+        #except CalledProcessError as exc:
+        #    print(exc.output)  
+
+
+def check_geno_exists(dbextract):
+    """
+    Check if the exact sequence already exists in the FASTA file and remove any duplicates
+
+    :param db_extract: aiseqdb table extract
+
+    :return: reduced dbextract
+    """
+   # dbextract = check_fasta_forids(dbextract,'isolate_epi_id')
+    dbextract = check_fasta_forids(dbextract,'isolate_name')
+    return dbextract
+
+def check_fasta_forids(dbextract,columnname):
+    for i in list(set(dbextract[columnname])):
+        idfound = False
+        fasta_sequences = SeqIO.parse(open(os.path.join(args.output_dir,f"all_genotype_references_{now}.fasta")), 'fasta')
+        for seq in fasta_sequences:
+            if i in seq.id:
+                idfound = True
+        if idfound == True:        
+            print(f"{columnname} already in genotyping base files, skipping, {i}")
+            indexseq = dbextract[dbextract[columnname] == i].index
+            dbextract.drop(indexseq, inplace=True)
+    return dbextract
+
 def create_fasta_seqs(db_extract):
     """
     Create FASTA file of the new genotype sequences and update the existing file
 
     :param db_extract: aiseqdb table extract
 
-    :return: N/A
+    :return: All gentoype fasta file
     """
     db_extract["segment_name"] = db_extract["segment_name"].fillna("NA")
-    db_extract['header'] = db_extract.isolate_name.astype(str) + '|'  + \
+    db_extract['header'] = db_extract.isolate_name.astype(str).replace(" ","_") + '|'  + \
     db_extract.Genotype.astype(str) + '|' +db_extract.subtype_x.astype(str) + '|' +\
     db_extract.segment_name.astype(str) 
     filtered_df = db_extract[db_extract["na_sequence"].notnull()]
-
+    filtered_df = check_geno_exists(filtered_df)
     seq_file = open(os.path.join(args.output_dir,f"new_genotype_references_{now}.fasta"), "w")
     updated_seq_file = open(os.path.join(args.output_dir,f"all_genotype_references_{now}.fasta"), "a")
     for index, row in filtered_df.iterrows():
@@ -166,6 +223,7 @@ def create_fasta_seqs(db_extract):
         SeqIO.write(file_content, seq_file, "fasta")
         SeqIO.write(file_content, updated_seq_file, "fasta")
 
+    return os.path.join(args.output_dir,f"all_genotype_references_{now}.fasta"), filtered_df
     
 def update_geno_key(genokey, subepitab):
     """
@@ -198,7 +256,7 @@ def new_fasta_parsing(seqfile):
     for seq in fasta_sequences:
         info = seq.id.split("|")
         newgenodict[info[1]] = [info[0], info[2], info[3], info[4]] 
-        seq.id = f'{info[0]}|{info[1]}|{info[2]}|{info[4]}'
+        seq.id = f'{info[0].replace(" ","_")}|{info[1]}|{info[2]}|{info[4]}'
         seq.description = ""
         SeqIO.write(seq, updated_seq_file, "fasta")
     newgenotab = pd.DataFrame.from_dict(newgenodict, orient="index")
@@ -243,22 +301,62 @@ def filter_blast_results(blasttab):
     """
     blast = pd.read_csv(blasttab,sep="\t")
     blast.columns = ['qseqid', 'sseqid', 'pident', 'length', 'mismatch', 'gapopen', 'qstart', 'qend', 'sstart', 'send', 'evalue', 'bitscore']
-    #checklen = []
-    #for n,q in enumerate(blast['qseqid']):
-    #    test = q.split("|")
-   #     print(len(test))
-    #    if len(test) == 4:
-    #        print(test)
-    #    checklen.append(len(test))
-    #print(Counter(checklen))
+
     blast[['query_isolate_name', 'query_genotype','query_subtype','query_segment']] = blast['qseqid'].str.split('|', expand=True)
     blast[['hit_isolate_name', 'hit_genotype','hit_subtype','hit_segment']] = blast['sseqid'].str.split('|', expand=True)
     blast.to_csv(os.path.join(args.output_dir,f"blast_h5n1_geno_refs_{now}.csv"))
     queries = list(set(blast['query_isolate_name']))
     return blast,queries
 
+def intersection(lst1, lst2):
+    return list(set(lst1) & set(lst2))
 
-def create_group_json(queries, t, subblast, s):
+def check_overlap(q,grouplist,groupdict,ingroup):
+    """
+    Review groups per segment and merge highly overlapping groups
+    
+
+    :return: N/A
+    """
+    maxoverlap = 0
+    groupfound = ""
+    for key, val in groupdict.items():
+        overlap = intersection(list(set(grouplist)), val)   
+        if len(overlap) > maxoverlap:
+            maxoverlap = len(overlap)
+            groupfound = key
+
+    groupdict, groupdecision, ingroup = decide_group_merge(q, maxoverlap, groupfound, grouplist, groupdict, ingroup)
+    return groupdict, groupdecision, ingroup
+
+def decide_group_merge(q,maxoverlap,groupfound, grouplist, groupdict, ingroup):
+    """
+    Review groups per segment and merge highly overlapping groups
+    
+
+    :return: N/A
+    """
+    if float(maxoverlap) / float(len(set(grouplist))) >= 0.75:
+        groupmembers = groupdict[groupfound]
+        print(f"Group found with > 75% matches to existing group, {q} {groupfound}")
+        logging.info(f"Group found with > 75% matches to existing group, {q} {groupfound}")
+        logging.info(f"Adding {q} to {groupfound}")
+        newgrouplist = []
+        #add query and other members of group to new list
+        for g in grouplist:
+            newgrouplist.append(g)
+        #add in the existing group members
+        for g in groupmembers:
+            newgrouplist.append(g)
+        groupdict[groupfound] = list(set(newgrouplist))
+        groupdecision = "merge"
+        ingroup = True
+        return groupdict, groupdecision, ingroup
+    else:
+        groupdecision = "separate"
+        return groupdict, groupdecision, ingroup
+    
+def create_group_json(queries, t, subblast, s,subtype):
     """
     Create the json table 
 
@@ -272,40 +370,86 @@ def create_group_json(queries, t, subblast, s):
     segblast = subblast[subblast['query_segment'] == s]
     groupdict = {}
     groups = 1
-    for n, q in enumerate(queries):
-
+    #remove duplicate sequences using set
+    for n, q in enumerate(list(set(queries))):
+       
         hitblast = segblast[segblast['query_isolate_name'] == q]
-        if hitblast.shape[0]==0:
-            groupdict[f'{s}_group{groups}'] = q
-            groups = groups+1
+       
+       
+        #if no hits then no segment available, otherwise would match to itself
+        if hitblast.shape[0] == 0:
+            print(f"{q} no {s} found")
+            pass
+
         else:
+            if subtype == True:
+                
+                h5type = hitblast['query_subtype'].iloc[0]
+                h5type = h5type.replace("A/", "")
+                hitblast['hit_subtype'] = hitblast['hit_subtype'].str.replace("A/", "")
+                hitblast = hitblast[hitblast['hit_subtype'] == h5type]
+            
             ingroup = False
-            #check if query is already in a group? 
+                #check if query is already in a group in dictionary 
             for key, val in groupdict.items():
-                if q in list(val):
-                    ingroup = True
-                    continue
-            if not ingroup:
-                newgrouplist = []
-                grouplist = list(hitblast['hit_isolate_name'])
-                grouplist.append(q) 
-                for g in grouplist:
-                    ng = False
+                    
+                    if q in list(val):
+                        ingroup = True
+                        pass
+            while not ingroup:
+                    #if not in the group
+                    grouplist = list(hitblast['hit_isolate_name'])
+                    grouplist.append(q) 
+                    #check if it overlaps with an existing group, and by how much
+                    groupdict, groupdecision,ingroup = check_overlap(q, grouplist, groupdict, ingroup)
+                    if groupdecision == "separate":
+                        #new group needed
+                        groupdict, groups, ingroup = new_group(s, groupdict, groups, grouplist)
+                        pass
+                    elif groupdecision=="merge":
+                        #already added to a group
+                        pass
+                    else:
+                        print("Not merge or separate??")
+            qfound = False
+            count = 0
+            for key, val in groupdict.items():
+                    if q in list(val):
+                        #   print(q, key)
+                        qfound = True
+                        count = count+1
+            if not qfound:
+                    print(q,"Not added to dictionary", ingroup)
+            if count>1:
+                    print(q,s,"duplicated!!!")
+                    remove = 0
                     for key, val in groupdict.items():
-                        if g in list(val):
-                            ng = True
-                            continue   
-                    if not ng:
-                         newgrouplist.append(g)
-                groupdict[f'{s}_group{groups}'] = list(set(newgrouplist))
-                ingroup = True
-                groups = groups+1
-                pass
+                        if q in list(val):
+                            remove = remove + 1
+                            if remove > 1:
+                                val = val.remove(q)
+                                groupdict[key] = val
 
     print(f'Segment {s}:{len(groupdict.keys())} groups')
     with open(os.path.join(args.output_dir,f'blast_geno_threshold_{t}_{s}.json'), 'w') as fp:
         json.dump(groupdict, fp)
 
+def new_group(s, groupdict, groups, grouplist):
+    newgrouplist = []
+    for g in grouplist:
+        ng = False
+        for key, val in groupdict.items():
+            if g in list(val):
+                ng = True
+                exit   
+        if not ng:
+             newgrouplist.append(g)
+    # print(ne)
+    logging.info(f"New group defined: {s}_group{groups}, {list(set(newgrouplist))}")
+    groupdict[f'{s}_group{groups}'] = list(set(newgrouplist))
+    ingroup = True
+    groups = groups+1
+    return groupdict, groups, ingroup
 
 def create_constellation(queries, blast, tabcols, t):
     """
@@ -321,6 +465,7 @@ def create_constellation(queries, blast, tabcols, t):
     testdf = []
     for q in queries:
         hitblast = blast[blast['query_isolate_name']==q]
+        
         seqinfo = [q,hitblast['query_genotype'].iloc[0],hitblast['query_subtype'].iloc[0]]
         for s in segments:
             with open(os.path.join(args.output_dir,f'blast_geno_threshold_{t}_{s}.json'), 'r') as file:
@@ -332,7 +477,7 @@ def create_constellation(queries, blast, tabcols, t):
                         if q in list(val):
                             seqinfo.append(key)
                             found = True
-                            exit
+
         if len(seqinfo)>11:
             print(seqinfo)
         testdf.append(seqinfo)
@@ -342,6 +487,26 @@ def create_constellation(queries, blast, tabcols, t):
     thresholddf["constellation"] = thresholddf[['PB2','PB1','PA','HA','NP','NA','MP','NS']].agg("|".join, axis=1)
     thresholddf.to_csv(os.path.join(args.output_dir,f'blast_geno_threshold_table{t}_{now}.csv'))
     return thresholddf
+
+
+
+def describe_geno(genotype,constellation,thresholddf,segments):
+    """
+    Describe the new genotypes and relatives in groups
+
+    :param constellation: constellation for new genotype
+    :param thresholddf:constellation table
+
+    :return: N/A
+    """
+    groups = constellation.split("|")
+    with open(f"genotype_description_{genotype}.txt","w") as filex:
+        filex.write(f'{genotype} has the following relatives per segment\n')
+      #  print(f'{genotype} has the following relatives per segment')
+        for n,g in enumerate(groups):
+            seg_threshold = thresholddf[thresholddf[segments[n]] == g]
+       #     print(f'{segments[n]}: {"|".join(list(seg_threshold["genotype"]))}')
+            filex.write(f'{g}: {"|".join(list(seg_threshold["genotype"]))}\n')
 
 
 def report_new_genotypes(thresholddf, genolist):
@@ -354,12 +519,13 @@ def report_new_genotypes(thresholddf, genolist):
 
     :return: N/A
     """
-    print(genolist)
+    #print(genolist)
     subthresholds = thresholddf[thresholddf['genotype'].isin(genolist)]
     constellations = []
     for index, row in subthresholds.iterrows():
         print(f"{row['genotype']} has the following constellation: {row['constellation']}")
         constellations.append(row['constellation'])
+        describe_geno(row['genotype'],row['constellation'],thresholddf,segments)
     dup_check = thresholddf[thresholddf['constellation'].isin(constellations)]
     if dup_check.shape[0] > subthresholds.shape[0]:
         print("Duplicate constellation found for at least one genotype....")
@@ -389,9 +555,14 @@ def geno_groups(queries,blast,t,newgeno):
     subblast = blast[blast['pident']>=t]
 
     for s in segments:
-        create_group_json(queries, t, subblast, s)
+        if s == "NA":
+            create_group_json(queries, t, subblast, s,subtype=True)
+        else:
+            create_group_json(queries, t, subblast, s,subtype=False)
     thresholddf = create_constellation(queries, blast, tabcols, t)
     report_new_genotypes(thresholddf,newgeno)
+
+
 
 def main(args):
     """
@@ -417,12 +588,20 @@ def main(args):
         print(f"{len(epitab['sequence'])} new genotypes to be added to the database")
         db_extract = query_aiseqdb(args.username, ids)
         for i in epitab['sequence']:
-            subepitab = db_extract[db_extract['isolate_epi_id']==i]
+            subepitab = db_extract[db_extract['isolate_epi_id'] == i]
             print(f'{i} has {subepitab.shape[0]} segments available')
-            if subepitab.shape[0] < 8:
+            if subepitab.shape[0] < 6:
+                print(f'{i} has less than 6 segments available. Constellation will be skipped. Genotype NOT added.')
+                logging.info(f'{i} has less than 6 segments available. Constellation will be skipped. Genotype NOT added.')
+                indexseq = epitab[epitab['sequence'] == i].index
+                epitab.drop(indexseq, inplace=True)
+            elif subepitab.shape[0] < 8:
                 print(f'{i} does not have all 8 segments available. Constellation will be incomplete')
-        db_extract2 = pd.merge(db_extract,epitab,left_on='isolate_epi_id',right_on='sequence',how="left")
-        create_fasta_seqs(db_extract2)
+        db_extract['isolate_name']=db_extract['isolate_name'].str.replace(" ","_")
+        db_extract2 = pd.merge(epitab,db_extract,right_on='isolate_epi_id',left_on='sequence',how="left")
+        fastafile, filtereddf = create_fasta_seqs(db_extract2)
+        per_segment_fasta(segments, fastafile, output_dir)
+        epitab = epitab[epitab['sequence'].isin(list(filtereddf['isolate_epi_id']))]
         subepitab = epitab[['Genotype', 'sequence', 'subtype', 'schema']]
         genotab = update_geno_key(args.geno_key,subepitab)
 
