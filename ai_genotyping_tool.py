@@ -747,8 +747,7 @@ def create_persample_summary(summarytab, segthreshold,hitdict):
         else:
             print(index, " not in blast dictionary")   
             details.append("No top hits found, BLAST fail??")  
-            genoblast.append("")
-    print(genoblast)
+            genoblast.append("BLAST fail")
    # print(len(details),len(genohits))
     pivot["consensus"] = consensus
     pivot["Top_Hit"] = freq
