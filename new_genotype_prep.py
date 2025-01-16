@@ -500,13 +500,17 @@ def describe_geno(genotype,constellation,thresholddf,segments):
     :return: N/A
     """
     groups = constellation.split("|")
-    with open(f"genotype_description_{genotype}.txt","w") as filex:
-        filex.write(f'{genotype} has the following relatives per segment\n')
+    genotype = genotype.replace("\/", "_")
+    try:
+        with open(os.path.join(args.output_dir,f"genotype_description_{genotype}.txt"),"w") as filex:
+            filex.write(f'{genotype} has the following relatives per segment\n')
       #  print(f'{genotype} has the following relatives per segment')
-        for n,g in enumerate(groups):
-            seg_threshold = thresholddf[thresholddf[segments[n]] == g]
-       #     print(f'{segments[n]}: {"|".join(list(seg_threshold["genotype"]))}')
-            filex.write(f'{g}: {"|".join(list(seg_threshold["genotype"]))}\n')
+            for n,g in enumerate(groups):
+                seg_threshold = thresholddf[thresholddf[segments[n]] == g]
+        #     print(f'{segments[n]}: {"|".join(list(seg_threshold["genotype"]))}')
+                filex.write(f'{g}: {"|".join(list(seg_threshold["genotype"]))}\n')
+    except:
+        pass
 
 
 def report_new_genotypes(thresholddf, genolist):

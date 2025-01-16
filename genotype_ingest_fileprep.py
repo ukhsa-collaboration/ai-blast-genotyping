@@ -138,7 +138,7 @@ def main(args):
     comb2["segment_sequence_id"] = comb2["segment_sequence_id"].fillna("nan")
     comb2["final_blast_genotype"] = comb2["final_blast_genotype"].str.replace("No known genotype: Please review individual segments results","Not assigned")
 
-    comb2.to_csv(os.path.join(args.output_dir,f"{now}_genotype_ingest_.csv"),index=False)
+    comb2.to_csv(os.path.join(args.output_dir,f"{now}_genotype_ingest.csv"),index=False)
     end_time = datetime.datetime.now()  # end time for calculating performance improvements
 
     logging.info(f"Pipeline time to completion: { end_time - start_time}")
@@ -152,7 +152,7 @@ def get_isolate_id_fasta(fasta):
         seqdict[info[1]] = [info[0],info[2]]
     seqdf = pd.DataFrame.from_dict(seqdict, orient='index')
     seqdf =seqdf.reset_index()
-    seqdf.columns = ['segment_sequence_id','isolate_epi_id','segment']
+    seqdf.columns = ['segment_sequence_id','isolate_epi_id','segment_name']
     return seqdf
 
 def genoflu_table_wrangling(subtab):
@@ -188,7 +188,7 @@ def genoflu_table_wrangling(subtab):
     subgeno2 = pd.merge(subbgeno,df2,left_on="isolate_epi_id",right_on='isolate_epi_id',how="left")
     subgeno2['genoflu_version'] = get_git_tag("/home/phe.gov.uk/kate.howell/Documents/GenoFLU")
     subgeno2['ingest_date'] = now
-    subgeno2.columns = ['isolate_epi_id','final_genoflu_genotype','segment','genoflu_group','number_segments','genoflu_version', 'ingest_date']
+    subgeno2.columns = ['isolate_epi_id','final_genoflu_genotype','segment_name','genoflu_group','number_segments','genoflu_version', 'ingest_date']
     seqdf = get_isolate_id_fasta(args.fasta)
     return subgeno2, seqdf
 
@@ -204,13 +204,13 @@ def wrangle_blast_tab(newtab):
     subblast = pd.melt(subtab[blastcols], id_vars=['isolate_epi_id','Top_Hit'])
   #  print(subblast.head)
     #rename the columns
-    df2 = subblast.groupby(['isolate_epi_id']).size().reset_index(name='number_segments')
+   # df2 = subblast.groupby(['isolate_epi_id']).size().reset_index(name='number_segments')
   #  print(df2.head)
   #  print(subblast.head)
-    subblast2 = pd.merge(subblast,df2,left_on="isolate_epi_id",right_on='isolate_epi_id',how="left")
-    subblast2.columns = ['isolate_epi_id','final_blast_genotype','segment','blast_group','number_segments']
+   # subblast2 = pd.merge(subblast,df2,left_on="isolate_epi_id",right_on='isolate_epi_id',how="left")
+    subblast.columns = ['isolate_epi_id','final_blast_genotype','segment','blast_group']
 
-    return subtab,subblast2
+    return subtab,subblast
 
 
 
