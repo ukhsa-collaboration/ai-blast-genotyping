@@ -59,9 +59,9 @@ def read_commandline():
     parser.add_argument(
         "--genoflu", "-g", required=True, help="Genoflu results"
     )
-    parser.add_argument(
-        "--gdir", "-d", required=True, help="Genoflu directory"
-    )
+   # parser.add_argument(
+  #     "--gdir", "-d", required=True, help="Genoflu directory"
+   # )
     parser.add_argument(
         "--fasta", "-f", required=True, help="Genotyping FASTA file"
     )
@@ -128,16 +128,19 @@ def main(args):
     subtab, subblast2 = wrangle_blast_tab(newtab)
     subgeno2, seqdf = genoflu_table_wrangling(subtab)
 
-    #combine all the tables & rename columns 
-    comb1 = pd.merge(subgeno2,seqdf,left_on=["isolate_epi_id",'segment'],right_on=["isolate_epi_id",'segment'],how="left")
+    # combine all the tables & rename columns 
+   
+    comb1 = pd.merge(subgeno2,seqdf,left_on=["isolate_epi_id",'segment_name'],right_on=["isolate_epi_id",'segment_name'],how="left")
     
     subblast2["segment"] = subblast2["segment"].fillna("NA")
-    comb1["segment"] = comb1["segment"].fillna("NA")
-    comb2 = pd.merge(comb1,subblast2,left_on=["isolate_epi_id",'segment'],right_on=["isolate_epi_id",'segment'],how="left")
-    #comb2['segment_sequence_id']=comb2['segment_sequence_id'].astype('float').astype('int')
-    comb2["segment_sequence_id"] = comb2["segment_sequence_id"].fillna("nan")
+    comb1["segment_name"] = comb1["segment_name"].fillna("NA")
+    comb2 = pd.merge(comb1,subblast2,left_on=["isolate_epi_id",'segment_name'],right_on=["isolate_epi_id",'segment'],how="left")
+    #comb2['segment_name_sequence_id']=comb2['segment_name_sequence_id'].astype('float').astype('int')
+    comb2["segment_sequence_id"] = comb2["segment_sequence_id"].fillna("")
     comb2["final_blast_genotype"] = comb2["final_blast_genotype"].str.replace("No known genotype: Please review individual segments results","Not assigned")
-
+    #comb2["final_genoflu_genotype"] = comb2["final_genoflu_genotype"].str.replace(r'\s+', "Not assigned", regex=True)
+    comb2 = comb2.drop(columns=['segment'])
+    comb2["final_genoflu_genotype"] = comb2["final_genoflu_genotype"].fillna("Not assigned")
     comb2.to_csv(os.path.join(args.output_dir,f"{now}_genotype_ingest.csv"),index=False)
     end_time = datetime.datetime.now()  # end time for calculating performance improvements
 
@@ -148,7 +151,14 @@ def get_isolate_id_fasta(fasta):
     seqdict = {}
     fasta_sequences = SeqIO.parse(open(fasta), 'fasta')
     for seq in fasta_sequences:
-        info = seq.id.split("|")
+        if "|" in seq.id:
+            seporator = "|"
+        elif "." in seq.id:
+             seporator = "."
+        else:
+            logging.warning("no known seporator found, exiting!")
+            sys.exit()
+        info = seq.id.split(seporator)
         seqdict[info[1]] = [info[0],info[2]]
     seqdf = pd.DataFrame.from_dict(seqdict, orient='index')
     seqdf =seqdf.reset_index()
