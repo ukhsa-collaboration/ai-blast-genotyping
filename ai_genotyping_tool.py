@@ -225,7 +225,7 @@ if os.path.exists(os.path.join(path, "blast_geno_threshold_table98.csv")):
         id_vars=["sequence", "genotype", "subtype", "constellation"],
         value_vars=segments,
     )
-    print(genogroups.head)
+ #   print(genogroups.head)
     genogroups = genogroups.rename(columns={"variable": "Segment", "value": "Group"})
     genogroups["Segment"] = genogroups["Segment"].replace(np.nan, "NA")
     groups = genogroups["Group"].tolist()
