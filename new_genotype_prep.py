@@ -30,10 +30,10 @@ def read_commandline():
         description=f"Script to update BLAST genotyping schemas"
     )
     parser.add_argument(
-        "--geno_key", "-g", required=True, help="existing genotyping key"
+        "--geno_key", "-g", required=True, help="existing genotyping key",default = "reference_files/genotype_key.csv"
     )
     parser.add_argument(
-        "--reffasta", "-r", required=True, help="existing genotype reference fasta"
+        "--reffasta", "-r", required=True, help="existing genotype reference fasta",default = "reference_files/all_genotype_references.fasta"
     )
     parser.add_argument(
         "--output_dir",
@@ -598,8 +598,10 @@ def main(args):
     logging_file_setup(output_dir)
     # Read in required files depending if CSV or FASTA provided
     outputfasta = os.path.join(args.output_dir,f'all_genotype_references_{now}.fasta')
-   
-    subprocess.call(f"cp {args.reffasta} {outputfasta}",shell=True)
+    if args.reffasta == "reference_files/all_genotype_references.fasta":
+        subprocess.call(f"cp {os.path.join(os.path.dirname(sys.argv[0]),args.reffasta)} {outputfasta}",shell=True)
+    else:
+        subprocess.call(f"cp {args.reffasta} {outputfasta}",shell=True)
     
     if args.epiid is not None:
         epitab = pd.read_csv(args.epiid)
@@ -622,12 +624,18 @@ def main(args):
         per_segment_fasta(segments, fastafile, output_dir)
         epitab = epitab[epitab['sequence'].isin(list(filtereddf['isolate_epi_id']))]
         subepitab = epitab[['Genotype', 'sequence', 'subtype', 'schema']]
-        genotab = update_geno_key(args.geno_key,subepitab)
+        if args.geno_key == "":
+            genotab = update_geno_key(os.path.join(os.path.dirname(sys.argv[0]),args.geno_key), subepitab)
+        else:
+            genotab = update_geno_key(args.geno_key,subepitab)
 
     if args.fasta is not None:
         newgenotab = new_fasta_parsing(args.fasta)
         print(f"{len(newgenotab['sequence'])} new genotypes to be added to the database")
-        genotab = update_geno_key(args.geno_key, newgenotab)
+        if args.geno_key == "":
+            genotab = update_geno_key(os.path.join(os.path.dirname(sys.argv[0]),args.geno_key), newgenotab)
+        else:
+            genotab = update_geno_key(args.geno_key, newgenotab)
         epitab = newgenotab
     try:
         blasttab = blast_processing()
