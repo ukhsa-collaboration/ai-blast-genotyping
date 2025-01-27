@@ -280,9 +280,6 @@ def duplicate_fasta_check(fasta):
         else:
             seqdict[seq.id] = str(seq.seq)
 
-   # print(
-  #      f"{len(duplist)} duplicates found in FASTA files. Any duplicates should be reviewed prior to interpreting results!"
-   # )
     logging.info(
         print(
             f"{len(duplist)} duplicates found in FASTA files. Any duplicates should be reviewed prior to interpreting results!"
@@ -392,11 +389,7 @@ def create_hit_dict(blast_pass):
     hitdict = {}
     for q in list(set(blast_pass['isolate_epi_id'])):
         subblast = blast_pass[blast_pass['isolate_epi_id'] == q]
-     #   print(subblast.shape)
-       # for s in segments:
-       #     subblastseg = subblast[subblast['segment']==s]
         if subblast.shape[0] >= 1:
-         #  print(Counter(list(subblast['hit_geno'])))
             hitdict[subblast["isolate_epi_id"].iloc[0]] = [dict(Counter(list(subblast['hit_isolate_name']))),Counter(list(subblast['hit_geno']))]
     return hitdict
 
@@ -442,7 +435,6 @@ def tidy_blast_table(folder, sample, segmissing, fasta_count):
                 "No sequences found to meet the minimum threshold. Tool now exiting, please check that you are using the same subtype of sequences as in the database!"
             )
         )
-  #  print("Checking sequence identifier for delimiters.... ")
     logging.info("Checking sequence identifier for delimiters.... ")
     if "|" in list(blast_pass["qseqid"])[0]:
         delim = "|"
@@ -456,10 +448,8 @@ def tidy_blast_table(folder, sample, segmissing, fasta_count):
             f'Sample header delimiter unknown! Please check, "." or "|" expected!'
         )
         print(f'Sample header delimiter unknown! Please check, "." or "|" expected!')
- #   print(f"Delimiter found: {delim}")
     logging.info(f"Delimiter found: {delim}")
     logging.info("Preparing BLAST table for summary")
- #   print("Preparing BLAST table for summary")
     try:
         test = blast_pass["qseqid"].str.split(pat=delim, expand=True)
     except:
@@ -557,13 +547,9 @@ def run_full_blasts(folder, mode, extension, output_dir):
             
             segdict = missing_fasta_check(f, segdict)
             duplist = duplicate_fasta_check(f)
-            #if len(duplist) >= 1:
-           #     print(f"Duplicates identified: {duplist}")
-           #     logging.info(f"Duplicates identified: {duplist}")
 
             run_blast(os.path.join(repopath,args.blastdb), folder, f, output_dir)
-           # logging.info("Reviewing BLAST results")
-          #  print("Reviewing BLAST results")
+
             segmissing, fasta_count = create_segment_tab(segdict)
 
             segdicttab = pd.DataFrame.from_dict(segmissing, orient="index")
@@ -575,8 +561,7 @@ def run_full_blasts(folder, mode, extension, output_dir):
             segdicttab.columns = segcols
 
             sresults,hitdict = tidy_blast_table(args.output_dir, f, segdicttab, fasta_count)
-           # logging.info("Combining results across FASTA files...")
-           # print("Combining results across FASTA files...")
+
             results_tabs.append(sresults)
         newdf = pd.concat(results_tabs)
         segtab = pd.concat(segtabs)
@@ -647,26 +632,6 @@ def run_full_blasts(folder, mode, extension, output_dir):
         return sresults, hitdict
 
 
-#def details_lookup(q, output_dir):
-#  #  print("look up details")
- #   blastout = glob.glob(os.path.join(output_dir, "*.blast.out2"))
-  #  if len(blastout)==1:
-   #     blasttab = pd.read_csv(os.path.join(output_dir, blastoutdetails_lookup[0]))
-   # else:
-    #    blasts = []
-    #    for b in blastout:
-    #        blasts.append(pd.read_csv(b))
-    #    blasttab = pd.concat(blasts)
-    #subblast = blasttab[blasttab['isolate_epi_id'] == q]
-   # match = []
-   # geno = []
-   # for index, row in subblast.iterrows():
-   #     hit = row['sseqid'].split("|")
-   #     match.append(hit[0])
-   #     geno.append(hit[1])
-   # print(dict(Counter(match)),dict(Counter(geno)))
-    #return dict(Counter(list(subblast['hit_isolate_name']))),Counter(list(subblast['hit_geno']))
-
 
 def tidydict(pivot, collist):
     print("tidy up step")
@@ -675,9 +640,6 @@ def tidydict(pivot, collist):
         for t in tidyup:
             pivot[c] = pivot[c].replace(t,"")
     return pivot
-
-#def geno_prevalence():
-#    
 
 
 def create_persample_summary(summarytab, segthreshold,hitdict):
@@ -697,16 +659,14 @@ def create_persample_summary(summarytab, segthreshold,hitdict):
         fill_value="No sequence",
         aggfunc="first",
     )
-   # path = os.path.dirname(sys.argv[0])
+
     consensus = []
-   # prioritytab = pd.read_csv(os.path.join(path, "genotype_prioritisation.csv"))
+
     freq = []
     results = []
     details = []
     genohits = []
     genoblast = []
-   # print(hitdict)
-  #  print(len(set(hitdict.keys() - set(pivot.index))))
     
     for index, row in pivot.iterrows():
         result = ""
@@ -721,24 +681,18 @@ def create_persample_summary(summarytab, segthreshold,hitdict):
         tophits = count_geno_hits(
            segthreshold, topgeno, counts, maxgeno, keys
         )
-      #  print(result)
+
         freq.append(tophits)
         consensus.append(genfreq)
         results.append(result)
-     #   print(hitdict)
-      #  print(index)
-        # try:
+
         keylist = hitdict.keys()
         if index in keylist:
             topmatch, genodict = hitdict[index]
             gencounts = list(genodict.values())
-        # except:
-        #     pass
-        #   print(index,max(gencounts))
             if len(gencounts)>=1:
                     maxgenohit = max(gencounts)
                     genkeys = list(genodict.keys())
-                #  topgeno = []
                     if maxgenohit >=6:
                         for n, c in enumerate(gencounts):
                             if c == maxgenohit:
@@ -748,18 +702,13 @@ def create_persample_summary(summarytab, segthreshold,hitdict):
             else:
                 genoblast.append("")
             details.append(topmatch)
-        #    genohits.append(tophits)
         else:
             print(index, " not in blast dictionary")   
             details.append("No top hits found, BLAST fail??")  
             genoblast.append("BLAST fail")
-   # print(len(details),len(genohits))
     pivot["consensus"] = consensus
     pivot["Top_Hit"] = freq
     pivot['Top_hit_details'] = details
-    
-  #  pivot['Top_hit_genotype'] = dict(genodict)
-    #pivot = tidydict(pivot,['Top_hit_details','Top_hit_genotype'])
     pivot["Best_result"] = genoblast
     pivot["Best_result"] = pivot["Best_result"].str.replace(
         "No sequence", "Insufficient sequence data"
@@ -790,22 +739,6 @@ def count_geno_hits(segthreshold, topgeno, counts, maxgeno, keys):
             topgeno.append(keys[n])
             if int(maxgeno) >= segthreshold:
                 tophit = "|".join(topgeno)
-                #if "|" in tophit:
-                   # freqs = []
-                    #for t in topgeno:
-                    #    hittab = prioritytab[prioritytab["Genotype"] == t]
-                    #    if hittab.shape[0] > 0:
-                    ##        freqs.append(hittab["Frequency"].iloc[0])
-                    #    else:
-                    #        logging.info(f"Genotype not found in frequency table: {t}")
-                    #      #  print(f"Genotype not found in frequency table: {t}")
-                    #        freqs.append(0)
-
-                   # maxhit = max(freqs)
-                   # result = topgeno[freqs.index(maxhit)]
-
-               # else:
-                #    result = keys[n]
             else:
                 tophit = "No known genotype: Please review individual segments results"
     return tophit
@@ -820,14 +753,10 @@ def split_geno_matches(pivot, row, newlist):
 
     """
     for s in pivot.columns:
-        # try:
-           # print(row[s])
             test = row[s].split("|")
-           # print(test)
             for t in test:
                 newlist.append(t)
-        #except:
-        #    newlist.append("")
+
     return newlist
 
 
@@ -850,12 +779,7 @@ def overall_summary(pivot):
     logging.info(Counter(pivot["Best_result"]))
 
 
-# Need a function to use historic genotype rules when multiple genotype calls are returned
-### e.g. AIV07-B1|AIV07-B2 = AIV07-B2
-
-
 # Run script
-
 
 def main(args):
     """
