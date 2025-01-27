@@ -1,12 +1,12 @@
 # AI BLAST genotyping
 
-command line tool for running the BLAST genotyping method 
+This repo contains the command line tool for running the universal BLAST genotyping method as well as helper scripts to process new genotype references and generate FASTA files for genotyping. 
 
 # Requirements & Dependencies
 To run this tool you will need to numpy, pandas and BLAST installed. The versions are present in the requirements.txt file. 
 Installation can be performed with either pip or conda. 
 
-# Running on the HPC
+## Running on the old HPC
 
 To run this script on the HPC you will need to load pre-existing modules, and have copied over and un-zip the gitlab code for both the AI BLAST genotyping gitlab repo. 
 You do not have to install further python modules or use the requirements.txt due to the limitations of updating python code on the HPC. 
@@ -18,40 +18,130 @@ module load qrsh
 # specific requirements
 module load sge blast+/2.2.27
 ```
-
+## Running on the SMED
+The BLAST genotyping repo will soon be containerised for the SMED. This section will be updated once the container is available. 
 
 ## Files required
-1. **BLAST database** - You will also need to have a local copy of the BLAST database that has been created based on the reference strains for the UK AI genotypes. 
-This can be copied from the HPC:
+1. **BLAST database** - The latest version of the BLAST db should be included with the git repo. Please perform a git pull before running to ensure you have the latest version. 
+Copies are also available for historic versions on the HPC (sftp://hpc1mgmt.unix.phe.gov.uk/phengs/hpc_projects/nicc80_ai/geno_blastdb/db_archives). 
+2. **constellation table** - The latest version of the blast_geno_threshold_table98.csv table should be included with the git repo. Please perform a git pull before running to ensure you have the latest version. 
+Copies are also available for historic versions on the HPC (sftp://hpc1mgmt.unix.phe.gov.uk/phengs/hpc_projects/nicc80_ai/geno_blastdb/db_archives).
 
-### THE INPUT FILES HAVE BEEN UPDATED SO PLEASE COPY ACROSS THE LATEST VERSION FROM THE HPC
+### CHANGE LOG
 
-[sftp://hpc1mgmt.unix.phe.gov.uk/phengs/hpc_projects/nicc80_ai/geno_blastdb](url)
+- The universal genotyping tool no longer requires the "genotype_groups_examples.csv" table and instead uses the constellations table blast_geno_threshold_table98.csv. 
+- The method itself has changed to incorporate groups per segment which are matched up to a genotype constellation (combination of groups across the segemnts). Some genotype constellations are known duplicates. 
+- The genotype prioritisation based on prevalence is no longer part of the universal genotyping process as is not feasible with the current data availability. The top BLAST hit is instead reported in addition to the genotype constellation, which is matched back to the genotype. 
+- For details on the method changes and the verification please see this summary report: 
 
-You will need the files all files labelled "ai_geno_groups_ref.*"
+[https://phecloud.sharepoint.com/:w:/r/teams/GenomicsCell/Shared%20Documents/horizon_scanning/avian_influenza/Universal_genotyping_summary_report.docx?d=w150ac935061e4b85ab783d367cbdb4c6&csf=1&web=1&e=UdHiBV](url)
 
-2. **Genotypes reference table** - "genotype_groups_examples.csv" copy also available in the same HPC folder. 
+# Adding new genotypes
 
-The reference table should be placed in the main repo folder to be accessed by the genotyping script
+### Process SOP 
+The full SOP can be found here:
+[https://phecloud.sharepoint.com/:w:/r/teams/GenomicsCell/Shared%20Documents/Quality%20Management/SOP_drafts/Avian%20Influenza%20SOPs/BLAST_genotyping.docx?d=w8adaccb7ad674e228482174d4f7ffd25&csf=1&web=1&e=5vVFqZ](url)
 
-If you do not have access to the folder then please discuss access with the project lead. 
+### Basic process
+1. If adding GenoFlu references there is a prepare the data for that for that: 
 
-# Command line tool 
+```
+python genoflu_prep.py -h
+usage: genoflu_prep.py [-h] --genoflu GENOFLU --previous_geno_tab PREVIOUS_GENO_TAB --output_dir OUTPUT_DIR
 
-```python ai_genotyping_tool.py -h 
+New US genotype prep tool
 
-usage: ai_genotyping_tool.py [-h] --output_dir OUTPUT_DIR [--testing {yes,no}] 
-[--extension EXTENSION] 
-[--input_file INPUT_FILE | --input_folder INPUT_FOLDER] --blastdb BLASTDB
+optional arguments:
+  -h, --help            show this help message and exit
+  --genoflu GENOFLU, -g GENOFLU
+                        Genoflu folder
+  --previous_geno_tab PREVIOUS_GENO_TAB, -p PREVIOUS_GENO_TAB
+                        Previous genotype key from ai-blast-genotyping prep
+  --output_dir OUTPUT_DIR, -o OUTPUT_DIR
+                        Output folder location
+
+```
+The FASTA file can then be input into step 3. 
+
+2. If adding other references you will need you can create the FASTA manually but the FASTA header must be in the following format: Sequence_identifier*|Genotype|Subtype|Scheme|Segment 
+If the isolate data is already in aiseqdb skip to step 3. 
+
+3. Run the new_genotyping_prep.py script using a BLAST identity threshold of **98%**
+
+```
+python new_genotype_prep.py -h
+usage: new_genotype_prep.py [-h] --geno_key GENO_KEY --reffasta REFFASTA --output_dir OUTPUT_DIR
+                            [--epiid EPIID | --fasta FASTA] [--username USERNAME] --tagname TAGNAME --threshold
+                            THRESHOLD
+
+Script to update BLAST genotyping schemas
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --geno_key GENO_KEY, -g GENO_KEY
+                        existing genotyping key
+  --reffasta REFFASTA, -r REFFASTA
+                        existing genotype reference fasta
+  --output_dir OUTPUT_DIR, -o OUTPUT_DIR
+                        Output folder. Default: CWD.
+  --epiid EPIID, -e EPIID
+                        CSV file of new genotype sequences with meta-data
+  --fasta FASTA, -f FASTA
+                        Input FASTA file for new genotype references (SPECIFIC INPUT FORMAT REQUIRED)
+  --username USERNAME, -u USERNAME
+                        username for aiseqdb query
+  --tagname TAGNAME, -n TAGNAME
+                        Analysis name for output files
+  --threshold THRESHOLD, -t THRESHOLD
+                        Threshold for BLAST filtering
+```
+
+4. Once you have reviewed the outputs and are happy you need to add the latest version of the BLASTdb and the blast_genotyping_threshold_table98.csv to this git repo.
+
+# BLAST genotyping command line tool 
+
+### Process SOP
+The full SOP can be found here:
+[https://phecloud.sharepoint.com/:w:/r/teams/GenomicsCell/Shared%20Documents/Quality%20Management/SOP_drafts/Avian%20Influenza%20SOPs/BLAST_genotyping.docx?d=w8adaccb7ad674e228482174d4f7ffd25&csf=1&web=1&e=5vVFqZ](url)
+
+### Basic process is outlined here:
+
+1. First you will need to create a FASTA file to run the BLAST genotyping on using the prep_for_genotyping.py script. 
+
+```
+python prep_for_genotyping.py -h
+usage: prep_for_genotyping.py [-h] --input_file INPUT_FILE --output_dir OUTPUT_DIR --tagname TAGNAME
+
+Script to create AI segment alignments for mutation scan
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --input_file INPUT_FILE, -i INPUT_FILE
+                        CSV file retrieved from AI database.
+  --output_dir OUTPUT_DIR, -o OUTPUT_DIR
+                        Output folder. Default: CWD.
+  --tagname TAGNAME, -n TAGNAME
+                        Analysis name for output files
+
+```
+2. Run the BLAST genotyping tool on your new FASTA file: 
+
+``` 
+python ai_genotyping_tool.py -h
+usage: ai_genotyping_tool.py [-h] --output_dir OUTPUT_DIR [--testing {yes,no}] --tagname TAGNAME
+                             [--extension EXTENSION] [--input_file INPUT_FILE | --input_folder INPUT_FOLDER]
+                             --blastdb BLASTDB --strict STRICT --identity IDENTITY
 
 AI UK Genotyping command line tool
 
-`optional arguments:
+optional arguments:
   -h, --help            show this help message and exit
   --output_dir OUTPUT_DIR, -o OUTPUT_DIR
                         Output folder. Default: CWD.
   --testing {yes,no}, -t {yes,no}
                         Debugging mode. Specify by either "yes" or "no"
+  --tagname TAGNAME, -n TAGNAME
+                        Analysis name for output files
   --extension EXTENSION, -e EXTENSION
                         FASTA file extension if not default
   --input_file INPUT_FILE, -i INPUT_FILE
@@ -60,21 +150,41 @@ AI UK Genotyping command line tool
                         Input FASTA file
   --blastdb BLASTDB, -b BLASTDB
                         Reference BLAST database
-                        `
-
+  --strict STRICT, -s STRICT
+                        Strict version, all 8 segments for genotype
+  --identity IDENTITY, -d IDENTITY
+                        Percentage identity threshold. Default = 98.
 ```
 
-
+```
 ## Example usage
 
-****Process all FASTA files (based on extension) in a folder or all samples in single FASTA file****
+python /path/ai-blast-genotyping/ai_genotyping_tool.py -o OUTPUT_DIR -t {yes,no} -e FASTA_EXTENSION [--input_file INPUT_FILE OR --input_folder INPUT_FOLDER] -b BLASTDB –n FILETAG 
+
 ```
 
-python /path/ai-blast-genotyping/ai_genotyping_tool.py -o OUTPUT_DIR -t {yes,no} -e FASTA_EXTENSION [--input_file INPUT_FILE OR --input_folder INPUT_FOLDER] -b BLASTDB –n FILETAG 
+3. If ingesting the results back into aiseqdb then you need to run this script to prepare the data for the ingest. Please refer to the SOP for the ingest instructions. 
+
+```
+python genotype_ingest_fileprep.py -h
+usage: genotype_ingest_fileprep.py [-h] --genoflu GENOFLU --fasta FASTA --blast BLAST --output_dir OUTPUT_DIR
+
+New US genotype prep tool
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --genoflu GENOFLU, -g GENOFLU
+                        Genoflu results
+  --fasta FASTA, -f FASTA
+                        Genotyping FASTA file
+  --blast BLAST, -b BLAST
+                        BLAST genotyping results
+  --output_dir OUTPUT_DIR, -o OUTPUT_DIR
+                        Output folder location
 ```
 ## Assumptions:
 
-Assumes that the FASTA header ends with the segment: "|HA" or "_HA"
+Assumes that the FASTA header ends with the segment: "|HA" or "_HA" and will check for these delimiters & otherwise will fail. 
 
 ## Test data from the UK reference sequences
 
@@ -82,8 +192,3 @@ A test data set for the UK reference genomes is available on the HPC folder in t
 sftp://hpc1mgmt.unix.phe.gov.uk/phengs/hpc_projects/nicc80_ai/geno_blastdb/test_data
 
 
-
-
-# Details of how the BLAST database was set up & initial testing
-
-[https://phecloud.sharepoint.com/:p:/r/teams/GenomicsCell/Shared%20Documents/Avian_Flu/Genotyping/AI_genotyping_20230209%20-%20Copy.pptx?d=wb923b858ed304b7480dbe572050270ab&csf=1&web=1&e=u6aFJT](url)
