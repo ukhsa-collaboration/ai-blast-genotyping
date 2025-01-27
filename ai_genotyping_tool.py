@@ -108,7 +108,7 @@ def read_commandline():
         "--input_folder", "-f", required=False, help="Input FASTA file"
     )
     parser.add_argument(
-        "--blastdb", "-b", required=True, help="Reference BLAST database"
+        "--blastdb", "-b", required=True, help="Reference BLAST database",default = "reference_files/all_genotype_references.db"
     )
     parser.add_argument(
         "--strict",
@@ -150,13 +150,15 @@ def check_arguments(args):
 
     if not os.path.isdir(args.output_dir):
         os.mkdir(args.output_dir)
-
-    if not os.path.exists(args.blastdb + ".nin"):
+    if args.blastdb == "reference_files/all_genotype_references.db":
+        repopath = os.path.dirname(sys.argv[0])
+    else:
+        repopath = ""
+    if not os.path.exists(os.path.join(repopath,args.blastdb + ".nin")):
         logging.error(
-            f"BLAST database does not appear to exists: {args.blastdb}. Please check"
+            f"BLAST database does not appear to exists: {os.path.join(repopath,args.blastdb)}. Please check"
         )
         return 1
-
     return 0
 
 
@@ -216,9 +218,11 @@ blast_cols = [
 
 segments = ["PB2", "PB1", "PA", "HA", "NP", "NA", "MP", "NS"]
 
-if os.path.exists(os.path.join(path, "blast_geno_threshold_table98.csv")):
+
+
+if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), "reference_files","blast_geno_threshold_table98.csv")):
     genoblast = pd.read_csv(
-        os.path.join(path, "blast_geno_threshold_table98.csv"), dtype=str
+        os.path.join(os.path.dirname(sys.argv[0]), "reference_files","blast_geno_threshold_table98.csv"), dtype=str
     )
     genogroups = pd.melt(
         genoblast,
@@ -556,7 +560,8 @@ def run_full_blasts(folder, mode, extension, output_dir):
             #if len(duplist) >= 1:
            #     print(f"Duplicates identified: {duplist}")
            #     logging.info(f"Duplicates identified: {duplist}")
-            run_blast(args.blastdb, folder, f, output_dir)
+
+            run_blast(os.path.join(repopath,args.blastdb), folder, f, output_dir)
            # logging.info("Reviewing BLAST results")
           #  print("Reviewing BLAST results")
             segmissing, fasta_count = create_segment_tab(segdict)
@@ -625,7 +630,7 @@ def run_full_blasts(folder, mode, extension, output_dir):
         if len(duplist) >= 1:
             print(f"Duplicates identified: {duplist}")
             logging.info(f"Duplicates identified: {duplist}")
-        run_blast(args.blastdb, head_tail[0], head_tail[1], output_dir)
+        run_blast(os.path.join(repopath,args.blastdb), head_tail[0], head_tail[1], output_dir)
         logging.info("Reviewing BLAST results")
         print("Reviewing BLAST results")
         sresults,hitdict = tidy_blast_table(output_dir, head_tail[1], segdicttab, fasta_count)
@@ -862,7 +867,11 @@ def main(args):
     # Create paths for qsub submission
     global output_dir
     output_dir = os.path.abspath(args.output_dir)
-    
+    global repopath
+    if args.blastdb == "reference_files/all_genotype_references.db":
+        repopath = os.path.dirname(sys.argv[0])
+    else:
+        repopath = ""
     if args.strict == "yes":
         segthreshold = 8
     else:
@@ -900,9 +909,12 @@ def main(args):
 if __name__ == "__main__":
     args = read_commandline()
 
+    
     # Setting up testing and logging
     logging_file_setup(args.output_dir, args.testing)
+    
     check = check_arguments(args)
+
     if check == 1:
         sys.exit(
             logging.error("Arguments provided were not expected. Please check log.")
