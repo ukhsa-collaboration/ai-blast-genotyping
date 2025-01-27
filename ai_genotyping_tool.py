@@ -121,8 +121,8 @@ def read_commandline():
         "--identity",
         "-d",
         required=True,
-        help="Percentage identity threshold. Default = 97",
-        default=97,
+        help="Percentage identity threshold. Default = 98",
+        default=98,
     )
     args = parser.parse_args()
     # Need to handle output dir before setting up logging files.hat's the timeline for the analysis
