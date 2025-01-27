@@ -22,10 +22,13 @@ module load sge blast+/2.2.27
 The BLAST genotyping repo will soon be containerised for the SMED. This section will be updated once the container is available. 
 
 ## Files required
-1. **BLAST database** - The latest version of the BLAST db should be included with the git repo. Please perform a git pull before running to ensure you have the latest version. 
+There are a series of required files for either adding new genotypes or running the BLAST genotyping. These are included in the reference_files folder within the repo and include:
+- The latest BLAST db - all_genotype_references.db.*
+- The FASTA file from which the BLAST db is built (all_genotype_references.fasta)
+- the constellation table - blast_geno_threshold_table98.csv
+- a genotyping key for the meta-data - genotype.key.csv
+
 Copies are also available for historic versions on the HPC (sftp://hpc1mgmt.unix.phe.gov.uk/phengs/hpc_projects/nicc80_ai/geno_blastdb/db_archives). 
-2. **constellation table** - The latest version of the blast_geno_threshold_table98.csv table should be included with the git repo. Please perform a git pull before running to ensure you have the latest version. 
-Copies are also available for historic versions on the HPC (sftp://hpc1mgmt.unix.phe.gov.uk/phengs/hpc_projects/nicc80_ai/geno_blastdb/db_archives).
 
 ### CHANGE LOG
 
