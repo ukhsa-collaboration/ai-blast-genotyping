@@ -163,16 +163,6 @@ def per_segment_fasta(segments, fastafile, output_dir):
         for seq in fasta_sequences:
             if s in seq.id:
                 SeqIO.write(seq, seq_file, "fasta")
-        #try:
-            #print('mafft', os.path.join(output_dir, f"all_genotype_references_{now}_{s}.fasta"), '>',os.path.join(output_dir,f"all_genotype_references_{now}_{s}.aln"))
-        #    aln_seqs = subprocess.Popen(['mafft', os.path.join(output_dir, f"all_genotype_references_{now}_{s}.fasta"), '>',os.path.join(output_dir,f"all_genotype_references_{now}_{s}.aln")],stdout=PIPE, stderr=PIPE)
-         #   out, err = aln_seqs.communicate()
-         #   result = out.decode()
-         #   print("Error : ",err )
-         #   print("Result : ",result )
-         #   aln_seqs.wait()
-        #except CalledProcessError as exc:
-        #    print(exc.output)  
 
 
 def check_geno_exists(dbextract):
@@ -183,11 +173,18 @@ def check_geno_exists(dbextract):
 
     :return: reduced dbextract
     """
-   # dbextract = check_fasta_forids(dbextract,'isolate_epi_id')
+
     dbextract = check_fasta_forids(dbextract,'isolate_name')
     return dbextract
 
 def check_fasta_forids(dbextract,columnname):
+    """
+    Look up if the isolate_name is already part of the FASTA file, skip if present. 
+
+    :param db_extract: aiseqdb table extract
+    :param columnname: aiseqdb table extract
+    :return: reduced db_extract
+    """
     for i in list(set(dbextract[columnname])):
         idfound = False
         fasta_sequences = SeqIO.parse(open(os.path.join(args.output_dir,f"all_genotype_references_{now}.fasta")), 'fasta')
@@ -315,8 +312,12 @@ def check_overlap(q,grouplist,groupdict,ingroup):
     """
     Review groups per segment and merge highly overlapping groups
     
+    :param q: query list to check overlap
+    :param grouplist: query relatives list
+    :param groupdict: existing group dictionary
+    :param ingroup: decision variable (merge / separate)
+    :return: groupdict, groupdecision, ingroup
 
-    :return: N/A
     """
     maxoverlap = 0
     groupfound = ""
@@ -332,9 +333,14 @@ def check_overlap(q,grouplist,groupdict,ingroup):
 def decide_group_merge(q,maxoverlap,groupfound, grouplist, groupdict, ingroup):
     """
     Review groups per segment and merge highly overlapping groups
-    
+    :param q: query list to check overlap
+    :param maxoverlap: max overlap with any existing groups
+    :param groupfound: query found in group list
+    :param grouplist: query relatives list
+    :param groupdict: existing group dictionary
+    :param ingroup: decision variable (merge / separate)
 
-    :return: N/A
+    :return: groupdict, groupdecision, ingroup
     """
     if float(maxoverlap) / float(len(set(grouplist))) >= 0.75:
         groupmembers = groupdict[groupfound]
@@ -435,6 +441,16 @@ def create_group_json(queries, t, subblast, s,subtype):
         json.dump(groupdict, fp)
 
 def new_group(s, groupdict, groups, grouplist):
+    """
+    Create new group
+
+    :param s: segment
+    :param groupdict: group dictionary
+    :param groups: running group count
+    :param grouplist: list of relatives for group
+
+    :return: groupdict, groups, ingroup (T/F variable)
+    """
     newgrouplist = []
     for g in grouplist:
         ng = False
@@ -567,7 +583,6 @@ def geno_groups(queries,blast,t,newgeno):
     report_new_genotypes(thresholddf,newgeno)
 
 
-
 def main(args):
     """
     Main running of the script to run the BLAST query and wrangle the results to provide a per segment and sample summary of the genotyping results.
@@ -622,7 +637,6 @@ def main(args):
     blast,queries = filter_blast_results(blasttab)
     geno_groups(queries, blast,int(args.threshold),epitab['Genotype'])
     
-
     end_time = datetime.now()  # end time for calculating performance improvements
 
     logging.info(f"Pipeline time to completion: {start_time - end_time}")
