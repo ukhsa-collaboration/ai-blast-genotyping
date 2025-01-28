@@ -236,7 +236,7 @@ def update_geno_key(genokey, subepitab):
     newdf = pd.concat([genotab, subepitab])
     head_tail = os.path.split(genokey)
     newname = head_tail[1].replace(".csv",f"_{now}.csv")
-    newdf.to_csv(os.path.join(args.output_dir,f'{newname}'))
+    newdf.to_csv(os.path.join(args.output_dir,f'{newname}'),index_row=False)
     return newdf
 
 
@@ -302,7 +302,7 @@ def filter_blast_results(blasttab):
 
     blast[['query_isolate_name', 'query_genotype','query_subtype','query_segment']] = blast['qseqid'].str.split('|', expand=True)
     blast[['hit_isolate_name', 'hit_genotype','hit_subtype','hit_segment']] = blast['sseqid'].str.split('|', expand=True)
-    blast.to_csv(os.path.join(args.output_dir,f"blast_h5n1_geno_refs_{now}.csv"))
+    blast.to_csv(os.path.join(args.output_dir,f"blast_h5n1_geno_refs_{now}.csv"),index_row=False)
     queries = list(set(blast['query_isolate_name']))
     return blast,queries
 
@@ -502,7 +502,7 @@ def create_constellation(queries, blast, tabcols, t):
     for s in segments:
         thresholddf[s] = thresholddf[s].fillna("Absent") 
     thresholddf["constellation"] = thresholddf[['PB2','PB1','PA','HA','NP','NA','MP','NS']].agg("|".join, axis=1)
-    thresholddf.to_csv(os.path.join(args.output_dir,f'blast_geno_threshold_table{t}_{now}.csv'))
+    thresholddf.to_csv(os.path.join(args.output_dir,f'blast_geno_threshold_table{t}_{now}.csv'),index_row=False)
     return thresholddf
 
 
@@ -550,7 +550,7 @@ def report_new_genotypes(thresholddf, genolist):
     dup_check = thresholddf[thresholddf['constellation'].isin(constellations)]
     if dup_check.shape[0] > subthresholds.shape[0]:
         print("Duplicate constellation found for at least one genotype....")
-        thresholddf.to_csv(f'new_genotype_duplicate_constellations_tab_{now}.csv')
+        thresholddf.to_csv(f'new_genotype_duplicate_constellations_tab_{now}.csv',index_row=False)
     for c in constellations:
         dup_check = thresholddf[thresholddf['constellation'] == c]
         if dup_check.shape[0] > 1:
