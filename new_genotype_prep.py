@@ -2,6 +2,7 @@ import argparse
 import logging
 import os
 import sys
+import glob
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -236,7 +237,7 @@ def update_geno_key(genokey, subepitab):
     newdf = pd.concat([genotab, subepitab])
     head_tail = os.path.split(genokey)
     newname = head_tail[1].replace(".csv",f"_{now}.csv")
-    newdf.to_csv(os.path.join(args.output_dir,f'{newname}'),index_row=False)
+    newdf.to_csv(os.path.join(args.output_dir,f'{newname}'),index=False)
     return newdf
 
 
@@ -302,7 +303,7 @@ def filter_blast_results(blasttab):
 
     blast[['query_isolate_name', 'query_genotype','query_subtype','query_segment']] = blast['qseqid'].str.split('|', expand=True)
     blast[['hit_isolate_name', 'hit_genotype','hit_subtype','hit_segment']] = blast['sseqid'].str.split('|', expand=True)
-    blast.to_csv(os.path.join(args.output_dir,f"blast_h5n1_geno_refs_{now}.csv"),index_row=False)
+    blast.to_csv(os.path.join(args.output_dir,f"blast_h5n1_geno_refs_{now}.csv"),index=False)
     queries = list(set(blast['query_isolate_name']))
     return blast,queries
 
@@ -502,7 +503,7 @@ def create_constellation(queries, blast, tabcols, t):
     for s in segments:
         thresholddf[s] = thresholddf[s].fillna("Absent") 
     thresholddf["constellation"] = thresholddf[['PB2','PB1','PA','HA','NP','NA','MP','NS']].agg("|".join, axis=1)
-    thresholddf.to_csv(os.path.join(args.output_dir,f'blast_geno_threshold_table{t}_{now}.csv'),index_row=False)
+    thresholddf.to_csv(os.path.join(args.output_dir,f'blast_geno_threshold_table{t}_{now}.csv'),index=False)
     return thresholddf
 
 
@@ -550,7 +551,7 @@ def report_new_genotypes(thresholddf, genolist):
     dup_check = thresholddf[thresholddf['constellation'].isin(constellations)]
     if dup_check.shape[0] > subthresholds.shape[0]:
         print("Duplicate constellation found for at least one genotype....")
-        thresholddf.to_csv(f'new_genotype_duplicate_constellations_tab_{now}.csv',index_row=False)
+        thresholddf.to_csv(f'new_genotype_duplicate_constellations_tab_{now}.csv',index=False)
     for c in constellations:
         dup_check = thresholddf[thresholddf['constellation'] == c]
         if dup_check.shape[0] > 1:
@@ -583,6 +584,22 @@ def geno_groups(queries,blast,t,newgeno):
     thresholddf = create_constellation(queries, blast, tabcols, t)
     report_new_genotypes(thresholddf,newgeno)
 
+def files_for_gitrepo(now):
+    try:
+        subprocess.call(f"mkdir {os.path.join(output_dir,'for_git')}",shell=True)
+    except:
+        pass
+    constpath = os.path.join(output_dir,f"blast_geno_threshold_table98_{now}.csv")
+    newconstpath = os.path.join(output_dir,"for_git","blast_geno_threshold_table98.csv")
+    subprocess.call(f"cp {constpath} {newconstpath}",shell=True)
+    
+    dbfiles = glob.glob(os.path.join(output_dir,'all_genotype_references_*'))
+    for d in dbfiles:
+        if "db" in d:
+            newdbloc = d.replace(f"_{now}","")
+            newdbloc = newdbloc.replace(output_dir,os.path.join(output_dir,"for_git"))
+            subprocess.call(f'cp {d} {newdbloc}',shell=True)
+        
 
 def main(args):
     """
@@ -592,9 +609,10 @@ def main(args):
     """
     start_time = datetime.now()  # Start time for calculating performance improvements
     # Create paths for qsub submission
+    global output_dir
     output_dir = os.path.abspath(args.output_dir)
 
-
+    
     # Set up logging
     logging_file_setup(output_dir)
     # Read in required files depending if CSV or FASTA provided
@@ -645,7 +663,7 @@ def main(args):
         sys.exit()
     blast,queries = filter_blast_results(blasttab)
     geno_groups(queries, blast,int(args.threshold),epitab['Genotype'])
-    
+    files_for_gitrepo(now)
     end_time = datetime.now()  # end time for calculating performance improvements
 
     logging.info(f"Pipeline time to completion: {start_time - end_time}")
