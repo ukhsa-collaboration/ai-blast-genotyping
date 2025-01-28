@@ -234,7 +234,8 @@ def update_geno_key(genokey, subepitab):
     """
     genotab = pd.read_csv(genokey)
     newdf = pd.concat([genotab, subepitab])
-    newname = genokey.replace(".csv",f"_{now}.csv")
+    head_tail = os.path.split(genokey)
+    newname = head_tail[1].replace(".csv",f"_{now}.csv")
     newdf.to_csv(os.path.join(args.output_dir,f'{newname}'))
     return newdf
 
