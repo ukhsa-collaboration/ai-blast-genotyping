@@ -148,7 +148,7 @@ def create_fasta_headers(df):
     """
     filtered_df = df[df["segment_name"].notnull()]
     filtered_df["fasta_header"] = (
-        filtered_df["isolate_epi_id"] + str("|") + filtered_df['id.1'].astype(str)+str("|") + filtered_df["segment_name"]
+        filtered_df["isolate_epi_id"] + str("|") + filtered_df['id_1'].astype(str)+str("|") + filtered_df["segment_name"]
     )
     logging.info("Fasta headers created and added to meta-data....")
     return filtered_df
