@@ -111,6 +111,9 @@ def read_commandline():
         "--blastdb", "-b", required=True, help="Reference BLAST database",default = "reference_files/all_genotype_references.db"
     )
     parser.add_argument(
+        "--constellation", "-c", required=True, help="Constellation table",default = "reference_files/blast_geno_threshold_table98.csv"
+    )
+    parser.add_argument(
         "--strict",
         "-s",
         required=True,
@@ -154,6 +157,7 @@ def check_arguments(args):
         repopath = os.path.dirname(sys.argv[0])
     else:
         repopath = ""
+    print(os.path.join(repopath,args.blastdb + ".nin"))
     if not os.path.exists(os.path.join(repopath,args.blastdb + ".nin")):
         logging.error(
             f"BLAST database does not appear to exists: {os.path.join(repopath,args.blastdb)}. Please check"
@@ -217,32 +221,6 @@ blast_cols = [
 ]
 
 segments = ["PB2", "PB1", "PA", "HA", "NP", "NA", "MP", "NS"]
-
-
-
-if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), "reference_files","blast_geno_threshold_table98.csv")):
-    genoblast = pd.read_csv(
-        os.path.join(os.path.dirname(sys.argv[0]), "reference_files","blast_geno_threshold_table98.csv"), dtype=str
-    )
-    genogroups = pd.melt(
-        genoblast,
-        id_vars=["sequence", "genotype", "subtype", "constellation"],
-        value_vars=segments,
-    )
- #   print(genogroups.head)
-    genogroups = genogroups.rename(columns={"variable": "Segment", "value": "Group"})
-    genogroups["Segment"] = genogroups["Segment"].replace(np.nan, "NA")
-    groups = genogroups["Group"].tolist()
-    genotypes = genogroups["genotype"].tolist()
-    genodict = genogroups.groupby("Group")["genotype"].apply(list).to_dict()
-    genodict2 = {}
-    for key in genodict:
-        genodict2[key] = "|".join(genodict[key])
-    genodict = genodict2
-else:
-    logging.error(
-        f'Reference genotypes table does not exists:"genotype_groups_examples.csv". Please check if the file is in the correct location'
-    )
 
 
 def tidy_fasta_files(sample):
@@ -773,10 +751,10 @@ def overall_summary(pivot):
     # Summary of genotypes called
     print(f"Samples processed: {pivot.shape[0]}")
     print("Genotypes called: ")
-    print(Counter(pivot["Best_result"]))
+    print(Counter(pivot["Top_Hit"]))
     logging.info(f"Samples processed: {pivot.shape[0]}")
     logging.info("Genotypes called: ")
-    logging.info(Counter(pivot["Best_result"]))
+    logging.info(Counter(pivot["Top_Hit"]))
 
 
 # Run script
@@ -789,6 +767,9 @@ def main(args):
     """
     start_time = datetime.now()  # Start time for calculating performance improvements
     # Create paths for qsub submission
+    
+
+
     global output_dir
     output_dir = os.path.abspath(args.output_dir)
     global repopath
@@ -796,6 +777,37 @@ def main(args):
         repopath = os.path.dirname(sys.argv[0])
     else:
         repopath = ""
+    if args.constellation == "reference_files/blast_geno_threshold_table98.csv":
+        repopath = os.path.dirname(sys.argv[0])
+        constellation_path = os.path.join(repopath,args.constellation)
+    else:
+        constellation_path = args.constellation
+
+    if os.path.exists(constellation_path):
+        genoblast = pd.read_csv(
+            os.path.join(constellation_path), dtype=str
+        )
+        global genogroups
+        genogroups = pd.melt(
+            genoblast,
+            id_vars=["sequence", "genotype", "subtype", "constellation"],
+            value_vars=segments,
+        )
+       
+        genogroups = genogroups.rename(columns={"variable": "Segment", "value": "Group"})
+        genogroups["Segment"] = genogroups["Segment"].replace(np.nan, "NA")
+        groups = genogroups["Group"].tolist()
+        genotypes = genogroups["genotype"].tolist()
+        global genodict
+        genodict = genogroups.groupby("Group")["genotype"].apply(list).to_dict()
+        genodict2 = {}
+        for key in genodict:
+            genodict2[key] = "|".join(genodict[key])
+        genodict = genodict2
+    else:
+        logging.error(
+            f'Reference genotypes table does not exists:"genotype_groups_examples.csv". Please check if the file is in the correct location'
+        )
     if args.strict == "yes":
         segthreshold = 8
     else:
