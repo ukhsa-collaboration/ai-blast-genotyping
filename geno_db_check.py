@@ -76,12 +76,32 @@ def read_commandline():
     args = parser.parse_args()
     print(args)
     logging.info(f'Arguments provided: {args}')
- 
-def main():
+    # Need to handle output dir before setting up logging files.
+    if not os.path.isdir(args.output_dir):  # Set up output folder
+        print(f"Creating output folder:\n {args.output_dir}")
+        os.mkdir(args.output_dir)
+
+    return args
+
+def check_arguments(args):
+    """
+    Check that paths provided exist and create output folder if it doesn't exist already.
+
+    :param args: output from arg parse
+    :return: status
+    """
+    if not os.path.isdir(args.output_dir):
+        os.mkdir(args.output_dir)
+    return 0
+
+
+
+def main(args):
     start_time = datetime.now()  # Start time for calculating performance improvements
 
+    
+    global output_dir
     output_dir = args.outputdir
-   
     logging.info(f"Ouput directory: {output_dir}")
     if not os.path.isdir(output_dir):
         os.mkdir(output_dir)
@@ -149,11 +169,11 @@ def main():
   
 
 if __name__ == '__main__':
-   
+    args = read_commandline()
     # Setting up testing and logging
-   # logging_file_setup(args.output_dir)
-   # check = check_arguments(args)
- #   if check == 1:
-   #     sys.exit(logging.error("Arguments provided were not expected. Please check log."))
+    logging_file_setup(args.output_dir)
+    check = check_arguments(args)
+    if check == 1:
+        sys.exit(logging.error("Arguments provided were not expected. Please check log."))
     
-    sys.exit(main())
+    sys.exit(main(args))
