@@ -149,6 +149,11 @@ def main():
   
 
 if __name__ == '__main__':
-    args = read_commandline()
+   
+    # Setting up testing and logging
+   # logging_file_setup(args.output_dir)
+   # check = check_arguments(args)
+ #   if check == 1:
+   #     sys.exit(logging.error("Arguments provided were not expected. Please check log."))
     
-    sys.exit(main(args))
+    sys.exit(main())
