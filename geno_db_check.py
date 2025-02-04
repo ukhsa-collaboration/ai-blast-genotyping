@@ -25,7 +25,8 @@ from dateutil.relativedelta import relativedelta
 now = date.today()
 x_int = int(now.strftime("%Y%m%d%H%M%S"))
 
-
+__version__ = 0.1
+__author__ = 'Kate Howell'
 
 def logging_file_setup(output_folder):
     """
@@ -127,12 +128,12 @@ def main(args):
 
     # query genotyping table to see what data already exists
     lastingest = func.max(genotype.c.ingest_date)
-    querydate = datecheck.iloc[0][0] - relativedelta(weeks=int(2))
+    
     datecheck = pd.read_sql(
             sql=lastingest, 
             con=db_conn.connect()
         )
-
+    querydate = datecheck.iloc[0][0] - relativedelta(weeks=int(2))
     existing_id = select(func.distinct(genotype.c.isolate_epi_id))
     processed = datecheck = pd.read_sql(
         sql=existing_id, 
