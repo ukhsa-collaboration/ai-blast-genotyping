@@ -324,10 +324,14 @@ def check_overlap(q,grouplist,groupdict,ingroup):
     maxoverlap = 0
     groupfound = ""
     for key, val in groupdict.items():
-        overlap = intersection(list(set(grouplist)), val)   
-        if len(overlap) > maxoverlap:
-            maxoverlap = len(overlap)
-            groupfound = key
+    
+        if val is None:
+            pass
+        else:
+            overlap = intersection(list(set(grouplist)), val)   
+            if len(overlap) > maxoverlap:
+                maxoverlap = len(overlap)
+                groupfound = key
 
     groupdict, groupdecision, ingroup = decide_group_merge(q, maxoverlap, groupfound, grouplist, groupdict, ingroup)
     return groupdict, groupdecision, ingroup
@@ -400,10 +404,12 @@ def create_group_json(queries, t, subblast, s,subtype):
             ingroup = False
                 #check if query is already in a group in dictionary 
             for key, val in groupdict.items():
-                    
-                    if q in list(val):
-                        ingroup = True
+                    if val is None:
                         pass
+                    else:
+                        if q in list(val):
+                            ingroup = True
+                            pass
             while not ingroup:
                     #if not in the group
                     grouplist = list(hitblast['hit_isolate_name'])
@@ -462,7 +468,7 @@ def new_group(s, groupdict, groups, grouplist):
                 exit   
         if not ng:
              newgrouplist.append(g)
-    # print(ne)
+
     logging.info(f"New group defined: {s}_group{groups}, {list(set(newgrouplist))}")
     groupdict[f'{s}_group{groups}'] = list(set(newgrouplist))
     ingroup = True
