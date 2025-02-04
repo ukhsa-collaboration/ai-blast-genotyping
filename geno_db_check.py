@@ -71,7 +71,7 @@ def read_commandline():
     parser.add_argument('--password_file', '-p', required=False, help='Password file path if not running with kerberos authentication')
     parser.add_argument('--no-rewrite-username', required=False, action='store_true', help='Skips rewriting usernames to include @phe.gov.uk')
     parser.add_argument('--use-aiseqdb-environment-variables', required=False, action='store_true', help='Read aiseqdb credentials from bash environment variables. Overrides username and password flags')
-    parser.add_argument('--outputdir','-o', required=True,default=os.getcwd(),help='Output directory path')
+    parser.add_argument('--output_dir','-o', required=True,default=os.getcwd(),help='Output directory path')
         
     args = parser.parse_args()
     print(args)
@@ -101,7 +101,7 @@ def main(args):
 
     
     global output_dir
-    output_dir = args.outputdir
+    output_dir = args.output_dir
     logging.info(f"Ouput directory: {output_dir}")
     if not os.path.isdir(output_dir):
         os.mkdir(output_dir)
