@@ -61,21 +61,30 @@ def logging_file_setup(output_folder):
     logging.info("Logging Started.")
     logging.info(f"Version: {__version__}")
 
+def tidy_files(output_dir,subtype):
+    # remove fasta files in alns complete
+    # create folder of alns and meta and zip up 
+
+    shutil.make_archive(f'genotyping_run_{now}', format='zip', root_dir=output_dir)
+
 
  
 def main():
     start_time = datetime.now()  # Start time for calculating performance improvements
-    for f in glob.glob("deletable_temp_folder*"):
-        rmtree(f)
-    output_dir = Path(f"deletable_temp_folder_{uuid.uuid4()}").resolve()
-    output_dir.mkdir()
+    #for f in glob.glob("deletable_temp_folder*"):
+    #    rmtree(f)
+    output_dir = os.path.join("/home/phe.gov.uk/kate.howell/data/genotyping",str(now))
+    #Path(f"deletable_temp_folder_{uuid.uuid4()}").resolve()
+    if not os.path.isdir(output_dir):  # Set up output folder
+        print(f"Creating output folder:\n {output_dir}")
+        os.mkdir(output_dir)
     logging.info(f"Ouput directory: {output_dir}")
     p = subprocess.Popen(["scp", "-i", "~/.ssh/id_rsa",f"kate.howell@158.119.147.128://phengs/hpc_projects/nicc80_ai/genoflugelbinder_runs/aiseqdb_genotypes_latest.db", "/home/phe.gov.uk/kate.howell/data/PDAG_exports/"])
     sts = os.waitpid(p.pid, 0)
     logging.info("Genotyping db copied from HPC")
-
-    p = subprocess.Popen(["sqlite3", "-header", "-csv", "/home/phe.gov.uk/kate.howell/data/PDAG_exports/aiseqdb_genotypes_latest.db", "select * from genotypes;", ">", os.path.join(output_dir,"linelist.csv")])
-    sts = os.waitpid(p.pid, 0)
+    os.system("sqlite3 -header -csv /home/phe.gov.uk/kate.howell/data/PDAG_exports/aiseqdb_genotypes_latest.db 'select * from genotypes;' > /home/phe.gov.uk/kate.howell/data/PDAG_exports/linelist.csv")
+    #p = subprocess.Popen(["sqlite3", "-header", "-csv", "/home/phe.gov.uk/kate.howell/data/PDAG_exports/aiseqdb_genotypes_latest.db", "select * from genotypes; > /home/phe.gov.uk/kate.howell/data/PDAG_exports/linelist.csv"])
+    #sts = os.waitpid(p.pid, 0)
     logging.info("Genotyping db queried for line list")
     print("Genotyping db queried for line list")
 
@@ -85,7 +94,7 @@ def main():
     logging.info("BLAST genotyping run list created")
 
 
-    p = subprocess.Popen(["conda","run","-n","blastgeno","python","/home/phe.gov.uk/kate.howell/ai-blast-genotyping/prep_for_genotyping.py","-i",os.path.join(output_dir,f"{now}__db_extract_newseqs_forgenotyping.csv"),"-o",output_dir,"-n","GenoRun"])
+    p = subprocess.Popen(["conda","run","-n","blastgeno","python","/home/phe.gov.uk/kate.howell/ai-blast-genotyping/prep_for_genotyping.py","-i",os.path.join(output_dir,f"{now}_db_extract_newseqs_forgenotyping.csv"),"-o",output_dir,"-n","GenoRun"])
     sts = os.waitpid(p.pid, 0)
     logging.info("FASTA file created")
 
@@ -93,14 +102,16 @@ def main():
     sts = os.waitpid(p.pid, 0)
     logging.info("Genotyping run complete")
 
-    p = subprocess.Popen(["conda","run","-n","blastgeno","python","/home/phe.gov.uk/kate.howell/ai-blast-genotyping/genotype_ingest_fileprep.py","-o",output_dir,"-f",os.path.join(output_dir,f"GenoRun_{now}.fasta"),"-g",os.path.join(output_dir,"linelist.csv"),"-b",os.path.join(output_dir,f"{now}_GenoRun_BLAST_summary.csv"),"-o",output_dir])
+    p = subprocess.Popen(["conda","run","-n","blastgeno","python","/home/phe.gov.uk/kate.howell/ai-blast-genotyping/genotype_ingest_fileprep.py","-o",output_dir,"-f",os.path.join(output_dir,f"GenoRun_{now}.fasta"),"-g","/home/phe.gov.uk/kate.howell/data/PDAG_exports/linelist.csv","-b",os.path.join(output_dir,f"{now}_GenoRun_genotyping_summary.csv")])
     sts = os.waitpid(p.pid, 0)
     logging.info("Genotyping run complete")
-
+    
+   # p = subprocess.Popen(['/home/phe.gov.uk/kate.howell/ai_seq_db_env/bin/activate','ai_seq_db','import_genotypes','--data',f'{now}_genotype_ingest.csv','--user','kate.CRON','--notes',f'"db ingest CRON job {now}"','--data_dir',output_dir])
+   # sts = os.waitpid(p.pid,0)
+   #q logging.info("Genotyping ingest complete")
+    shutil.make_archive(f'genotyping_run_{now}', format='zip', root_dir=output_dir)
     # copy over folders to the HPC
-    p = subprocess.Popen(["scp", "-i", "~/.ssh/id_rsa",f"H5N5_export_{now}.zip","kate.howell@158.119.147.128://phengs/hpc_projects/nicc80_ai/PDAG_exports" ])
-    sts = os.waitpid(p.pid, 0)
-    p = subprocess.Popen(["scp", "-i", "~/.ssh/id_rsa",f"H5N1_export_{now}.zip","kate.howell@158.119.147.128://phengs/hpc_projects/nicc80_ai/PDAG_exports" ])
+    p = subprocess.Popen(["scp", "-i", "~/.ssh/id_rsa",f"genotyping_run_{now}.zip","kate.howell@158.119.147.128://phengs/hpc_projects/nicc80_ai/geno_blastdb/analysis_results" ])
     sts = os.waitpid(p.pid, 0)
     for f in glob.glob("*zip"):
         os.remove(f)
