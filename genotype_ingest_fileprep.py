@@ -196,7 +196,11 @@ def genoflu_table_wrangling(subtab):
     subbgeno_nomissing = subbgeno[subbgeno['value']!="missing or below threshold"]
     df2 = subbgeno.groupby(['isolate_epi_id']).size().reset_index(name='number_segments')
     subgeno2 = pd.merge(subbgeno,df2,left_on="isolate_epi_id",right_on='isolate_epi_id',how="left")
-    subgeno2['genoflu_version'] = get_git_tag("/home/phe.gov.uk/kate.howell/Documents/GenoFLU")
+    command = 'genoflu.py -v'
+    result = subprocess.check_output(command, shell=True, text=True)
+    result = result.replace('genoflu.py: ','')
+    result = result.replace('\n','')
+    subgeno2['genoflu_version'] = result
     subgeno2['ingest_date'] = now
     subgeno2.columns = ['isolate_epi_id','final_genoflu_genotype','segment_name','genoflu_group','number_segments','genoflu_version', 'ingest_date']
     seqdf = get_isolate_id_fasta(args.fasta)
@@ -205,7 +209,9 @@ def genoflu_table_wrangling(subtab):
 def wrangle_blast_tab(newtab):
     droplist = ["consensus","sample","Genotype","Genotype Sample Title List","Genotype Percent Match List","Genotype Mismatch List","Genotype Average Depth of Coverage List"]
 
-    keepcols = set(newtab.columns)-set(droplist)
+    keepcols = list(set(newtab.columns)-set(droplist))
+    #print(keepcols)
+    #print(set(keepcols) - set(newtab.columns))
     subtab = newtab[keepcols]
  #   print(subtab.head)
    # print(subtab.columns)
