@@ -4,7 +4,11 @@ This repo contains the command line tool for running the universal BLAST genotyp
 
 # Requirements & Dependencies
 To run this tool you will need to numpy, pandas and BLAST installed. The versions are present in the requirements.txt file. 
-Installation can be performed with either pip or conda. 
+Installation can be performed with conda:
+```
+conda install --file requirements.txt
+```
+
 
 ## Running on the old HPC
 
@@ -33,7 +37,7 @@ Copies are also available for historic versions on the HPC (sftp://hpc1mgmt.unix
 ### CHANGE LOG
 
 - The universal genotyping tool no longer requires the "genotype_groups_examples.csv" table and instead uses the constellations table blast_geno_threshold_table98.csv. 
-- The method itself has changed to incorporate groups per segment which are matched up to a genotype constellation (combination of groups across the segemnts). Some genotype constellations are known duplicates. 
+- The method itself has changed to incorporate groups per segment which are matched up to a genotype constellation (combination of groups across the segments). Some genotype constellations are known duplicates. 
 - The genotype prioritisation based on prevalence is no longer part of the universal genotyping process as is not feasible with the current data availability. The top BLAST hit is instead reported in addition to the genotype constellation, which is matched back to the genotype. 
 - For details on the method changes and the verification please see this summary report: 
 
@@ -46,7 +50,7 @@ The full SOP can be found here:
 [https://phecloud.sharepoint.com/:w:/r/teams/GenomicsCell/Shared%20Documents/Quality%20Management/SOP_drafts/Avian%20Influenza%20SOPs/BLAST_genotyping.docx?d=w8adaccb7ad674e228482174d4f7ffd25&csf=1&web=1&e=5vVFqZ](url)
 
 ### Basic process
-1. If adding GenoFlu references there is a prepare the data for that for that: 
+1. If adding GenoFlu references there is a script to prepare the data for that: 
 
 ```
 python genoflu_prep.py -h
