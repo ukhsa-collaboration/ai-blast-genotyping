@@ -166,14 +166,15 @@ def get_isolate_id_fasta(fasta):
     return seqdf
 
 def genoflu_table_wrangling(subtab):
-    genoflucols = ['isolate_epi_id','Genotype List Used, >=98%','Genotype_simplified']
+    genoflucols = ['isolate_epi_id','Genotype List Used, >=98.0%','Genotype_simplified']
     #melt the dataframe, how to get the count of segments, how we get the version of the BLAST genotyping
     gftab = subtab[genoflucols]
+    #print(gftab.head)
     segments = ['PB2','PB1','PA','HA','NP','NA','MP','NS']
 
     for s in segments:
         info = []
-        for i in list(gftab['Genotype List Used, >=98%']):
+        for i in list(gftab['Genotype List Used, >=98.0%']):
             found = False
             try:
                 segs = i.split(",")
@@ -210,7 +211,7 @@ def wrangle_blast_tab(newtab):
     droplist = ["consensus","sample","Genotype","Genotype Sample Title List","Genotype Percent Match List","Genotype Mismatch List","Genotype Average Depth of Coverage List"]
 
     keepcols = list(set(newtab.columns)-set(droplist))
-    #print(keepcols)
+    print(keepcols)
     #print(set(keepcols) - set(newtab.columns))
     subtab = newtab[keepcols]
  #   print(subtab.head)
