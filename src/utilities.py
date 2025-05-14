@@ -5,6 +5,8 @@ import sys
 import logging
 from datetime import date
 import shutil
+from sqlalchemy import text, inspect, create_engine
+import pandas as pd
 
 segments = ["PB2", "PB1", "PA", "HA", "NP", "NA", "MP", "NS"]
 
@@ -133,9 +135,6 @@ blast_cols = [
     "bitscore",
 ]
 
-segments = ["PB2", "PB1", "PA", "HA", "NP", "NA", "MP", "NS"]
-
-
 def create_segment_tab(segdict):
     """
     Create a segment table that checks the FASTA file for presence of all 8 segments and writes to a csv table
@@ -171,3 +170,40 @@ def tidydict(pivot, collist):
         for t in tidyup:
             pivot[c] = pivot[c].replace(t, "")
     return pivot
+
+
+
+def query_aiseqdb(username, epiids):
+    """
+    Run query of aiseqdb to retrieve records for specific isolate_epi_ids.
+
+    :param username: user name for the database (e.g. kate.howell)
+    :param epiids: list of isolate_epi_ids from input table
+
+
+    :return: database extract from aiseqdb
+    """
+    print("Preparing to query aiseqdb....")
+    SQLquery = f"""select *
+    from isolates  
+    left join segment_sequences on (segment_sequences.isolate_id = isolates.id) 
+    left join files as fasta_files 
+    on (segment_sequences.file_id = fasta_files.id) where isolates.isolate_epi_id in ('{epiids}')"""
+    
+    hostname = "SqlpgEpiDevCol01.unix.phe.gov.uk"
+    database_name = "ai_seq_db_preprod"
+    username = f'{username}@phe.gov.uk'
+    db_conn = create_engine(f'postgresql+psycopg2://{username}@{hostname}/{database_name}')
+    insp = inspect(db_conn)
+
+    print(insp.get_table_names())
+    
+    db_extract = pd.read_sql(
+            sql=text(SQLquery), 
+            con=db_conn.connect())
+    print(f'{db_extract.shape[0]} segments retrieved from aiseqdb')
+
+    return db_extract
+
+def intersection(lst1, lst2):
+    return list(set(lst1) & set(lst2))

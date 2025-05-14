@@ -523,3 +523,46 @@ def overall_summary(pivot):
     logging.info(f"Samples processed: {pivot.shape[0]}")
     logging.info("Genotypes called: ")
     logging.info(Counter(pivot["Top_Hit"]))
+
+
+
+def filter_blast_results(args,now,blasttab):
+    """
+    Tidy up the BLAST results table and output csv version of table
+
+    :param blasttab: BLAST output table
+    :return: tidied BLAST query table output and list of isolates
+    """
+    blast = pd.read_csv(blasttab,sep="\t")
+    blast.columns = ['qseqid', 'sseqid', 'pident', 'length', 'mismatch', 'gapopen', 'qstart', 'qend', 'sstart', 'send', 'evalue', 'bitscore']
+
+    blast[['query_isolate_name', 'query_genotype','query_subtype','query_segment']] = blast['qseqid'].str.split('|', expand=True)
+    blast[['hit_isolate_name', 'hit_genotype','hit_subtype','hit_segment']] = blast['sseqid'].str.split('|', expand=True)
+    blast.to_csv(os.path.join(args.output_dir,f"blast_h5n1_geno_refs_{now}.csv"),index=False)
+    queries = list(set(blast['query_isolate_name']))
+    return blast,queries
+
+
+
+def blast_processing(args,now):
+    """
+    Run commands to create new BLASTdb and run the query 
+
+    :return: BLAST query table output
+    """
+  #  subprocess create blast db
+    logging.info("Creating the new BLAST database")
+
+    subprocess.call(
+        f"makeblastdb -in {os.path.join(args.output_dir,f'all_genotype_references_{now}.fasta')} -out {os.path.join(args.output_dir,f'all_genotype_references_{now}.db')} -dbtype nucl",
+        shell=True,
+    )
+    logging.info("Performing the BLAST searches per FASTA file")
+    blasttab = os.path.join(args.output_dir, f'all_genotype_references_{now}.blast.out')
+    #subprocess query blast db with file
+    subprocess.call(
+        f"blastn -db {os.path.join(args.output_dir,f'all_genotype_references_{now}.db')} -query {os.path.join(args.output_dir,f'all_genotype_references_{now}.fasta')} -out {blasttab} -outfmt 6",
+        shell=True,
+    )
+    return blasttab
+

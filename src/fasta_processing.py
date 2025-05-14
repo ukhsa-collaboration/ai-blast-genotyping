@@ -1,7 +1,10 @@
 import logging
 import os
+import sys
+import pandas as pd
 from Bio import SeqIO
-
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
 
 def missing_fasta_check(fasta, segdict):
     """
@@ -75,3 +78,130 @@ def duplicate_fasta_check(fasta):
         )
     )
     return duplist
+
+
+
+def get_isolate_id_fasta(fasta):
+    seqdict = {}
+    fasta_sequences = SeqIO.parse(open(fasta), 'fasta')
+    for seq in fasta_sequences:
+        if "|" in seq.id:
+            seporator = "|"
+        elif "." in seq.id:
+             seporator = "."
+        else:
+            logging.warning("no known seporator found, exiting!")
+            sys.exit()
+        info = seq.id.split(seporator)
+        seqdict[info[1]] = [info[0],info[2]]
+    seqdf = pd.DataFrame.from_dict(seqdict, orient='index')
+    seqdf =seqdf.reset_index()
+    seqdf.columns = ['segment_sequence_id','isolate_epi_id','segment_name']
+    return seqdf
+
+
+
+def per_segment_fasta(now,segments, fastafile, output_dir):
+    """
+    Create FASTA file of the genotype sequences per segment, run alignments & trees
+
+    :param segments: segment list
+
+    :param fastafile: all genotypes references FASTA file
+
+    :param output_dir: output directory
+
+    :return: N/A
+    """
+    for s in segments:
+        seq_file = open(os.path.join(output_dir,f"all_genotype_references_{now}_{s}.fasta"), "w")
+        fasta_sequences = SeqIO.parse(open(fastafile), 'fasta')
+        for seq in fasta_sequences:
+            if s in seq.id:
+                SeqIO.write(seq, seq_file, "fasta")
+
+
+def check_geno_exists(args,now,dbextract):
+    """
+    Check if the exact sequence already exists in the FASTA file and remove any duplicates
+
+    :param db_extract: aiseqdb table extract
+
+    :return: reduced dbextract
+    """
+
+    dbextract = check_fasta_forids(args,now,dbextract,'isolate_name')
+    return dbextract
+
+def check_fasta_forids(args,now,dbextract,columnname):
+    """
+    Look up if the isolate_name is already part of the FASTA file, skip if present. 
+
+    :param db_extract: aiseqdb table extract
+    :param columnname: aiseqdb table extract
+    :return: reduced db_extract
+    """
+    for i in list(set(dbextract[columnname])):
+        idfound = False
+        fasta_sequences = SeqIO.parse(open(os.path.join(args.output_dir,f"all_genotype_references_{now}.fasta")), 'fasta')
+        for seq in fasta_sequences:
+            if i in seq.id:
+                idfound = True
+        if idfound == True:        
+            print(f"{columnname} already in genotyping base files, skipping, {i}")
+            indexseq = dbextract[dbextract[columnname] == i].index
+            dbextract.drop(indexseq, inplace=True)
+    return dbextract
+
+def create_fasta_seqs(args,now,db_extract):
+    """
+    Create FASTA file of the new genotype sequences and update the existing file
+
+    :param db_extract: aiseqdb table extract
+
+    :return: All gentoype fasta file
+    """
+    db_extract["segment_name"] = db_extract["segment_name"].fillna("NA")
+    db_extract['header'] = db_extract.isolate_name.astype(str).replace(" ","_") + '|'  + \
+    db_extract.Genotype.astype(str) + '|' +db_extract.subtype_x.astype(str) + '|' +\
+    db_extract.segment_name.astype(str) 
+    filtered_df = db_extract[db_extract["na_sequence"].notnull()]
+    filtered_df = check_geno_exists(args,now,filtered_df)
+    seq_file = open(os.path.join(args.output_dir,f"new_genotype_references_{now}.fasta"), "w")
+    updated_seq_file = open(os.path.join(args.output_dir,f"all_genotype_references_{now}.fasta"), "a")
+    for index, row in filtered_df.iterrows():
+        fasta_header = row["header"]
+        fasta_sequence = row["na_sequence"]
+        file_content = SeqRecord(Seq(fasta_sequence), id=fasta_header, description="")
+        SeqIO.write(file_content, seq_file, "fasta")
+        SeqIO.write(file_content, updated_seq_file, "fasta")
+
+    return os.path.join(args.output_dir,f"all_genotype_references_{now}.fasta"), filtered_df
+
+
+def new_fasta_parsing(args,now,seqfile):
+    """
+    Parse provided FASTA file to retrieve new genotype meta-data and sequences
+
+    :param seqfile: FASTA file for new genotype sequences
+
+    :return: new rows for genotyping key table
+    """
+    newgenodict = {}
+    fasta_sequences = SeqIO.parse(open(seqfile), 'fasta')
+    updated_seq_file = open(os.path.join(args.output_dir,f"all_genotype_references_{now}.fasta"), "a")
+    for seq in fasta_sequences:
+        info = seq.id.split("|")
+        newgenodict[info[1]] = [info[0], info[2], info[3], info[4]] 
+        seq.id = f'{info[0].replace(" ","_")}|{info[1]}|{info[2]}|{info[4]}'
+        seq.description = ""
+        SeqIO.write(seq, updated_seq_file, "fasta")
+    newgenotab = pd.DataFrame.from_dict(newgenodict, orient="index")
+    newgenotab = newgenotab.reset_index()
+    newgenotab.columns = ['Genotype', 'sequence', 'subtype', 'schema', 'segment']
+
+    #remove column for segment and de-duplicate
+    newgenotab = newgenotab.drop('segment', axis=1)
+    newgenotab = newgenotab.drop_duplicates()
+
+    return newgenotab
