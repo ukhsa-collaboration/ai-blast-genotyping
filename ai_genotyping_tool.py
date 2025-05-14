@@ -20,10 +20,8 @@ import src.utilities as util
 import src.blast_wrangle as bl
 
 
-
 __version__ = 2.0
 __author__ = "Kate Howell"
-
 
 
 def read_commandline():
@@ -68,10 +66,18 @@ def read_commandline():
         "--input_folder", "-f", required=False, help="Input FASTA folder"
     )
     parser.add_argument(
-        "--blastdb", "-b", required=True, help="Reference BLAST database",default = "reference_files/all_genotype_references.db"
+        "--blastdb",
+        "-b",
+        required=True,
+        help="Reference BLAST database",
+        default="reference_files/all_genotype_references.db",
     )
     parser.add_argument(
-        "--constellation", "-c", required=True, help="Constellation table",default = "reference_files/blast_geno_threshold_table98.csv"
+        "--constellation",
+        "-c",
+        required=True,
+        help="Constellation table",
+        default="reference_files/blast_geno_threshold_table98.csv",
     )
     parser.add_argument(
         "--strict",
@@ -98,6 +104,7 @@ def read_commandline():
 
 # Run script
 
+
 def main(args):
     """
     Main running of the script to run the BLAST query and wrangle the results to provide a per segment and sample summary of the genotyping results.
@@ -105,7 +112,7 @@ def main(args):
     :return: N/A
     """
     start_time = datetime.now()  # Start time for calculating performance improvements
-    
+
     ### global declarations
     global output_dir
     global repopath
@@ -114,12 +121,12 @@ def main(args):
 
     now = date.today()
     output_dir = os.path.abspath(args.output_dir)
-    
+
     if args.blastdb == "reference_files/all_genotype_references.db":
         repopath = os.path.dirname(sys.argv[0])
     else:
         repopath = ""
-    
+
     if args.strict == "yes":
         segthreshold = 8
     else:
@@ -136,29 +143,42 @@ def main(args):
         print("Processing folder full of input files")
         input_folder = os.path.abspath(args.input_folder)
 
-        summarytab,hitdict = bl.run_full_blasts(repopath,args,now,
-            input_folder, "all_in_folder", args.extension, output_dir
+        summarytab, hitdict = bl.run_full_blasts(
+            repopath,
+            args,
+            now,
+            input_folder,
+            "all_in_folder",
+            args.extension,
+            output_dir,
         )
-        pivot_out = bl.create_persample_summary(args,now,summarytab, segthreshold,hitdict)
+        pivot_out = bl.create_persample_summary(
+            args, now, summarytab, segthreshold, hitdict
+        )
         bl.overall_summary(pivot_out)
     if args.input_file is not None:
         print("Processing single FASTA files")
         logging.info("Processing single FASTA files")
         input_file = os.path.abspath(args.input_file)
-        summarytab,hitdict = bl.run_full_blasts(repopath,args,now,input_file, "single", args.extension, output_dir)
-        pivot_out = bl.create_persample_summary(args,now,summarytab, segthreshold,hitdict)
+        summarytab, hitdict = bl.run_full_blasts(
+            repopath, args, now, input_file, "single", args.extension, output_dir
+        )
+        pivot_out = bl.create_persample_summary(
+            args, now, summarytab, segthreshold, hitdict
+        )
         bl.overall_summary(pivot_out)
 
     end_time = datetime.now()  # end time for calculating performance improvements
 
     logging.info(f"Pipeline time to completion: {start_time - end_time}")
 
+
 if __name__ == "__main__":
     args = read_commandline()
 
     # Setting up testing and logging
     util.logging_file_setup(args.output_dir, args.testing)
-    
+
     check = util.check_arguments(args)
 
     if check == 1:

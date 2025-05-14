@@ -1,34 +1,31 @@
 import os
 import logging
 import src.utilities as util
+import src.fasta_processing as fap
 from collections import Counter
 import pandas as pd
 import sys
 import glob
 import subprocess
 import numpy as np
-from Bio import SeqIO
 
 global genogroups
 global genodict
 global constellation_path
 
+
 def process_ref_tables(constellation_path):
-    genoblast = pd.read_csv(
-            os.path.join(constellation_path), dtype=str
-        )
-    
+    genoblast = pd.read_csv(os.path.join(constellation_path), dtype=str)
+
     genogroups = pd.melt(
-            genoblast,
-            id_vars=["sequence", "genotype", "subtype", "constellation"],
-            value_vars=util.segments,
-        )
-       
+        genoblast,
+        id_vars=["sequence", "genotype", "subtype", "constellation"],
+        value_vars=util.segments,
+    )
+
     genogroups = genogroups.rename(columns={"variable": "Segment", "value": "Group"})
     genogroups["Segment"] = genogroups["Segment"].replace(np.nan, "NA")
-    groups = genogroups["Group"].tolist()
-    genotypes = genogroups["genotype"].tolist()
-    
+
     genodict = genogroups.groupby("Group")["genotype"].apply(list).to_dict()
     genodict2 = {}
     for key in genodict:
@@ -37,7 +34,7 @@ def process_ref_tables(constellation_path):
     return genogroups, genodict
 
 
-def match_genotype_dict(blast_pass,genogroups,genodict):
+def match_genotype_dict(blast_pass, genogroups, genodict):
     """
     Match the BLAST hit to a genotype group and possible genotype match per segment
 
@@ -59,22 +56,27 @@ def match_genotype_dict(blast_pass,genogroups,genodict):
         blast_pass["group_match"].apply(lambda x: genodict.get(x)).fillna("")
     )
     return blast_pass
+
+
 #
+
 
 def create_hit_dict(blast_pass):
     hitdict = {}
-    for q in list(set(blast_pass['isolate_epi_id'])):
-        subblast = blast_pass[blast_pass['isolate_epi_id'] == q]
+    for q in list(set(blast_pass["isolate_epi_id"])):
+        subblast = blast_pass[blast_pass["isolate_epi_id"] == q]
         if subblast.shape[0] >= 1:
-            hitdict[subblast["isolate_epi_id"].iloc[0]] = [dict(Counter(list(subblast['hit_isolate_name']))),Counter(list(subblast['hit_geno']))]
+            hitdict[subblast["isolate_epi_id"].iloc[0]] = [
+                dict(Counter(list(subblast["hit_isolate_name"]))),
+                Counter(list(subblast["hit_geno"])),
+            ]
     return hitdict
-
 
 
 def check_constellations(args):
     if args.constellation == "reference_files/blast_geno_threshold_table98.csv":
         repopath = os.path.dirname(sys.argv[0])
-        constellation_path = os.path.join(repopath,args.constellation)
+        constellation_path = os.path.join(repopath, args.constellation)
     else:
         constellation_path = args.constellation
 
@@ -82,12 +84,12 @@ def check_constellations(args):
         genogroups, genodict = process_ref_tables(constellation_path)
     else:
         logging.error(
-            f'Reference genotypes table does not exist:"genotype_groups_examples.csv". Please check if the file is in the correct location'
+            'Reference genotypes table does not exist:"genotype_groups_examples.csv". Please check if the file is in the correct location'
         )
     return constellation_path
 
 
-def tidy_blast_table(args,folder, sample, segmissing, fasta_count):
+def tidy_blast_table(args, folder, sample, segmissing, fasta_count):
     """
     Wrange the BLAST results table, exclude results that do not meet threshold, separate no sequence vs. no hit, split the query and hit ids into isolate_epi_id and segment.
 
@@ -109,7 +111,7 @@ def tidy_blast_table(args,folder, sample, segmissing, fasta_count):
     blasttab.columns = util.blast_cols
     threshold = int(args.identity)
     blast_pass = blasttab[blasttab["pident"] >= threshold]
-    blast_pass = blast_pass.sort_values(['qseqid','pident'],ascending=[True,False])
+    blast_pass = blast_pass.sort_values(["qseqid", "pident"], ascending=[True, False])
     blast_fail = blasttab[blasttab["pident"] < threshold]
     if blast_fail.shape[0] >= 1:
         logging.info(
@@ -139,9 +141,9 @@ def tidy_blast_table(args,folder, sample, segmissing, fasta_count):
         delim = "_"
     else:
         logging.error(
-            f'Sample header delimiter unknown! Please check, "." or "|" expected!'
+            'Sample header delimiter unknown! Please check, "." or "|" expected!'
         )
-        print(f'Sample header delimiter unknown! Please check, "." or "|" expected!')
+        print('Sample header delimiter unknown! Please check, "." or "|" expected!')
     logging.info(f"Delimiter found: {delim}")
     logging.info("Preparing BLAST table for summary")
     try:
@@ -157,12 +159,14 @@ def tidy_blast_table(args,folder, sample, segmissing, fasta_count):
         + "_"
         + blast_pass["sseqid"].map(lambda x: x.split("|")[0]).str.replace("_", ""),
     )
-    blast_pass[['hit_isolate_name', 'hit_geno','hit_subtype','hit_segment']] = blast_pass['sseqid'].str.split('|', expand=True)
+    blast_pass[["hit_isolate_name", "hit_geno", "hit_subtype", "hit_segment"]] = (
+        blast_pass["sseqid"].str.split("|", expand=True)
+    )
     constellation_path = check_constellations(args)
     genogroups, genodict = process_ref_tables(constellation_path)
-    blast_pass = match_genotype_dict(blast_pass,genogroups,genodict)
+    blast_pass = match_genotype_dict(blast_pass, genogroups, genodict)
     blast_pass.to_csv(os.path.join(folder, f"{sample}.blast.out2"))
-   
+
     results_df = pd.DataFrame()
     results_df.insert(
         len(results_df.columns), "genotype_match", blast_pass["genotype_match"]
@@ -173,7 +177,7 @@ def tidy_blast_table(args,folder, sample, segmissing, fasta_count):
     )
     results_df.insert(len(results_df.columns), "top_hit", blast_pass["ref_match"])
     newresults_df = [results_df]
-     
+
     hitdict = create_hit_dict(blast_pass)
     print("hit dictionary created....")
     if blast_fail.shape[0] >= 1:
@@ -211,12 +215,21 @@ def tidy_blast_table(args,folder, sample, segmissing, fasta_count):
             for seg in segcheck:
 
                 if submissing[seg].iloc[0] == "missing":
-                    newresultstab.loc[len(newresultstab)] = ["No sequence", seg, s,"Null"]
+                    newresultstab.loc[len(newresultstab)] = [
+                        "No sequence",
+                        seg,
+                        s,
+                        "Null",
+                    ]
                 else:
-                    newresultstab.loc[len(newresultstab)] = ["BLAST FAIL", seg, s,"Null"]
+                    newresultstab.loc[len(newresultstab)] = [
+                        "BLAST FAIL",
+                        seg,
+                        s,
+                        "Null",
+                    ]
 
-    return newresultstab,hitdict
-
+    return newresultstab, hitdict
 
 
 def run_blast(db, folder, sample, output_dir):
@@ -225,7 +238,7 @@ def run_blast(db, folder, sample, output_dir):
 
     :return: N/A
     """
-    tidy_fasta_files(os.path.join(folder, sample))
+    fap.tidy_fasta_files(os.path.join(folder, sample))
     logging.info("Performing the BLAST searches per FASTA file")
     print(db)
     subprocess.call(
@@ -233,7 +246,8 @@ def run_blast(db, folder, sample, output_dir):
         shell=True,
     )
 
-def run_full_blasts(repopath,args,now,folder, mode, extension, output_dir):
+
+def run_full_blasts(repopath, args, now, folder, mode, extension, output_dir):
     """
 
     Perform several checks on the FASTA file(s) and run the BLAST queries. For the multiple file option, concatenate the results. Match the BLAST hits to the genotyping reference table.
@@ -255,11 +269,11 @@ def run_full_blasts(repopath,args,now,folder, mode, extension, output_dir):
         print("Running BLAST on input folder")
         hitdict = {}
         for f in fastas:
-            
-            segdict = missing_fasta_check(f, segdict)
-            duplist = duplicate_fasta_check(f)
 
-            run_blast(os.path.join(repopath,args.blastdb), folder, f, output_dir)
+            segdict = fap.missing_fasta_check(f, segdict)
+            duplist = fap.duplicate_fasta_check(f)
+
+            run_blast(os.path.join(repopath, args.blastdb), folder, f, output_dir)
 
             segmissing, fasta_count = util.create_segment_tab(segdict)
 
@@ -271,7 +285,9 @@ def run_full_blasts(repopath,args,now,folder, mode, extension, output_dir):
                 segcols.append(s)
             segdicttab.columns = segcols
 
-            sresults,hitdict_perfile = tidy_blast_table(args,args.output_dir, f, segdicttab, fasta_count)
+            sresults, hitdict_perfile = tidy_blast_table(
+                args, args.output_dir, f, segdicttab, fasta_count
+            )
             hitdict.update(hitdict_perfile)
             results_tabs.append(sresults)
         newdf = pd.concat(results_tabs)
@@ -292,7 +308,7 @@ def run_full_blasts(repopath,args,now,folder, mode, extension, output_dir):
             os.path.join(output_dir, f"{now}_{args.tagname}_BLAST_summary.csv")
         )
 
-        return newdf,hitdict
+        return newdf, hitdict
 
     elif mode == "single":
         logging.info("Running BLAST on single FASTA file")
@@ -301,8 +317,8 @@ def run_full_blasts(repopath,args,now,folder, mode, extension, output_dir):
         logging.info("Fasta file found:")
         logging.info(folder)
         logging.info(head_tail)
-        duplist = duplicate_fasta_check(folder)
-        segdict = missing_fasta_check(folder, segdict)
+        duplist = fap.duplicate_fasta_check(folder)
+        segdict = fap.missing_fasta_check(folder, segdict)
         segmissing, fasta_count = util.create_segment_tab(segdict)
         segdicttab = pd.DataFrame.from_dict(segmissing, orient="index")
         segdicttab = segdicttab.reset_index()
@@ -326,10 +342,14 @@ def run_full_blasts(repopath,args,now,folder, mode, extension, output_dir):
         if len(duplist) >= 1:
             print(f"Duplicates identified: {duplist}")
             logging.info(f"Duplicates identified: {duplist}")
-        run_blast(os.path.join(repopath,args.blastdb), head_tail[0], head_tail[1], output_dir)
+        run_blast(
+            os.path.join(repopath, args.blastdb), head_tail[0], head_tail[1], output_dir
+        )
         logging.info("Reviewing BLAST results")
         print("Reviewing BLAST results")
-        sresults,hitdict = tidy_blast_table(args,output_dir, head_tail[1], segdicttab, fasta_count)
+        sresults, hitdict = tidy_blast_table(
+            args, output_dir, head_tail[1], segdicttab, fasta_count
+        )
 
         sresults.to_csv(
             os.path.join(output_dir, f"{now}_{args.tagname}_BLAST_summary.csv")
@@ -343,7 +363,7 @@ def run_full_blasts(repopath,args,now,folder, mode, extension, output_dir):
         return sresults, hitdict
 
 
-def create_persample_summary(args,now,summarytab, segthreshold,hitdict):
+def create_persample_summary(args, now, summarytab, segthreshold, hitdict):
     """
 
     Wrangle the results from the BLAST table (matched to genotypes) into a summary and likely top result.
@@ -365,14 +385,24 @@ def create_persample_summary(args,now,summarytab, segthreshold,hitdict):
     freq = []
     results = []
     details = []
-    genohits = []
     genoblast = []
-    
+
     for index, row in pivot.iterrows():
-        process_pivot(segthreshold, hitdict, pivot, consensus, freq, results, details, genoblast, index, row)
+        process_pivot(
+            segthreshold,
+            hitdict,
+            pivot,
+            consensus,
+            freq,
+            results,
+            details,
+            genoblast,
+            index,
+            row,
+        )
     pivot["consensus"] = consensus
     pivot["Top_Hit"] = freq
-    pivot['Top_hit_details'] = details
+    pivot["Top_hit_details"] = details
     pivot["Best_result"] = genoblast
     pivot["Best_result"] = pivot["Best_result"].str.replace(
         "No sequence", "Insufficient sequence data"
@@ -389,7 +419,19 @@ def create_persample_summary(args,now,summarytab, segthreshold,hitdict):
     print(os.path.join(args.output_dir, f"{now}_{args.tagname}_genotyping_summary.csv"))
     return pivot
 
-def process_pivot(segthreshold, hitdict, pivot, consensus, freq, results, details, genoblast, index, row):
+
+def process_pivot(
+    segthreshold,
+    hitdict,
+    pivot,
+    consensus,
+    freq,
+    results,
+    details,
+    genoblast,
+    index,
+    row,
+):
     """
 
     Review pivot counts across geno groups
@@ -400,15 +442,13 @@ def process_pivot(segthreshold, hitdict, pivot, consensus, freq, results, detail
     result = ""
     newlist = []
     topgeno = []
-        
+
     newlist = split_geno_matches(pivot, row, newlist)
     genfreq = Counter(newlist)
     counts = list(genfreq.values())
     maxgeno = max(counts)
     keys = list(genfreq.keys())
-    tophits = count_geno_hits(
-           segthreshold, topgeno, counts, maxgeno, keys
-        )
+    tophits = count_geno_hits(segthreshold, topgeno, counts, maxgeno, keys)
 
     freq.append(tophits)
     consensus.append(genfreq)
@@ -418,21 +458,21 @@ def process_pivot(segthreshold, hitdict, pivot, consensus, freq, results, detail
     if index in keylist:
         topmatch, genodict = hitdict[index]
         gencounts = list(genodict.values())
-        if len(gencounts)>=1:
-                maxgenohit = max(gencounts)
-                genkeys = list(genodict.keys())
-                if maxgenohit >=6:
-                    for n, c in enumerate(gencounts):
-                        if c == maxgenohit:
-                            genoblast.append(genkeys[n])
-                else:
-                    genoblast.append("No genotype had >=6 segments, review top hit")
+        if len(gencounts) >= 1:
+            maxgenohit = max(gencounts)
+            genkeys = list(genodict.keys())
+            if maxgenohit >= 6:
+                for n, c in enumerate(gencounts):
+                    if c == maxgenohit:
+                        genoblast.append(genkeys[n])
+            else:
+                genoblast.append("No genotype had >=6 segments, review top hit")
         else:
             genoblast.append("")
         details.append(topmatch)
     else:
-        print(index, " not in blast dictionary")   
-        details.append("No top hits found, BLAST fail??")  
+        print(index, " not in blast dictionary")
+        details.append("No top hits found, BLAST fail??")
         genoblast.append("BLAST fail")
 
 
@@ -462,12 +502,11 @@ def split_geno_matches(pivot, row, newlist):
 
     """
     for s in pivot.columns:
-            test = row[s].split("|")
-            for t in test:
-                newlist.append(t)
+        test = row[s].split("|")
+        for t in test:
+            newlist.append(t)
 
     return newlist
-
 
 
 def overall_summary(pivot):
@@ -484,77 +523,3 @@ def overall_summary(pivot):
     logging.info(f"Samples processed: {pivot.shape[0]}")
     logging.info("Genotypes called: ")
     logging.info(Counter(pivot["Top_Hit"]))
-
-
-def missing_fasta_check(fasta, segdict):
-    """
-    Read in FASTA file, check if segments are present for each sample, report any missing segments
-
-    :return: segmissing
-    """
-    print("Check which FASTAs available...")
-    delim = "None"
-    fasta_sequences = SeqIO.parse(open(fasta), "fasta")
-
-    for seq in fasta_sequences:
-        if "|" in seq.id:
-            delim = "|"
-        elif "." in seq.id:
-            delim = "."
-        elif "_" in seq.id:
-            delim = "."
-        identifier = seq.id.split(delim)
-        newlist = []
-        try:
-            sofar = segdict.get(identifier[0])
-            for s in sofar:
-                newlist.append(s)
-        except:
-            pass
-        newlist.append(identifier[-1])
-        segdict[identifier[0]] = newlist
-
-    return segdict
-
-
-def duplicate_fasta_check(fasta):
-    """
-    Read in FASTA file, check if sequence in dictionary, report any duplicates
-
-    :return: duplicates_list
-    """
-    seqdict = {}
-    duplist = []
-    fasta_sequences = SeqIO.parse(open(fasta), "fasta")
-    for seq in fasta_sequences:
-        # check if sequence already in dictionary
-        if seq.id in seqdict:
-            print(f"Duplicate sequence found for {seq.id}")
-            logging.info(f"Duplicate sequence found for {seq.id}")
-            duplist.append(seq.id)
-        else:
-            seqdict[seq.id] = str(seq.seq)
-
-    logging.info(
-        print(
-            f"{len(duplist)} duplicates found in FASTA files. Any duplicates should be reviewed prior to interpreting results!"
-        )
-    )
-    return duplist
-
-
-def tidy_fasta_files(sample):
-    """
-    Run regex on FASTA files to ensure BLAST searches can run
-
-    :return: None
-    """
-    logging.info(
-        "Tidying FASTA headers for the following non-standard characters.... () ,-\n"
-    )
-    os.system("perl -pi -e 's/\(/_/g' " + sample)
-    os.system("perl -pi -e 's/\)/_/g' " + sample)
-    os.system("perl -pi -e 's/ /_/g' " + sample)
-    os.system("perl -pi -e 's/,/_/g' " + sample)
-    os.system("perl -pi -e 's/--//g' " + sample)
-    os.system("perl -pi -e 'spath/-\n-//g' " + sample)

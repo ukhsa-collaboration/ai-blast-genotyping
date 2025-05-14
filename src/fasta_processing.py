@@ -2,6 +2,7 @@ import logging
 import os
 from Bio import SeqIO
 
+
 def missing_fasta_check(fasta, segdict):
     """
     Read in FASTA file, check if segments are present for each sample, report any missing segments
@@ -74,4 +75,3 @@ def duplicate_fasta_check(fasta):
         )
     )
     return duplist
-

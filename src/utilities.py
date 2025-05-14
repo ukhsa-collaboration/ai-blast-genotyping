@@ -1,26 +1,19 @@
 """Module providing a range of utilities functions for the mutation scan wrapper."""
 
 import os
-import glob
 import sys
-import pandas as pd
-import numpy as np
 import logging
-import argparse
-from datetime import datetime, date
+from datetime import date
 import shutil
-import subprocess
-from collections import Counter
-from Bio import SeqIO
 
 segments = ["PB2", "PB1", "PA", "HA", "NP", "NA", "MP", "NS"]
 
 
-
 now = date.today()
 
+
 def logging_file_setup(output_folder, testing):
-    '''
+    """
     Return the sum of two decimal numbers in binary digits.
 
             Parameters:
@@ -29,7 +22,7 @@ def logging_file_setup(output_folder, testing):
 
             Returns:
                     binary_sum (str): Binary string of the sum of a and b
-    '''
+    """
     print("Setting up logging information for debugging.")
     # Need to clean up log files, currently generates multiple log files.
     logging_file_output = os.path.join(
@@ -56,7 +49,6 @@ def logging_file_setup(output_folder, testing):
     logging.info("Logging Started.")
 
 
-
 def check_arguments(args):
     """
     Check that paths provided exist and create output folder if it doesn't exist already.
@@ -78,8 +70,8 @@ def check_arguments(args):
         repopath = os.path.dirname(sys.argv[0])
     else:
         repopath = ""
- #   print(os.path.join(repopath,args.blastdb + ".nin"))
-    if not os.path.exists(os.path.join(repopath,args.blastdb + ".nin")):
+    #   print(os.path.join(repopath,args.blastdb + ".nin"))
+    if not os.path.exists(os.path.join(repopath, args.blastdb + ".nin")):
         logging.error(
             f"BLAST database does not appear to exist: {os.path.join(repopath,args.blastdb)}. Please check"
         )
@@ -95,7 +87,7 @@ def testing_functions(testing_functions_parameters):
     """
     # Generate output folder
     if testing_functions_parameters[1] == str("output_folder"):
-        if testing_functions_parameters[0] == True:
+        if testing_functions_parameters[0] is True:
             if os.path.exists(testing_functions_parameters[2]):
                 print(
                     "Deleting output_folder {}".format(testing_functions_parameters[2])
@@ -103,7 +95,7 @@ def testing_functions(testing_functions_parameters):
                 logging.info(
                     "Deleting output_folder {}".format(testing_functions_parameters[2])
                 )
-                try:  ## Try to remove tree; if failed show an error using try...except on screen
+                try:  
                     shutil.rmtree(testing_functions_parameters[2])
                 except OSError as e:
                     print("Error: %s - %s." % (e.filename, e.strerror))
@@ -144,8 +136,6 @@ blast_cols = [
 segments = ["PB2", "PB1", "PA", "HA", "NP", "NA", "MP", "NS"]
 
 
-
-
 def create_segment_tab(segdict):
     """
     Create a segment table that checks the FASTA file for presence of all 8 segments and writes to a csv table
@@ -174,11 +164,10 @@ def create_segment_tab(segdict):
     return segdf, fasta_count
 
 
-
 def tidydict(pivot, collist):
     print("tidy up step")
-    tidyup = ['{','}',"'"]
+    tidyup = ["{", "}", "'"]
     for c in collist:
         for t in tidyup:
-            pivot[c] = pivot[c].replace(t,"")
+            pivot[c] = pivot[c].replace(t, "")
     return pivot
