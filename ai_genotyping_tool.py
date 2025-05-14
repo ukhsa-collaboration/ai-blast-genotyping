@@ -65,7 +65,7 @@ def read_commandline():
         "--input_file", "-i", required=False, help="Input FASTA file"
     )
     input_group.add_argument(
-        "--input_folder", "-f", required=False, help="Input FASTA file"
+        "--input_folder", "-f", required=False, help="Input FASTA folder"
     )
     parser.add_argument(
         "--blastdb", "-b", required=True, help="Reference BLAST database",default = "reference_files/all_genotype_references.db"
@@ -136,7 +136,7 @@ def main(args):
         print("Processing folder full of input files")
         input_folder = os.path.abspath(args.input_folder)
 
-        summarytab,hitdict = bl.run_full_blasts(
+        summarytab,hitdict = bl.run_full_blasts(repopath,args,now,
             input_folder, "all_in_folder", args.extension, output_dir
         )
         pivot_out = bl.create_persample_summary(args,now,summarytab, segthreshold,hitdict)
@@ -145,8 +145,8 @@ def main(args):
         print("Processing single FASTA files")
         logging.info("Processing single FASTA files")
         input_file = os.path.abspath(args.input_file)
-        summarytab,hitdict = bl.run_full_blasts(input_file, "single", args.extension, output_dir)
-        pivot_out = bl.create_persample_summary(summarytab, segthreshold,hitdict)
+        summarytab,hitdict = bl.run_full_blasts(repopath,args,now,input_file, "single", args.extension, output_dir)
+        pivot_out = bl.create_persample_summary(args,now,summarytab, segthreshold,hitdict)
         bl.overall_summary(pivot_out)
 
     end_time = datetime.now()  # end time for calculating performance improvements

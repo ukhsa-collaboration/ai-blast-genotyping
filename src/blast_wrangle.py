@@ -7,6 +7,7 @@ import sys
 import glob
 import subprocess
 import numpy as np
+from Bio import SeqIO
 
 global genogroups
 global genodict
@@ -81,12 +82,12 @@ def check_constellations(args):
         genogroups, genodict = process_ref_tables(constellation_path)
     else:
         logging.error(
-            f'Reference genotypes table does not exists:"genotype_groups_examples.csv". Please check if the file is in the correct location'
+            f'Reference genotypes table does not exist:"genotype_groups_examples.csv". Please check if the file is in the correct location'
         )
     return constellation_path
 
 
-def tidy_blast_table(args,folder, sample, segmissing, fasta_count,constellation_path):
+def tidy_blast_table(args,folder, sample, segmissing, fasta_count):
     """
     Wrange the BLAST results table, exclude results that do not meet threshold, separate no sequence vs. no hit, split the query and hit ids into isolate_epi_id and segment.
 
@@ -224,8 +225,9 @@ def run_blast(db, folder, sample, output_dir):
 
     :return: N/A
     """
-    util.tidy_fasta_files(os.path.join(folder, sample))
+    tidy_fasta_files(os.path.join(folder, sample))
     logging.info("Performing the BLAST searches per FASTA file")
+    print(db)
     subprocess.call(
         f"blastn -db {db} -query {os.path.join(folder,sample)} -out {os.path.join(output_dir,sample)}.blast.out -outfmt 6 -max_target_seqs 1",
         shell=True,
@@ -251,10 +253,11 @@ def run_full_blasts(repopath,args,now,folder, mode, extension, output_dir):
         segtabs = []
         logging.info("Running BLAST")
         print("Running BLAST on input folder")
+        hitdict = {}
         for f in fastas:
             
-            segdict = util.missing_fasta_check(f, segdict)
-            duplist = util.duplicate_fasta_check(f)
+            segdict = missing_fasta_check(f, segdict)
+            duplist = duplicate_fasta_check(f)
 
             run_blast(os.path.join(repopath,args.blastdb), folder, f, output_dir)
 
@@ -268,8 +271,8 @@ def run_full_blasts(repopath,args,now,folder, mode, extension, output_dir):
                 segcols.append(s)
             segdicttab.columns = segcols
 
-            sresults,hitdict = tidy_blast_table(args,args.output_dir, f, segdicttab, fasta_count)
-
+            sresults,hitdict_perfile = tidy_blast_table(args,args.output_dir, f, segdicttab, fasta_count)
+            hitdict.update(hitdict_perfile)
             results_tabs.append(sresults)
         newdf = pd.concat(results_tabs)
         segtab = pd.concat(segtabs)
@@ -289,7 +292,7 @@ def run_full_blasts(repopath,args,now,folder, mode, extension, output_dir):
             os.path.join(output_dir, f"{now}_{args.tagname}_BLAST_summary.csv")
         )
 
-        return newdf
+        return newdf,hitdict
 
     elif mode == "single":
         logging.info("Running BLAST on single FASTA file")
@@ -298,8 +301,8 @@ def run_full_blasts(repopath,args,now,folder, mode, extension, output_dir):
         logging.info("Fasta file found:")
         logging.info(folder)
         logging.info(head_tail)
-        duplist = util.duplicate_fasta_check(folder)
-        segdict = util.missing_fasta_check(folder, segdict)
+        duplist = duplicate_fasta_check(folder)
+        segdict = missing_fasta_check(folder, segdict)
         segmissing, fasta_count = util.create_segment_tab(segdict)
         segdicttab = pd.DataFrame.from_dict(segmissing, orient="index")
         segdicttab = segdicttab.reset_index()
@@ -482,3 +485,76 @@ def overall_summary(pivot):
     logging.info("Genotypes called: ")
     logging.info(Counter(pivot["Top_Hit"]))
 
+
+def missing_fasta_check(fasta, segdict):
+    """
+    Read in FASTA file, check if segments are present for each sample, report any missing segments
+
+    :return: segmissing
+    """
+    print("Check which FASTAs available...")
+    delim = "None"
+    fasta_sequences = SeqIO.parse(open(fasta), "fasta")
+
+    for seq in fasta_sequences:
+        if "|" in seq.id:
+            delim = "|"
+        elif "." in seq.id:
+            delim = "."
+        elif "_" in seq.id:
+            delim = "."
+        identifier = seq.id.split(delim)
+        newlist = []
+        try:
+            sofar = segdict.get(identifier[0])
+            for s in sofar:
+                newlist.append(s)
+        except:
+            pass
+        newlist.append(identifier[-1])
+        segdict[identifier[0]] = newlist
+
+    return segdict
+
+
+def duplicate_fasta_check(fasta):
+    """
+    Read in FASTA file, check if sequence in dictionary, report any duplicates
+
+    :return: duplicates_list
+    """
+    seqdict = {}
+    duplist = []
+    fasta_sequences = SeqIO.parse(open(fasta), "fasta")
+    for seq in fasta_sequences:
+        # check if sequence already in dictionary
+        if seq.id in seqdict:
+            print(f"Duplicate sequence found for {seq.id}")
+            logging.info(f"Duplicate sequence found for {seq.id}")
+            duplist.append(seq.id)
+        else:
+            seqdict[seq.id] = str(seq.seq)
+
+    logging.info(
+        print(
+            f"{len(duplist)} duplicates found in FASTA files. Any duplicates should be reviewed prior to interpreting results!"
+        )
+    )
+    return duplist
+
+
+def tidy_fasta_files(sample):
+    """
+    Run regex on FASTA files to ensure BLAST searches can run
+
+    :return: None
+    """
+    logging.info(
+        "Tidying FASTA headers for the following non-standard characters.... () ,-\n"
+    )
+    os.system("perl -pi -e 's/\(/_/g' " + sample)
+    os.system("perl -pi -e 's/\)/_/g' " + sample)
+    os.system("perl -pi -e 's/ /_/g' " + sample)
+    os.system("perl -pi -e 's/,/_/g' " + sample)
+    os.system("perl -pi -e 's/--//g' " + sample)
+    os.system("perl -pi -e 'spath/-\n-//g' " + sample)

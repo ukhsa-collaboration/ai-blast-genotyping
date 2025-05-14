@@ -78,10 +78,10 @@ def check_arguments(args):
         repopath = os.path.dirname(sys.argv[0])
     else:
         repopath = ""
-    print(os.path.join(repopath,args.blastdb + ".nin"))
+ #   print(os.path.join(repopath,args.blastdb + ".nin"))
     if not os.path.exists(os.path.join(repopath,args.blastdb + ".nin")):
         logging.error(
-            f"BLAST database does not appear to exists: {os.path.join(repopath,args.blastdb)}. Please check"
+            f"BLAST database does not appear to exist: {os.path.join(repopath,args.blastdb)}. Please check"
         )
         return 1
     return 0
