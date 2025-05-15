@@ -1,0 +1,9 @@
+sequence,genotype,subtype,PB2,PB1,PA,HA,NP,NA,MP,NS,constellation
+A1_ref,A1,H5N1,PB2_group3,PB1_group3,PA_group1,HA_group1,NP_group3,NA_group1,MP_group1,NS_group2,PB2_group3|PB1_group3|PA_group1|HA_group1|NP_group3|NA_group1|MP_group1|NS_group2
+A/chicken/Scotland/054477/2021,AB_AIV09,H5N1,PB2_group7,PB1_group3,PA_group3,HA_group1,NP_group6,NA_group1,MP_group1,NS_group2,PB2_group7|PB1_group3|PA_group3|HA_group1|NP_group6|NA_group1|MP_group1|NS_group2
+A/chicken/Wales/053969/2021,AH_AIV08,H5N1,PB2_group19,PB1_group3,PA_group1,HA_group1,NP_group3,NA_group1,MP_group1,NS_group2,PB2_group19|PB1_group3|PA_group1|HA_group1|NP_group3|NA_group1|MP_group1|NS_group2
+A3_ref,A3,H5N1,PB2_group3,PB1_group3,PA_group1,HA_group1,NP_group3,NA_group1,MP_group1,NS_group2,PB2_group3|PB1_group3|PA_group1|HA_group1|NP_group3|NA_group1|MP_group1|NS_group2
+A/chicken/England/069816/2021,AA_AIV55,H5N1,PB2_group3,PB1_group3,PA_group1,HA_group1,NP_group16,NA_group1,MP_group1,NS_group2,PB2_group3|PB1_group3|PA_group1|HA_group1|NP_group16|NA_group1|MP_group1|NS_group2
+A2_ref,A2,H5N1,PB2_group3,PB1_group3,PA_group1,HA_group1,NP_group3,NA_group1,MP_group1,NS_group2,PB2_group3|PB1_group3|PA_group1|HA_group1|NP_group3|NA_group1|MP_group1|NS_group2
+A/turkey/England/016515/2022,AM_AIV20,H5N1,PB2_group3,PB1_group3,PA_group1,HA_group1,NP_group44,NA_group1,MP_group1,NS_group2,PB2_group3|PB1_group3|PA_group1|HA_group1|NP_group44|NA_group1|MP_group1|NS_group2
+A/turkey/England/057679/2021,AL_AIV07-B2b,H5N1,PB2_group3,PB1_group3,PA_group1,HA_group1,NP_group6,NA_group7,MP_group1,NS_group2,PB2_group3|PB1_group3|PA_group1|HA_group1|NP_group6|NA_group7|MP_group1|NS_group2

@@ -1,0 +1,9 @@
+Genotype,sequence,subtype,schema
+A1,A1_ref,H5N1,US
+A2,A2_ref,H5N1,US
+A3,A3_ref,H5N1,US
+AA_AIV55,A/chicken/England/069816/2021,H5N1,UK_EU
+AB_AIV09,A/chicken/Scotland/054477/2021,H5N1,UK_EU
+AH_AIV08,A/chicken/Wales/053969/2021,H5N1,UK_EU
+AL_AIV07-B2b,A/turkey/England/057679/2021,H5N1,UK_EU
+AM_AIV20,A/turkey/England/016515/2022,H5N1,UK_EU
