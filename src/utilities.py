@@ -5,8 +5,11 @@ import sys
 import logging
 from datetime import date
 import shutil
-from sqlalchemy import text, inspect, create_engine
+import sqlalchemy
+from sqlalchemy import text, inspect, create_engine, inspect, URL
 import pandas as pd
+
+
 
 segments = ["PB2", "PB1", "PA", "HA", "NP", "NA", "MP", "NS"]
 
@@ -207,3 +210,58 @@ def query_aiseqdb(username, epiids):
 
 def intersection(lst1, lst2):
     return list(set(lst1) & set(lst2))
+
+
+def get_aiseqdb_conn():
+    return sqlalchemy.create_engine(
+        URL.create(
+            "postgresql+psycopg2",
+            username=os.environ["AISEQDB_PROD_USER"],
+            password=os.environ["AISEQDB_PROD_PASSWORD"],
+            host=os.environ["AISEQDB_PROD_HOST"],
+            database=os.environ["AISEQDB_PROD_DB"]
+        )
+    )
+
+
+def tidy_files(output_dir,subtype):
+    # remove fasta files in alns complete
+    # create folder of alns and meta and zip up 
+
+    shutil.make_archive(f'genotyping_run_{now}', format='zip', root_dir=output_dir)
+
+
+
+def metatab_checks(input,metatab):
+    """
+    Check that the metadata file is as expected, with > 1 row, correct columns and na_sequence with data.
+
+    :param args: metatab
+    :return: status
+    """
+    if metatab.shape[0] == 0:
+        logging.error(
+            f"No rows found in the input meta-data csv file {input}. Please check that you have the correct file and try again!"
+        )
+        return 1
+    metacols = [
+        "na_sequence",
+        "isolate_epi_id",
+        "segment_name",
+        "isolate_name",
+        "isolate_id",
+    ]
+    for m in metacols:
+        if m in metatab.columns:
+            pass
+        else:
+            logging.error(
+                f"Required columns are not present {m}. Please check that you have the correct file and try again!"
+            )
+            return 1
+    if metatab["na_sequence"].isnull().sum():
+        logging.error(
+            f"No sequence information is present in na_sequence column. Please check that you have the correct file and try again!"
+        )
+        return 1
+    return 0

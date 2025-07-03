@@ -4,15 +4,12 @@ import sys
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-import re
 import glob
-import numpy as np
 import logging
 import argparse
 import datetime
-import subprocess
-from collections import Counter
 from Bio import SeqIO
+from src.utilities import util 
 
 now = datetime.date.today()
 
@@ -20,36 +17,6 @@ now = datetime.date.today()
 
 __version__ = 1.0
 __author__ = "Kate Howell"
-
-
-def logging_file_setup(output_folder,testing):
-    '''
-    Prep the required files for new genotypes from the GenoFlu tool
-    '''
-    print("Setting up logging information for debugging.")
-    # Need to clean up log files, currently generates multiple log files.
-    logging_file_output = os.path.join(
-        output_folder, str(str(now.strftime("%Y%m%d")) + str("_genoflu_prep.log"))
-    )
-    print("Logging output in the file: {}".format(logging_file_output))
-
-    if testing == "yes":
-        logging.basicConfig(
-            filename=logging_file_output,
-            filemode="w",
-            format="%(asctime)s:%(levelname)s:%(message)s",
-            level=logging.DEBUG,
-        )
-        print("Logging Level: DEBUG")
-    else:
-        logging.basicConfig(
-            filename=logging_file_output,
-            filemode="w",
-            format="%(asctime)s:%(levelname)s:%(message)s",
-            level=logging.INFO,
-        )
-        print("Logging Level: INFO")
-    logging.info("Logging Started.")
 
 
 def read_commandline():
@@ -79,21 +46,6 @@ def read_commandline():
         os.mkdir(args.output_dir)
     return args
 
-
-def check_arguments(args):
-    """
-    Check that paths provided exist and create output folder if it doesn't exist already.
-
-    :param args: output from arg parse
-    :return: status
-    """
-    # Check if input file or input folder are present
-    if args.genoflu is not None:
-        if not os.path.exists(args.genoflu):
-            logging.error(
-                f"Folder does not appear to exists: {args.genoflu}. Please check"
-            )
-            return 1
 
 
 
@@ -192,8 +144,8 @@ def main(args):
 if __name__ == "__main__":
     args = read_commandline()
     # Setting up testing and logging
-    logging_file_setup(args.output_dir,"no")
-    check = check_arguments(args)
+    util.logging_file_setup(args.output_dir,"no")
+    check = util.check_arguments(args)
 
     if check == 1:
         sys.exit(

@@ -25,6 +25,7 @@ def read_commandline():
     parser = argparse.ArgumentParser(
         description=f"Genotype ingest preparation for aiseqdb"
     )
+    
 
     parser.add_argument("--genoflu", "-g", required=True, help="Genoflu results")
     # parser.add_argument(

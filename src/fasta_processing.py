@@ -205,3 +205,61 @@ def new_fasta_parsing(args,now,seqfile):
     newgenotab = newgenotab.drop_duplicates()
 
     return newgenotab
+
+
+
+def create_fasta_headers(df):
+    """
+    Produce a FASTA header to accomanpy the nucleotide sequence from the database table
+    Includes the isolate_epi_id, isolate_id and segment_name
+    Excludes any sequences where the segment is not specified
+
+    :param args: df
+    :return: filtered_df
+    """
+    filtered_df = df[df["segment_name"].notnull()]
+    filtered_df["fasta_header"] = (
+        filtered_df["isolate_epi_id"] + str("|") + filtered_df['id_1'].astype(str)+str("|") + filtered_df["segment_name"]
+    )
+    logging.info("Fasta headers created and added to meta-data....")
+    return filtered_df
+
+
+def write_fasta_file(now,df, filetag, output_dir):
+    """
+    Create fasta files per segment using the fasta_header and
+    na_sequence columns from the database extract dataframe
+
+
+    :param args: df, segment, file name tag, output directory
+    :return: output_file fasta file name
+    """
+    logging.info(f"Processing fasta file for input file....")
+    sequence_df = df[["fasta_header", "na_sequence", "segment_name", "isolate_epi_id"]]
+    # change method to remove warnings
+    sequence_df.insert(
+        len(sequence_df.columns), "length", len(sequence_df["na_sequence"])
+    )
+    sequence_df = sequence_df.sort_values(
+        ["fasta_header", "length"], ascending=[False, False]
+    )
+    # look at duplicates
+    uniqueids = set(sequence_df["fasta_header"])
+    #   print(f'{len(uniqueids)} unique ids in FASTA headers')
+    logging.info(f"{len(uniqueids)} unique ids in FASTA headers")
+    sequence_df = sequence_df.reset_index()
+    sequence_df = sequence_df.drop_duplicates(subset=["fasta_header"], keep="first")
+    sequence_dictionary_list = sequence_df.to_dict("records")
+    fasta_filename = f"{filetag}_{now}.fasta"
+    output_file = os.path.join(output_dir, fasta_filename)
+    seq_file = open(output_file, "w")
+    logging.info(f"Creating fasta file for segment: {output_file}....")
+    for sequence in sequence_dictionary_list:
+        fasta_header = sequence["fasta_header"]
+        fasta_sequence = sequence["na_sequence"]
+        file_content = SeqRecord(Seq(fasta_sequence), id=fasta_header, description="")
+        SeqIO.write(file_content, seq_file, "fasta")
+    seq_file.close()
+    logging.info(f"Fasta file for segment complete....")
+    logging.info(f"Meta-data for segment contains {sequence_df.shape[0]} records.")
+    return output_file
