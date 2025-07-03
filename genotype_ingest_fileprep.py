@@ -187,6 +187,9 @@ def wrangle_blast_tab(newtab):
 
     keepcols = set(newtab.columns) - set(droplist)
 
+    keepcols = list(set(newtab.columns)-set(droplist))
+    #print(keepcols)
+    #print(set(keepcols) - set(newtab.columns))
     subtab = newtab[keepcols]
 
     blastcols = [
